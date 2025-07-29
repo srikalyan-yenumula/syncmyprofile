@@ -1,0 +1,285 @@
+{% macro render_profile(text) %}
+{%- set lines = text.split('\n') -%}
+<div class="space-y-2">
+{%- for line in lines %}
+    {%- if line.startswith('## ') %}
+        <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ line[3:] }}</h2>
+    {%- elif line.startswith('### ') %}
+        <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ line[4:] }}</h3>
+    {%- elif (line.startswith('**') and line.endswith('**:')) or (line.startswith('**') and line.endswith('**')) %}
+        {# Handle lines like **Headline:** or **Summary:** as headings #}
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line[2:-2].rstrip(':') }}</h3>
+    {%- elif line.strip().endswith(':') and line.strip().replace(':','').replace(' ','').isalpha() and line|length < 40 %}
+        {# Treat any short line ending with a colon as a heading #}
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line.rstrip(':') }}</h3>
+    {%- elif line.startswith('- ') %}
+        <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ line[2:] }}</span></div>
+    {%- elif line.startswith('* ') %}
+        <div class="pl-6 relative"><span class="absolute left-0 top-0" style="color:#0A66C2;font-size:1.2em;">*</span><span class="text-gray-800">{{ line[2:] }}</span></div>
+    {%- elif line.strip() == '' %}
+        <div class="h-4"></div>
+    {%- else %}
+        <div class="text-gray-800">{{ line }}</div>
+    {%- endif %}
+{%- endfor %}
+</div>
+{% endmacro %}
+
+{% set pdf_content = 'Rebuilt LinkedIn Profile\n\n' %}
+{% if rebuilt_profile.summary %}
+    {% set clean_summary = rebuilt_profile.summary.replace('*', '').replace('_', '').replace('`', '').strip() %}
+    {% set pdf_content = pdf_content + clean_summary + '\n\n' %}
+{% endif %}
+{% if rebuilt_profile.headline %}
+    {% set clean_headline = rebuilt_profile.headline.replace('*', '').replace('_', '').replace('`', '').strip() %}
+    {% set pdf_content = pdf_content + 'Headline\n' + clean_headline + '\n\n' %}
+{% endif %}
+{% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'interests'] %}
+    {% if rebuilt_profile[section] and rebuilt_profile[section]|length > 0 %}
+        {% set section_title = section.replace('_', ' ').title() %}
+        {% set section_content = rebuilt_profile[section] if rebuilt_profile[section] is string else rebuilt_profile[section]|join('\n') %}
+        {% set clean_section_content = section_content.replace('*', '').replace('_', '').replace('`', '').strip() %}
+        {% set pdf_content = pdf_content + section_title + '\n' + clean_section_content + '\n\n' %}
+    {% endif %}
+{% endfor %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Profile Analysis Result</title>
+  <link rel="icon" type="image/x-icon" href="https://static.licdn.com/sc/h/akt4ae504epesldzj74dzred8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans transition-colors duration-300">
+    {% if error %}
+    <div class="max-w-2xl mx-auto mt-8 mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded text-center text-lg font-semibold">
+        {{ error }}
+    </div>
+    {% endif %}
+    {% if raw_output %}
+    <div class="max-w-2xl mx-auto mb-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded text-sm font-mono overflow-x-auto">
+        <b>Raw AI Output:</b>
+        <pre style="white-space: pre-wrap;">{{ raw_output }}</pre>
+    </div>
+    {% endif %}
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-6 px-4 md:px-12 mb-8 flex items-center justify-between">
+        <div class="max-w-5xl mx-auto w-full">
+            <h1 class="text-3xl font-bold text-blue-700 mb-1">LinkedIn Profile Analysis Result</h1>
+            <p class="text-gray-600 text-lg">Tailored improvement suggestions based on your profile and target role.</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-2 md:px-0 fade-in slide-up-fade-in">
+        <!-- Score Summary Card -->
+        <section class="bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between mb-8 transition-colors duration-300">
+            <div class="flex-1 flex flex-col md:flex-row items-center gap-6">
+                <!-- Radial Progress -->
+                <div class="relative w-32 h-32 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
+                        {% set dasharray = 282.74 %}
+                        {% set dashoffset = dasharray - (dasharray * (current_score|default(75)) / 100) %}
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-3xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
+                        <span class="text-gray-500 text-sm">/100</span>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500">Previous Score:</span>
+                        <span class="font-semibold text-gray-700">{{ previous_score|default(60) }}/100</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500">Target Role:</span>
+                        <span class="font-semibold text-blue-700">{{ target_role|default('Data Analyst') }}</span>
+                    </div>
+                    <div class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium mt-2">
+                        📈 +{{ improvement|default(15) }} Improvement
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% if rationale %}
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8 transition-colors duration-300">
+            <h2 class="text-lg font-semibold text-blue-700 mb-2">Profile Score Rationale</h2>
+            <p class="text-gray-800">{{ rationale }}</p>
+        </section>
+        {% endif %}
+
+        <!-- Accordion: Section-by-Section Analysis -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Section-by-Section Analysis</h2>
+            <div class="space-y-4" id="accordion">
+                {% for section in sections %}
+                <div class="bg-white rounded-lg shadow overflow-hidden transition-colors duration-300">
+                    <button type="button" class="w-full flex justify-between items-center px-6 py-4 focus:outline-none focus:bg-blue-50 hover:bg-blue-50 transition-colors duration-200" onclick="toggleAccordion('panel-{{ loop.index }}')" aria-expanded="false" aria-controls="panel-{{ loop.index }}" id="accordion-header-{{ loop.index }}">
+                        <span class="text-lg font-medium text-blue-700">{{ section.title }}</span>
+                        <svg id="icon-panel-{{ loop.index }}" class="w-5 h-5 text-blue-500 transform transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div id="panel-{{ loop.index }}" class="px-6 pb-4 hidden transition-colors duration-300" role="region" aria-labelledby="accordion-header-{{ loop.index }}" tabindex="-1">
+                        <div class="mb-2">
+                            <span class="font-semibold text-red-600">Weaknesses:</span>
+                            <ul class="list-disc list-inside text-red-600 text-sm">
+                                {% for w in section.weaknesses %}<li>{{ w }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold text-green-700">Suggestions:</span>
+                            <ul class="list-disc list-inside text-green-700 text-sm">
+                                {% for s in section.suggestions %}<li>{{ s }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-gray-700">Rewritten Example:</span>
+                            <div class="bg-gray-100 rounded p-3 mt-1 font-mono text-sm text-gray-800 whitespace-pre-line transition-colors duration-300">
+                                {{ section.rewritten if section.rewritten else 'No rewritten example available.' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Rebuilt Profile Preview -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Rebuilt Profile Preview</h2>
+            <div class="bg-white rounded-xl shadow-md p-6 transition-colors duration-300">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm transition-colors duration-300">
+                    {{ render_profile(rebuilt_profile.summary) }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Score Comparison Chart -->
+        <section class="mb-8 max-w-5xl mx-auto w-full">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Score Comparison</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8 w-full">
+                <!-- Bar Chart -->
+                <div class="w-full flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Before</span>
+                        <span class="font-semibold text-gray-700">{{ previous_score|default(60) }}</span>
+                    </div>
+                    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden mb-2 transition-colors duration-300">
+                        <div class="h-4 bg-red-400 rounded-full transition-all" style="width: {{ previous_score|default(60) }}%"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">After</span>
+                        <span class="font-semibold text-blue-700">{{ current_score|default(75) }}</span>
+                    </div>
+                    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden transition-colors duration-300">
+                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score|default(75) }}%"></div>
+                    </div>
+                </div>
+                <!-- Radial Chart (again, for visual emphasis) -->
+                <div class="w-32 h-32 flex items-center justify-center relative">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
+                        {% set dasharray = 282.74 %}
+                        {% set dashoffset2 = dasharray - (dasharray * (current_score|default(75)) / 100) %}
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset2 }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-2xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
+                        <span class="text-gray-500 text-xs">/100</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% if remarks %}
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8 transition-colors duration-300">
+            <h2 class="text-lg font-semibold text-blue-700 mb-2">Remarks</h2>
+            <p class="text-gray-800">{{ remarks }}</p>
+        </section>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <section class="flex flex-wrap gap-4 justify-center mb-12">
+            <button onclick="downloadPDF()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Download PDF">
+                <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Download PDF
+            </button>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Edit Profile on LinkedIn">
+                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.29c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm15.5 10.29h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.89v1.23h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.57 1.98 3.57 4.56v4.75z"/></svg>
+                Edit Profile on LinkedIn
+            </a>
+            <button onclick="shareWithMentor()" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Share with Mentor">
+                <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h2M12 15v-6m0 0l-3 3m3-3l3 3"/></svg>
+                Share with Mentor
+            </button>
+        </section>
+    </main>
+
+    <script>
+    // Accordion toggle logic with accessibility and keyboard support
+    function toggleAccordion(id) {
+        const panel = document.getElementById(id);
+        const icon = document.getElementById('icon-' + id);
+        const header = document.querySelector(`[aria-controls="${id}"]`);
+        const expanded = panel.classList.contains('hidden');
+        document.querySelectorAll('[role="region"]').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('[aria-expanded]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('[id^="icon-panel-"]').forEach(i => i.classList.remove('rotate-180'));
+        if (expanded) {
+            panel.classList.remove('hidden');
+            header.setAttribute('aria-expanded', 'true');
+            icon.classList.add('rotate-180');
+            panel.focus();
+        }
+    }
+    // Keyboard navigation for accordion
+    document.addEventListener('keydown', function(e) {
+        if (e.target.matches('[id^="accordion-header-"]')) {
+            const idx = parseInt(e.target.id.replace('accordion-header-', ''));
+            if (e.key === 'ArrowDown') {
+                const next = document.getElementById('accordion-header-' + (idx + 1));
+                if (next) next.focus();
+            } else if (e.key === 'ArrowUp') {
+                const prev = document.getElementById('accordion-header-' + (idx - 1));
+                if (prev) prev.focus();
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleAccordion('panel-' + idx);
+            }
+        }
+    });
+    // Download PDF implementation
+    function downloadPDF() {
+        const doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
+        const rebuiltProfile = {{ pdf_content | tojson }};
+        doc.setFont('helvetica', '');
+        doc.setFontSize(13);
+        const marginLeft = 40;
+        const marginTop = 60;
+        const maxWidth = 515;
+        const lineHeight = 18;
+        const pageHeight = doc.internal.pageSize.getHeight();
+        let y = marginTop;
+        const lines = doc.splitTextToSize(rebuiltProfile, maxWidth);
+        lines.forEach(line => {
+            if (y + lineHeight > pageHeight - marginTop) {
+                doc.addPage();
+                y = marginTop;
+            }
+            doc.text(line, marginLeft, y);
+            y += lineHeight;
+        });
+        doc.save('LinkedIn_Rebuilt_Profile.pdf');
+    }
+    // Placeholder for Share with Mentor
+    function shareWithMentor() {
+        alert('Share with Mentor functionality coming soon!');
+    }
+    </script>
+</body>
+</html> 

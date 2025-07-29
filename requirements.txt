@@ -1,0 +1,6 @@
+Flask
+PyMuPDF
+requests
+python-dotenv 
+pytesseract
+Pillow
