@@ -154,7 +154,9 @@
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Rebuilt Profile Preview</h2>
             <div class="bg-white rounded-xl shadow-md p-6 transition-colors duration-300">
                 <div class="bg-gray-50 rounded-lg p-6 shadow-sm transition-colors duration-300">
-                    {{ render_profile(rebuilt_profile.summary) }}
+                    <div class="rebuilt-profile">
+                        {{ render_profile(rebuilt_profile.summary) }}
+                    </div>
                 </div>
             </div>
         </section>
@@ -282,4 +284,4 @@
     }
     </script>
 </body>
-</html> 
+</html>

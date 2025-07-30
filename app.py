@@ -44,8 +44,7 @@ def analyze():
     profile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     profile_file.save(profile_path)
     profile_text = extract_text_from_pdf(profile_path)
-    print('--- Extracted PDF Text ---')
-    print(profile_text)
+    print('✅ PDF text extraction successful.')
 
     if profile_text.startswith('Error'):
         session['suggestion'] = None
@@ -54,8 +53,7 @@ def analyze():
 
     jd_text = job_role
     analysis = analyze_profile(profile_text, jd_text)
-    print('--- AI Analysis Output ---')
-    print(analysis)
+    print('✅ Gemini API response received and stored in session.')
     if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
         session['suggestion'] = None
         session['error'] = analysis or 'Unknown error during analysis.'
@@ -82,8 +80,7 @@ def suggestion():
         profile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         profile_file.save(profile_path)
         profile_text = extract_text_from_pdf(profile_path)
-        print('--- Extracted PDF Text ---')
-        print(profile_text)
+        print('✅ PDF text extraction successful.')
 
         if profile_text.startswith('Error'):
             return render_template('result.html', error=profile_text)
@@ -98,13 +95,11 @@ def suggestion():
             jd_text += f"Target Job Role/Title: {job_role}"
 
         analysis = analyze_profile(profile_text, jd_text)
-        print('--- AI Analysis Output ---')
-        print(analysis)
+        print('✅ Gemini API response received and stored in session.')
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
             return render_template('result.html', error=analysis or 'Unknown error during analysis.')
         parsed = parse_ai_markdown(analysis)
-        print('--- Parsed Result ---')
-        print(parsed)
+        print('✅ AI analysis parsed and ready to render.')
         if not parsed or not parsed.get('sections'):
             return render_template('result.html', error='Parsing failed or no sections found.', raw_output=analysis)
         return render_template('result.html', **parsed)
@@ -116,8 +111,7 @@ def suggestion():
             return render_template('result.html', error=error)
         if suggestion_text:
             parsed = parse_ai_markdown(suggestion_text)
-            print('--- Parsed Result (GET) ---')
-            print(parsed)
+            print('✅ Suggestion (GET) parsed and displayed.')
             if not parsed or not parsed.get('sections'):
                 return render_template('result.html', error='Parsing failed or no sections found.', raw_output=suggestion_text)
             return render_template('result.html', **parsed)
@@ -271,17 +265,7 @@ def parse_ai_markdown(suggestion):
         'interests': [],
     }
 
-    # Try to extract role from the rewritten example of the Headline section
-    headline_role = None
-    for section in sections:
-        if section['title'].lower().startswith('headline') and section['rewritten']:
-            # Take the first part (before | or , or -)
-            headline_text = section['rewritten'].split('|')[0].split(',')[0].split('-')[0].strip()
-            if headline_text:
-                headline_role = headline_text
-                break
-    if headline_role:
-        target_role = headline_role
+   
 
     # Extract remarks from the Final Profile Score section
     remarks_match = re.search(r'##\s*[⭐️\*]*\s*Final Profile Score.*?\*\*Remarks:\*\*\s*(.*?)(?:\n|$)', suggestion, re.DOTALL)

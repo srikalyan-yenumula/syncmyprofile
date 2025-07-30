@@ -26,47 +26,35 @@ const loader = document.getElementById('loader');
 const mainContent = document.getElementById('main-content');
 if (analyzeForm) {
     analyzeForm.addEventListener('submit', async function(e) {
-        if (mainContent) {
-            mainContent.classList.add('fade-out');
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // Show loader immediately
+        if (loader) {
+            loader.style.display = 'flex';
+            loader.classList.add('fade-in');
         }
-        setTimeout(() => {
-            if (loader) {
-                loader.style.display = 'flex';
-                loader.classList.add('fade-in');
-            }
-        }, 300);
-        // Delay form submission to allow fade-out
-        setTimeout(async () => {
-    e.preventDefault();
-    const form = e.target;
-    const resultDiv = document.getElementById('result');
-    const resultSection = document.getElementById('result-section');
-        if (resultDiv && resultSection) {
-    resultDiv.textContent = 'Analyzing... Please wait.';
-    resultSection.style.display = 'block';
-        }
-    const formData = new FormData(form);
-    try {
-        const response = await fetch('/analyze', {
-            method: 'POST',
-            body: formData
-        });
-        const data = await response.json();
-        if (data.redirect) {
-            window.location.href = data.redirect;
-        } else if (data.result) {
-            window.location.href = '/suggestion?text=' + encodeURIComponent(data.result);
-        } else if (data.error) {
-                if (resultDiv) resultDiv.textContent = data.error;
-                    if (loader) loader.style.display = 'none';
-        } else {
-                if (resultDiv) resultDiv.textContent = 'Unexpected error.';
-                    if (loader) loader.style.display = 'none';
-        }
-    } catch (err) {
-            if (resultDiv) resultDiv.textContent = 'Error: ' + (err.message || err);
+
+        try {
+            const response = await fetch('/analyze', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            } else if (data.error) {
+                alert(data.error);
                 if (loader) loader.style.display = 'none';
-    }
-        }, 500); // match fade-out duration
-}); 
-} 
+            } else {
+                alert('Unexpected error.');
+                if (loader) loader.style.display = 'none';
+            }
+        } catch (err) {
+            alert('Error: ' + (err.message || err));
+            if (loader) loader.style.display = 'none';
+        }
+    });
+}
