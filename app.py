@@ -1,7 +1,5 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
-from models import db, Analysis, ProfileAnalysis
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from helpers.pdf_utils import extract_text_from_pdf
 from helpers.genai_utils import analyze_profile
@@ -13,11 +11,6 @@ from flask_session import Session  # <-- Add this import
 load_dotenv()
 
 app = Flask(__name__)
-# Configure the database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///local.db")  # Fallback to SQLite for local development
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
-
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_default_secret_key')
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB limit
@@ -65,17 +58,6 @@ def analyze():
         session['suggestion'] = None
         session['error'] = analysis or 'Unknown error during analysis.'
         return jsonify({'redirect': url_for('suggestion')})
-
-    # Save analysis to the database
-    new_analysis = ProfileAnalysis(
-        linkedin_name=filename,
-        job_role=job_role,
-        original_text=profile_text,
-        analysis_result=analysis
-    )
-    db.session.add(new_analysis)
-    db.session.commit()
-
     # Store result in session and redirect
     session['suggestion'] = analysis
     session['error'] = None
@@ -98,7 +80,6 @@ def suggestion():
         profile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         profile_file.save(profile_path)
         profile_text = extract_text_from_pdf(profile_path)
-      
         print('✅ PDF text extraction successful.')
 
         if profile_text.startswith('Error'):
@@ -114,7 +95,6 @@ def suggestion():
             jd_text += f"Target Job Role/Title: {job_role}"
 
         analysis = analyze_profile(profile_text, jd_text)
-       
         print('✅ Gemini API response received and stored in session.')
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
             return render_template('result.html', error=analysis or 'Unknown error during analysis.')
@@ -302,36 +282,6 @@ def parse_ai_markdown(suggestion):
         'remarks': remarks,
     }
 
-@app.route('/test-db', methods=['GET'])
-def test_db():
-    try:
-        # Create a test row
-        test_entry = ProfileAnalysis(
-            linkedin_name='Test User',
-            job_role='Test Role',
-            original_text='This is a test.',
-            analysis_result='Test analysis result.'
-        )
-        db.session.add(test_entry)
-        db.session.commit()
-
-        # Retrieve the test row
-        retrieved_entry = ProfileAnalysis.query.filter_by(linkedin_name='Test User').first()
-        return jsonify({
-            'id': retrieved_entry.id,
-            'linkedin_name': retrieved_entry.linkedin_name,
-            'job_role': retrieved_entry.job_role,
-            'original_text': retrieved_entry.original_text,
-            'analysis_result': retrieved_entry.analysis_result
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 if __name__ == '__main__':
-    with app.app_context():
-        try:
-            db.create_all()
-            print('✅ Database connected and tables created successfully.')
-        except Exception as e:
-            print(f'❌ Failed to connect to the database: {e}')
+    # Run the Flask app on all interfaces for Docker/VM compatibility
     app.run(debug=True, host='0.0.0.0')
