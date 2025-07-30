@@ -32,6 +32,7 @@ STRICT INSTRUCTIONS:
 - NEVER leave any field blank or empty. Every field must have a meaningful value or a placeholder.
 - Use Markdown formatting as shown below. Do not use code blocks or HTML.
 - Output must be parseable and consistent. Do not add extra commentary or deviate from the format.
+- give spoken Languages only under Languages section.
 
 ---
 
