@@ -6,7 +6,7 @@ from helpers.genai_utils import analyze_profile
 from dotenv import load_dotenv
 import re
 from flask_session import Session  # <-- Add this import
-
+from helpers.log_utils import log_extracted_text, log_ai_analysis
 # Load environment variables from .env file
 load_dotenv()
 
@@ -80,6 +80,7 @@ def suggestion():
         profile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         profile_file.save(profile_path)
         profile_text = extract_text_from_pdf(profile_path)
+        log_extracted_text(profile_text)
         print('✅ PDF text extraction successful.')
 
         if profile_text.startswith('Error'):
@@ -95,6 +96,7 @@ def suggestion():
             jd_text += f"Target Job Role/Title: {job_role}"
 
         analysis = analyze_profile(profile_text, jd_text)
+        log_ai_analysis(analysis)
         print('✅ Gemini API response received and stored in session.')
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
             return render_template('result.html', error=analysis or 'Unknown error during analysis.')
