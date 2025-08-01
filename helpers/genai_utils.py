@@ -82,7 +82,7 @@ Sections to cover (in this order):
 **Score:** <0-100>
 **Remarks:** <one short line summarizing how the profile improved>
 **Name:** <extract the full name from the profile>
-**Education Summary:** <brief summary of their highest education>
+**Education:** <brief summary of their highest education>
 ---
 
 # FINAL CHECKLIST (for the AI)
