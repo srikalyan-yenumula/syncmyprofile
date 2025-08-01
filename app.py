@@ -268,8 +268,30 @@ def parse_ai_markdown(suggestion):
     sections = sorted(sections, key=section_sort_key)
 
     # Extract rebuilt profile (improved: cut at start of Final Profile Score section)
-    rebuilt_match = re.search(r'## Rebuilt Profile.*?### HERE IS YOUR NEW LINKEDIN PROFILE:(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)', suggestion, re.DOTALL)
-    rebuilt_text = rebuilt_match.group(1).strip() if rebuilt_match else ""
+    # Try multiple patterns to handle variations in AI output
+    rebuilt_patterns = [
+        r'## Rebuilt Profile.*?### HERE IS YOUR NEW LINKEDIN PROFILE:(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)', 
+        r'## Rebuilt Profile.*?### HERE IS YOUR NEW LINKEDIN PROFILE(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)',
+        r'## Rebuilt Profile(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)',
+        r'### HERE IS YOUR NEW LINKEDIN PROFILE:(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)',
+        r'### HERE IS YOUR NEW LINKEDIN PROFILE(.*?)(?:##\s*[⭐️\*]*\s*Final Profile Score|New Score After Improvements|$)'
+    ]
+    
+    rebuilt_text = ""
+    for pattern in rebuilt_patterns:
+        rebuilt_match = re.search(pattern, suggestion, re.DOTALL)
+        if rebuilt_match:
+            rebuilt_text = rebuilt_match.group(1).strip()
+            break
+    
+    # If no pattern matched, try to extract anything after "Rebuilt Profile" section
+    if not rebuilt_text:
+        rebuilt_match = re.search(r'## Rebuilt Profile(.*)', suggestion, re.DOTALL)
+        if rebuilt_match:
+            rebuilt_text = rebuilt_match.group(1).strip()
+            # Remove any trailing sections
+            rebuilt_text = re.split(r'\n##\s*[⭐️\*]*\s*Final Profile Score', rebuilt_text)[0]
+            rebuilt_text = re.split(r'\n##\s*New Score After Improvements', rebuilt_text)[0]
 
     # Use the full rebuilt profile text for the summary (so the preview shows all sections)
     summary = rebuilt_text
@@ -308,4 +330,3 @@ def parse_ai_markdown(suggestion):
 if __name__ == '__main__':
     # Run the Flask app on all interfaces for Docker/VM compatibility
     app.run(debug=True, host='0.0.0.0')
-
