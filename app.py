@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import re
 from flask_session import Session  # <-- Add this import
 
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -22,6 +23,8 @@ Session(app)
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -54,6 +57,8 @@ def analyze():
     jd_text = job_role
     analysis = analyze_profile(profile_text, jd_text)
     print('✅ Gemini API response received and stored in session.')
+    
+ 
     if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
         session['suggestion'] = None
         session['error'] = analysis or 'Unknown error during analysis.'
@@ -80,7 +85,9 @@ def suggestion():
         profile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         profile_file.save(profile_path)
         profile_text = extract_text_from_pdf(profile_path)
+       
         print('✅ PDF text extraction successful.')
+      
 
         if profile_text.startswith('Error'):
             return render_template('result.html', error=profile_text)
@@ -95,11 +102,14 @@ def suggestion():
             jd_text += f"Target Job Role/Title: {job_role}"
 
         analysis = analyze_profile(profile_text, jd_text)
+     
         print('✅ Gemini API response received and stored in session.')
+      
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
             return render_template('result.html', error=analysis or 'Unknown error during analysis.')
         parsed = parse_ai_markdown(analysis)
         print('✅ AI analysis parsed and ready to render.')
+        
         if not parsed or not parsed.get('sections'):
             return render_template('result.html', error='Parsing failed or no sections found.', raw_output=analysis)
         return render_template('result.html', **parsed)
@@ -136,6 +146,16 @@ def suggestion():
         )
 
 def parse_ai_markdown(suggestion):
+    # Extract Name from the response
+    name_match = re.search(r'\*\*Name:\*\*\s*(.+?)(?:\n|$)', suggestion, re.MULTILINE)
+    name = name_match.group(1).strip() if name_match else "Name not found"
+    print("\n✨ User Name:", name)
+
+    # Extract Education from the response
+    education_match = re.search(r'### Education\s*(.*?)(?=###|$)', suggestion, re.DOTALL)
+    education = education_match.group(1).strip() if education_match else "Education not found"
+    print("📚 Education:", education)
+
     # Extract Target Role from the very top if present
     top_role_match = re.search(r'^\*\*Target Role:\*\*\s*(.+)$', suggestion, re.MULTILINE)
     if top_role_match:
@@ -144,6 +164,7 @@ def parse_ai_markdown(suggestion):
         # Fallback: Extract Target Role (if present) from previous logic
         target_role_match = re.search(r'Target (Job )?Role/Title:\s*(.*)', suggestion)
         target_role = target_role_match.group(2).strip() if target_role_match else ""
+    print("🎯 Target Role:", target_role)
 
     # Extract Current Profile Score (before improvements) from API response
     score_match = re.search(r'##\s*Current Profile Score.*?\*\*Score:\*\*\s*(\d+)', suggestion, re.DOTALL)
@@ -280,8 +301,11 @@ def parse_ai_markdown(suggestion):
         'rebuilt_profile': rebuilt_profile,
         'rationale': rationale,
         'remarks': remarks,
+        'name': name,
+        'education': education
     }
 
 if __name__ == '__main__':
     # Run the Flask app on all interfaces for Docker/VM compatibility
     app.run(debug=True, host='0.0.0.0')
+
