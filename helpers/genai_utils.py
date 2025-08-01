@@ -39,9 +39,6 @@ STRICT INSTRUCTIONS:
 # OUTPUT FORMAT (follow exactly)
 
 **Target Role:** <the role you are optimizing for>
-**Name:** <extract the full name from the profile>
-**Education Summary:** <brief summary of their highest education>
-
 ## Current Profile Score
 **Score:** <0-100>
 **Rationale:** <2-3 sentences explaining strengths and gaps>
@@ -82,7 +79,8 @@ Sections to cover (in this order):
 ## ⭐️ Final Profile Score
 **Score:** <0-100>
 **Remarks:** <one short line summarizing how the profile improved>
-
+**Name:** <extract the full name from the profile>
+**Education Summary:** <brief summary of their highest education>
 ---
 
 # FINAL CHECKLIST (for the AI)
