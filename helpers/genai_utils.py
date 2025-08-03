@@ -21,7 +21,15 @@ def analyze_profile(profile_text, jd_text):
 
     def build_prompt(profile_text, jd_text):
         return f"""
-SYSTEM: You are a professional career coach and LinkedIn expert. Your job is to transform the user's LinkedIn profile into a high-impact, role-aligned version that exactly matches the provided job description or target role. You should optimize the profile to reach the highest possible alignment and quality score.
+SYSTEM: You are a professional career coach and LinkedIn expert. Your task is to:
+1. Carefully analyze the provided job description/requirements
+2. Transform the user's LinkedIn profile to perfectly align with these requirements
+3. Highlight relevant experience and skills that match the job requirements
+4. Suggest improvements where the profile doesn't meet the requirements
+
+INPUT CONTEXT:
+Job Description/Requirements:
+{jd_text}
 
 STRICT INSTRUCTIONS:
 
@@ -121,8 +129,7 @@ STRICT INSTRUCTIONS:
 **User Profile:**
 {profile_text}
 
-**Job Description / Target Role:**
-{jd_text}
+
 
 """
 
