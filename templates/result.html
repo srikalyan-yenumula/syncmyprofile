@@ -42,7 +42,7 @@
     {% set clean_headline = rebuilt_profile.headline.replace('*', '').replace('_', '').replace('`', '').strip() %}
     {% set pdf_content = pdf_content + 'Headline\n' + clean_headline + '\n\n' %}
 {% endif %}
-{% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'interests'] %}
+{% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'personal interests'] %}
     {% if rebuilt_profile[section] and rebuilt_profile[section]|length > 0 %}
         {% set section_title = section.replace('_', ' ').title() %}
         {% set section_content = rebuilt_profile[section] if rebuilt_profile[section] is string else rebuilt_profile[section]|join('\n') %}
