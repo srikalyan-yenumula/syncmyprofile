@@ -16,7 +16,7 @@ def analyze_profile(profile_text, jd_text):
     required_sections = [
         'Profile Summary (About)', 'Headline', 'Experience', 'Skills', 'Education', 'Projects', 'Certifications',
         'Awards & Accomplishments', 'Courses', 'Publications', 'Licenses', 'Volunteering', 'Organizations',
-        'Recommendations', 'Languages', 'Interests', 'Any other relevant section'
+        'Recommendations', 'Languages', 'personal Interests', 'Any other relevant section'
     ]
 
     def build_prompt(profile_text, jd_text):
@@ -49,7 +49,7 @@ STRICT INSTRUCTIONS:
    13. Organizations
    14. Recommendations
    15. Languages
-   16. Interests
+   16. personal Interests
    17. Any other relevant section
 
 2. For every section, you MUST include the following 3 sub-sections:
@@ -68,7 +68,7 @@ STRICT INSTRUCTIONS:
 
 6. SPECIAL RULES:
    - Under **Languages**, list only spoken human languages (e.g., English, Hindi). **Do NOT include programming languages here.**
-   - Under **Interests**, always include relevant interests (e.g., Data Science, AI, Sports, Travel), even if missing from the original profile. This section must never be blank.
+   - Under **personal Interests**, always include relevant personal interests (e.g., Data Science, AI, Sports, Travel), even if missing from the original profile. This section must never be blank.
    - In the **Summary** and **Experience** sections, explicitly mention the **target company name** if possible (e.g., “OpenAI”) to show intent and alignment.
    - In the **Experience** and **Projects** sections, include references to **ethical AI, compliance, and responsible AI development** where relevant.
    - In **Experience**, **Projects**, or **Awards**, include evidence of **mentoring, leadership, or collaboration** with teams.
@@ -114,7 +114,7 @@ STRICT INSTRUCTIONS:
 - [ ] Are all 17 sections included?
 - [ ] Does each section include Weaknesses, Suggestions, and Rewritten Example?
 - [ ] Did you list only spoken languages under “Languages”?
-- [ ] Did you fill “Interests” with relevant values even if missing from profile?
+- [ ] Did you fill “personal Interests” with relevant values even if missing from profile?
 - [ ] Did you explicitly mention the target company or role where relevant?
 - [ ] Did you include ethical AI, security, or compliance where appropriate?
 - [ ] Did you include mentorship, leadership, or team collaboration if applicable?
