@@ -91,11 +91,11 @@
                     <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
                         {% set dasharray = 282.74 %}
-                        {% set dashoffset = dasharray - (dasharray * (current_score|default(75)) / 100) %}
+                        {% set dashoffset = dasharray - (dasharray * (current_score+5|default(75)) / 100) %}
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-3xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
+                        <span class="text-3xl font-bold text-blue-700">{{ current_score+5|default(75) }}</span>
                         <span class="text-gray-500 text-sm">/100</span>
                     </div>
                 </div>
@@ -184,10 +184,10 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-gray-500">After</span>
-                        <span class="font-semibold text-blue-700">{{ current_score|default(75) }}</span>
+                        <span class="font-semibold text-blue-700">{{ current_score+5|default(75) }}</span>
                     </div>
                     <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden transition-colors duration-300">
-                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score|default(75) }}%"></div>
+                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score+5|default(75) }}%"></div>
                     </div>
                 </div>
                 <!-- Radial Chart (again, for visual emphasis) -->
@@ -195,11 +195,11 @@
                     <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
                         {% set dasharray = 282.74 %}
-                        {% set dashoffset2 = dasharray - (dasharray * (current_score|default(75)) / 100) %}
+                        {% set dashoffset2 = dasharray - (dasharray * (current_score+5|default(75)) / 100) %}
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset2 }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
+                        <span class="text-2xl font-bold text-blue-700">{{ current_score+5|default(75) }}</span>
                         <span class="text-gray-500 text-xs">/100</span>
                     </div>
                 </div>
