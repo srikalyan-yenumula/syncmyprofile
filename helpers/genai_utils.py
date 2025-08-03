@@ -1,4 +1,3 @@
-
 import os
 import requests
 import re
@@ -19,7 +18,7 @@ def analyze_profile(profile_text, jd_text):
         'Awards & Accomplishments', 'Courses', 'Publications', 'Licenses', 'Volunteering', 'Organizations',
         'Recommendations', 'Languages', 'Interests', 'Any other relevant section'
     ]
-    
+
     def build_prompt(profile_text, jd_text):
         return f"""
 SYSTEM: You are an expert LinkedIn coach and career mentor. Your job is to take the user's exported LinkedIn profile and transform it into a high-impact, role-focused version that is as closely aligned as possible to the provided job description or target role. You must output a complete, production-ready analysis and rewrite, following the exact structure below.
@@ -33,8 +32,8 @@ STRICT INSTRUCTIONS:
 - NEVER leave any field blank or empty. Every field must have a meaningful value or a placeholder.
 - Use Markdown formatting as shown below. Do not use code blocks or HTML.
 - Output must be parseable and consistent. Do not add extra commentary or deviate from the format.
-- give spoken Languages only under Languages section.
-- give Interests always.
+- Give spoken languages only under Languages section.
+- Give Interests always.
 
 ---
 
@@ -101,18 +100,24 @@ Sections to cover (in this order):
 """
 
     def is_output_complete(text):
-        # Check for all 17 required section headings
+        """Checks if all required section headers are present in the AI response."""
         found = 0
         for sec in required_sections:
-            # Accept some flexibility in section heading formatting
-            if re.search(rf'###\s*{re.escape(sec)}', text, re.IGNORECASE):
+            pattern = rf'(?i)###\s*{re.escape(sec)}'  # allow case-insensitive match
+            if re.search(pattern, text):
                 found += 1
-        return found == 17
+        return found == len(required_sections)
+
+    def extract_name(profile_text):
+        """Optional: Extracts the user's name from the profile for final output."""
+        match = re.search(r'Name:\s*(.+)', profile_text)
+        return match.group(1).strip() if match else "Name Not Found"
 
     prompt = build_prompt(profile_text, jd_text)
     tries = 0
     max_tries = 2
     last_response = None
+
     while tries < max_tries:
         try:
             response = requests.post(
@@ -123,22 +128,33 @@ Sections to cover (in this order):
             )
             response.raise_for_status()
             data = response.json()
-            candidates = data.get("candidates")
+
+            candidates = data.get("candidates", [])
             if not candidates or not candidates[0].get("content"):
-                return "Error: Gemini API returned an unexpected response."
-            parts = candidates[0]["content"].get("parts")
-            if not parts or not parts[0].get("text"):
-                return "Error: Gemini API returned an incomplete response."
-            text = parts[0]["text"]
+                return "Error: Gemini API returned an unexpected or empty response."
+
+            parts = candidates[0]["content"].get("parts", [])
+            text = parts[0].get("text", "").strip() if parts else ""
+
+            if not text:
+                return "Error: Gemini API returned an incomplete or blank response."
+
             last_response = text
+
             if is_output_complete(text):
                 return text
+
+            # Retry with stronger warning
             tries += 1
-            # If incomplete, retry with a warning preamble
-            prompt = "SYSTEM: Your last response was incomplete. Please output ALL 17 sections, with all fields, as per the instructions.\n\n" + prompt
+            retry_notice = "\n\nSYSTEM NOTICE: Your last response was incomplete. Please output ALL 17 sections, with all required parts and fields as per the prompt format."
+            prompt += retry_notice
+
         except requests.Timeout:
-            return "Error: Gemini API request timed out."
+            tries += 1
+            continue  # Retry on timeout
+
         except Exception as e:
-            return f"Error: {e}"
-    # If still incomplete, return the last response (will be parsed with placeholders)
+            return f"Error: {str(e)}"
+
+    # Return the last response if all retries fail (even if incomplete)
     return last_response or "Error: Gemini API did not return a usable response."
