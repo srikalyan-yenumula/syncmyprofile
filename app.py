@@ -54,7 +54,20 @@ def analyze():
         session['error'] = profile_text
         return jsonify({'redirect': url_for('suggestion')})
 
-    jd_text = job_role
+    # Get both job description and role
+    job_desc = request.form.get('job_desc', '').strip()
+    jd_text = ''
+    if job_desc:
+        jd_text = job_desc
+    if job_role:
+        if jd_text:
+            jd_text += "\n\n"
+        jd_text += f"Target Job Role/Title: {job_role}"
+
+    # If both are empty, return error
+    if not jd_text:
+        return jsonify({'error': 'Please provide either a job description or a target role.'}), 400
+
     analysis = analyze_profile(profile_text, jd_text)
     print('✅ Gemini API response received and stored in session.')
     
