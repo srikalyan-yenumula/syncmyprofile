@@ -154,7 +154,7 @@ def suggestion():
                 'certifications': [],
                 'awards': [],
                 'languages': [],
-                'interests': [],
+                'personal interests': [],
             }
         )
 
@@ -245,7 +245,7 @@ def parse_ai_markdown(suggestion):
         required_sections = [
             'Profile Summary (About)', 'Headline', 'Experience', 'Skills', 'Education', 'Projects', 'Certifications',
             'Awards & Accomplishments', 'Courses', 'Publications', 'Licenses', 'Volunteering', 'Organizations',
-            'Recommendations', 'Languages', 'Interests', 'Any other relevant section'
+            'Recommendations', 'Languages', 'personal Interests', 'Any other relevant section'
         ]
         for sec in required_sections:
             sections.append({
@@ -259,7 +259,7 @@ def parse_ai_markdown(suggestion):
     required_sections = [
         'Profile Summary (About)', 'Headline', 'Experience', 'Skills', 'Education', 'Projects', 'Certifications',
         'Awards & Accomplishments', 'Courses', 'Publications', 'Licenses', 'Volunteering', 'Organizations',
-        'Recommendations', 'Languages', 'Interests', 'Any other relevant section'
+        'Recommendations', 'Languages', 'personal Interests', 'Any other relevant section'
     ]
     # Build a dict for fast lookup
     section_dict = {s['title'].strip().lower(): s for s in sections}
@@ -318,7 +318,7 @@ def parse_ai_markdown(suggestion):
         'certifications': [],
         'awards': [],
         'languages': [],
-        'interests': [],
+        'personal interests': [],
     }
 
    
