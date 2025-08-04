@@ -29,6 +29,11 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/favicon.ico')
+def favicon():
+    """Serve the favicon."""
+    return app.send_static_file('favicon.ico')
+
 @app.route('/')
 def index():
     """Render the home page with the upload form."""
