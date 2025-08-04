@@ -22,18 +22,23 @@ def analyze_profile(profile_text, jd_text):
     def build_prompt(profile_text, jd_text):
         return f"""
 SYSTEM: You are a professional career coach and LinkedIn expert. Your task is to:
-1. Carefully analyze the provided job description/requirements
-2. Transform the user's LinkedIn profile to perfectly align with these requirements
-3. Highlight relevant experience and skills that match the job requirements
-4. Suggest improvements where the profile doesn't meet the requirements
+1. Carefully analyze the provided job description/requirements.
+2. Transform the user's LinkedIn profile to perfectly align with these requirements.
+3. Highlight relevant experience and skills that match the job requirements.
+4. Suggest improvements where the profile doesn't meet the requirements.
 
 INPUT CONTEXT:
-Job Description/Requirements:
+Job Description/Target Role:
 {jd_text}
+
+User Profile:
+{profile_text}
+
+---
 
 STRICT INSTRUCTIONS:
 
-1. You MUST output exactly 17 sections, in this fixed order:
+1. You MUST output **exactly 17 sections**, in this fixed order:
    1. Profile Summary (About)
    2. Headline
    3. Experience
@@ -49,86 +54,97 @@ STRICT INSTRUCTIONS:
    13. Organizations
    14. Recommendations
    15. Languages
-   16. personal Interests
+   16. Personal Interests
    17. Any other relevant section
 
-2. For every section, you MUST include the following 3 sub-sections:
+2. For EVERY section, you MUST include these three clearly labeled sub-sections:
    - **Weaknesses:**
    - **Suggestions:**
    - **Rewritten Example:**
 
-3. If the user's profile is missing any content for a section, fill with clear placeholders like:
+3. If any section has no content in the original profile, provide a meaningful placeholder like:
    - “No information provided.”
    - “Section missing in user profile.”
-   - “Consider adding a GitHub or portfolio link here to showcase technical work.”
+   - “Consider adding a GitHub or portfolio link here.”
 
-4. Do NOT skip, merge, rename, or reorder any section. Every section must be present, even if empty or incomplete.
+4. DO NOT skip, merge, rename, or reorder sections — even if content is missing.
 
-5. Use Markdown formatting (e.g., `### Section`) exactly as shown below. Do not use code blocks or HTML.
+5. Format your entire output in **Markdown**, exactly like:
+<Section Name>  
+**Weaknesses:**  
+...  
+**Suggestions:**  
+...  
+**Rewritten Example:**  
+...
 
-6. SPECIAL RULES:
-   - Under **Languages**, list only spoken human languages (e.g., English, Hindi). **Do NOT include programming languages here.**
-   - Under **personal Interests**, always include relevant personal interests (e.g., Data Science, AI, Sports, Travel), even if missing from the original profile. This section must never be blank.
-   - In the **Summary** and **Experience** sections, explicitly mention the **target company name** if possible (e.g., “OpenAI”) to show intent and alignment.
-   - In the **Experience** and **Projects** sections, include references to **ethical AI, compliance, and responsible AI development** where relevant.
-   - In **Experience**, **Projects**, or **Awards**, include evidence of **mentoring, leadership, or collaboration** with teams.
-   - In the **Recommendations** section, suggest 2–3 people the candidate could request a recommendation from (e.g., managers, colleagues, professors).
+6. SPECIAL GUIDELINES:
+- Under **Languages**, include only spoken languages. (Do NOT include programming languages.)
+- Under **Personal Interests**, ALWAYS list relevant interests like AI, Tech, Travel, etc. This section must NOT be blank.
+- Explicitly mention the **target company name** (e.g., Google) in the Summary or Experience.
+- Mention **ethical AI**, **fairness**, or **responsible AI** practices where relevant.
+- Include references to **mentorship, leadership, or teamwork** where applicable.
+- In **Recommendations**, suggest 2–3 specific people (e.g., professors, mentors, managers).
+- In **Projects**, include at least two GitHub repository links.
+- In **Certifications**, include one from Google or Coursera if missing.
+- In **Publications**, add at least one blog-style placeholder article.
+- In **Any other relevant section**, always include a GitHub or portfolio link.
+- Mention any use of **MLflow**, **Weights & Biases**, or version control for reproducibility.
 
-7. Use the tone of a knowledgeable yet friendly mentor — supportive, clear, and constructive. Your voice should feel helpful and encouraging, not robotic or overly formal.
+7. Use a warm, friendly, and clear tone — like a helpful mentor, not a robot.
 
 ---
 
 # OUTPUT FORMAT (follow exactly)
 
-**Target Role:** <insert target role or job title>
-## Current Profile Score
-**Score:** <0–100>
+**Target Role:** <Job Title or Target Role>  
+## Current Profile Score  
+**Score:** <0–100>  
 **Rationale:** <Brief paragraph summarizing strengths and gaps>
 
 ## Section-by-Section Audit
 
-### <Section Name>
-**Weaknesses:**
-- ...
-**Suggestions:**
-- ...
-**Rewritten Example:**
+### Profile Summary (About)  
+**Weaknesses:**  
+...  
+**Suggestions:**  
+...  
+**Rewritten Example:**  
 ...
 
-(repeat for all 17 sections above)
+(repeat for all 17 sections...)
 
 ---
 
-## Rebuilt Profile
-### HERE IS YOUR NEW LINKEDIN PROFILE:
+## Rebuilt Profile  
+### HERE IS YOUR NEW LINKEDIN PROFILE:  
 <Full updated profile in LinkedIn order, based on rewritten examples>
 
-## ⭐️ Final Profile Score
-**Score:** <0–100>
-**Remarks:** <One-line summary of improvement>
-**Name:** <Extracted name from profile>
+## ⭐️ Final Profile Score  
+**Score:** <0–100>  
+**Remarks:** Perfectly aligned with the target role and fully rebuilt  
+**Name:** <Extracted from profile>
 
 ---
 
 # FINAL CHECKLIST
-- [ ] Are all 17 sections included?
-- [ ] Does each section include Weaknesses, Suggestions, and Rewritten Example?
-- [ ] Did you list only spoken languages under “Languages”?
-- [ ] Did you fill “personal Interests” with relevant values even if missing from profile?
-- [ ] Did you explicitly mention the target company or role where relevant?
-- [ ] Did you include ethical AI, security, or compliance where appropriate?
-- [ ] Did you include mentorship, leadership, or team collaboration if applicable?
-- [ ] Did you propose realistic people to request recommendations from?
-- [ ] Did you avoid merging, skipping, or renaming sections?
-- [ ] Is every field filled with content or a placeholder?
-- [ ] Is the Markdown structure consistent?
-- [ ] Did you avoid extra commentary or explanation?
-
----
-
-**User Profile:**
-{profile_text}
-
+- [x] All 17 sections included?
+- [x] Each section includes Weaknesses, Suggestions, and Rewritten Example?
+- [x] Spoken languages only under “Languages”?
+- [x] “Personal Interests” filled with relevant values?
+- [x] Target company mentioned where relevant?
+- [x] Ethical AI, fairness, or compliance mentioned?
+- [x] Mentorship, leadership, or teamwork mentioned?
+- [x] Realistic recommendations suggested?
+- [x] Project GitHub links added?
+- [x] At least one ML certification included?
+- [x] At least one publication or blog placeholder added?
+- [x] GitHub/portfolio in “Any other relevant section”?
+- [x] Reproducibility tools (MLflow/W&B) mentioned?
+- [x] No sections skipped, merged, or renamed?
+- [x] Every field filled with content or placeholder?
+- [x] Markdown structure consistent?
+- [x] No extra commentary?
 
 
 """
