@@ -32,11 +32,11 @@ Your task is to:
 
 ---
 
-INPUT CONTEXT:
-Job Description or Target Role:
-{jd_text}
+INPUT CONTEXT:  
+Job Description or Target Role:  
+{jd_text}  
 
-User LinkedIn Profile:
+User LinkedIn Profile:  
 {profile_text}
 
 ---
@@ -65,43 +65,43 @@ STRICT INSTRUCTIONS:
 2. For **every section**, include:
    - **Weaknesses:** What’s missing, vague, or misaligned?  
    - **Suggestions:** How to fix or strengthen it.  
-   - **Rewritten Example:** A polished, role-aligned version (or high-quality placeholder if empty).
+   - **Rewritten Example:** A polished, role-aligned version (or high-quality placeholder if empty)
 
-3. **Never** skip, merge, rename, or reorder sections—**all 17** must appear, even if the original profile lacked content.
+3. **Never skip, merge, rename, or reorder sections** — all 17 must appear, even if no content exists.
 
-4. If a section is empty or weak, supply a **realistic placeholder** (e.g., sample GitHub link, mock blog title, portfolio prompt, or a realistic recommendation request).
+4. If a section is empty, use a **realistic placeholder** (e.g., GitHub link, blog title, sample cert).
 
-5. Use **strict Markdown** only:
-   - `### Section Name` headers  
-   - **Bolded** labels for Weaknesses/Suggestions/Rewritten Example  
-   - No HTML, no code blocks, no tables.
+5. Use **strict Markdown only**:
+   - `### Section Name`  
+   - Use **bold** for “Weaknesses”, “Suggestions”, and “Rewritten Example”  
+   - No HTML, no code blocks, no tables
 
 ---
 
 ### SPECIAL SCORING RULES (TO HIT 100/100):
 
-- ✅ Mention the **target company name** (e.g., Google, TCS, Meta) in **Summary** and at least one bullet in **Experience**.  
-- ✅ For service-based firms (TCS, Accenture), spotlight **teamwork**, client deliverables, SLAs, and reliability.  
-- ✅ Include **2–3 technical projects** with GitHub links and **quantifiable metrics** (accuracy %, performance gains).  
-- ✅ Reference **MLflow**, **Weights & Biases**, or equivalent **reproducibility tools** for any ML work.  
-- ✅ Call out **ethical AI**, **bias mitigation**, or **responsible AI** in relevant projects.  
-- ✅ Add at least **one professional certification** (Coursera, Google, AWS, etc.).  
-- ✅ If **Publications** is empty, create a **realistic blog/article placeholder**.  
-- ✅ List **only spoken languages** under “Languages” (no coding languages).  
-- ✅ If **Volunteering** is empty, create a **realistic volunteer placeholder**.
-- ✅ “Personal Interests” must be a meaningful list (AI, Data, Startups, Open Source, Travel, etc.).  
-- ✅ In “Any other relevant section,” include **GitHub**, **portfolio**, or **personal website** (use placeholders if needed).
+- ✅ Mention the **target company name** (e.g., Google, TCS) in **Summary** and **Experience**
+- ✅ Emphasize **teamwork**, **client deliverables**, **SLAs** for service-based companies
+- ✅ Include **2–3 technical projects** with GitHub links and quantifiable results
+- ✅ Reference **MLflow**, **Weights & Biases**, or reproducibility tools
+- ✅ Include **ethical AI**, **bias mitigation**, or **responsible AI** where relevant
+- ✅ Add **at least one certification** (e.g., Coursera, Google, AWS)
+- ✅ If **Publications** is empty, use a blog-style placeholder
+- ✅ List **only spoken languages** under “Languages”
+- ✅ Use a realistic volunteer example if needed
+- ✅ Fill “Personal Interests” meaningfully (e.g., AI, Open Source, Travel)
+- ✅ In “Any other relevant section”, include GitHub/portfolio link or placeholder
 
 ---
 
 # OUTPUT FORMAT
 
 **Target Role:** <role>  
-**Target Company:** <company>
+**Target Company:** <company>  
 
 ## Current Profile Score  
 **Score:** <0–100>  
-**Rationale:** <Brief summary of strengths & gaps>
+**Rationale:** <Brief summary of strengths and improvement needs>
 
 ## Section-by-Section Audit
 
@@ -113,33 +113,90 @@ STRICT INSTRUCTIONS:
 **Rewritten Example:**  
 …
 
-*(Repeat exactly for all 17 sections.)*
+*(Repeat for all 17 sections in exact order)*
+
+---
+
+⚠️ **IMPORTANT:** The “Rebuilt Profile” section must include ONLY the **Rewritten Example** content from each of the 17 sections above.  
+Do NOT include any **Weaknesses** or **Suggestions** in this section.  
+It should read as a clean, user-ready LinkedIn profile.  
+Start with the candidate's **Name** and **Headline**, then proceed with all 17 sections in order.
 
 ---
 
 ## Rebuilt Profile  
-### HERE IS YOUR NEW LINKEDIN PROFILE:  
-<Full 17-section profile built from the above “Rewritten Example” entries>
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** <Extracted Full Name>  
+**Headline:** <Rewritten Headline from section 2>
+
+### Profile Summary (About)  
+<Rewritten Example from section 1>
+
+### Experience  
+<Rewritten Example from section 3>
+
+### Skills  
+<Rewritten Example from section 4>
+
+### Education  
+<Rewritten Example from section 5>
+
+### Projects  
+<Rewritten Example from section 6>
+
+### Certifications  
+<Rewritten Example from section 7>
+
+### Awards & Accomplishments  
+<Rewritten Example from section 8>
+
+### Courses  
+<Rewritten Example from section 9>
+
+### Publications  
+<Rewritten Example from section 10>
+
+### Licenses  
+<Rewritten Example from section 11>
+
+### Volunteering  
+<Rewritten Example from section 12>
+
+### Organizations  
+<Rewritten Example from section 13>
+
+### Recommendations  
+<Rewritten Example from section 14>
+
+### Languages  
+<Rewritten Example from section 15>
+
+### Personal Interests  
+<Rewritten Example from section 16>
+
+### Any other relevant section  
+<Rewritten Example from section 17>
 
 ---
 
 ## ⭐️ Final Profile Score  
 **Score:** <0–100>  
-**Remarks:** <One-line summary of alignment>  
-**Name:** <Extracted full name>
+**Remarks:** <One-line summary of final alignment>  
+**Name:** <Extracted Full Name>
 
 ---
 
 # FINAL CHECKLIST (for the AI)
 
-- [ ] All 17 sections present and in the correct order  
+- [ ] All 17 sections present and in correct order  
 - [ ] Each has **Weaknesses**, **Suggestions**, **Rewritten Example**  
 - [ ] Only spoken languages in “Languages”  
 - [ ] “Personal Interests” meaningfully filled  
-- [ ] Target company mentioned in Summary & Experience  z
+- [ ] Target company mentioned in Summary and Experience  
 - [ ] At least one certification included  
-- [ ] Ethical AI or responsible practices noted if relevant  
-- [ ] GitHub/portfolio link in “Any other relevant section”  
+- [ ] Ethical AI or responsible practices mentioned if relevant  
+- [ ] GitHub/portfolio included in “Any other relevant section”  
 - [ ] Placeholder publication added if needed  
 - [ ] Strict Markdown formatting throughout  
 
