@@ -29,11 +29,6 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/favicon.ico')
-def favicon():
-    """Serve the favicon."""
-    return app.send_static_file('favicon.ico')
-
 @app.route('/')
 def index():
     """Render the home page with the upload form."""
@@ -125,12 +120,32 @@ def suggestion():
       
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
             return render_template('result.html', error=analysis or 'Unknown error during analysis.')
-        parsed = parse_ai_markdown(analysis)
-        print('✅ AI analysis parsed and ready to render.')
         
-        if not parsed or not parsed.get('sections'):
-            return render_template('result.html', error='Parsing failed or no sections found.', raw_output=analysis)
-        return render_template('result.html', **parsed)
+        try:
+            parsed = parse_ai_markdown(analysis)
+            print('✅ AI analysis parsed and ready to render.')
+            
+            if not parsed or not parsed.get('sections'):
+                return render_template('result.html', error='Parsing failed or no sections found.', raw_output=analysis)
+            
+            # Ensure rebuilt_profile is always defined
+            if 'rebuilt_profile' not in parsed or parsed['rebuilt_profile'] is None:
+                parsed['rebuilt_profile'] = {
+                    'summary': '',
+                    'experience': [],
+                    'projects': [],
+                    'skills': [],
+                    'education': [],
+                    'certifications': [],
+                    'awards': [],
+                    'languages': [],
+                    'personal interests': [],
+                }
+            
+            return render_template('result.html', **parsed)
+        except Exception as e:
+            print(f'❌ Error parsing AI response: {str(e)}')
+            return render_template('result.html', error=f'Error parsing AI response: {str(e)}', raw_output=analysis)
     else:
         # GET request: check for suggestion or error in session (use get, not pop)
         suggestion_text = session.get('suggestion', None)
@@ -138,11 +153,30 @@ def suggestion():
         if error:
             return render_template('result.html', error=error)
         if suggestion_text:
-            parsed = parse_ai_markdown(suggestion_text)
-            print('✅ Suggestion (GET) parsed and displayed.')
-            if not parsed or not parsed.get('sections'):
-                return render_template('result.html', error='Parsing failed or no sections found.', raw_output=suggestion_text)
-            return render_template('result.html', **parsed)
+            try:
+                parsed = parse_ai_markdown(suggestion_text)
+                print('✅ Suggestion (GET) parsed and displayed.')
+                if not parsed or not parsed.get('sections'):
+                    return render_template('result.html', error='Parsing failed or no sections found.', raw_output=suggestion_text)
+                
+                # Ensure rebuilt_profile is always defined
+                if 'rebuilt_profile' not in parsed or parsed['rebuilt_profile'] is None:
+                    parsed['rebuilt_profile'] = {
+                        'summary': '',
+                        'experience': [],
+                        'projects': [],
+                        'skills': [],
+                        'education': [],
+                        'certifications': [],
+                        'awards': [],
+                        'languages': [],
+                        'personal interests': [],
+                    }
+                
+                return render_template('result.html', **parsed)
+            except Exception as e:
+                print(f'❌ Error parsing AI response (GET): {str(e)}')
+                return render_template('result.html', error=f'Error parsing AI response: {str(e)}', raw_output=suggestion_text)
         # Fallback: Provide empty defaults for all template variables
         return render_template('result.html',
             current_score=0,
