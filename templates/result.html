@@ -34,22 +34,24 @@
 {% endmacro %}
 
 {% set pdf_content = 'Rebuilt LinkedIn Profile\n\n' %}
-{% if rebuilt_profile.summary %}
-    {% set clean_summary = rebuilt_profile.summary.replace('*', '').replace('_', '').replace('`', '').strip() %}
+{% if rebuilt_profile and rebuilt_profile.summary %}
+    {% set clean_summary = rebuilt_profile.summary.replace('*', '').replace('_', '').replace('`', '').replace('### ', '').replace('## ', '').replace('# ', '').strip() %}
     {% set pdf_content = pdf_content + clean_summary + '\n\n' %}
 {% endif %}
-{% if rebuilt_profile.headline %}
+{% if rebuilt_profile and rebuilt_profile.headline %}
     {% set clean_headline = rebuilt_profile.headline.replace('*', '').replace('_', '').replace('`', '').strip() %}
     {% set pdf_content = pdf_content + 'Headline\n' + clean_headline + '\n\n' %}
 {% endif %}
-{% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'personal interests'] %}
-    {% if rebuilt_profile[section] and rebuilt_profile[section]|length > 0 %}
-        {% set section_title = section.replace('_', ' ').title() %}
-        {% set section_content = rebuilt_profile[section] if rebuilt_profile[section] is string else rebuilt_profile[section]|join('\n') %}
-        {% set clean_section_content = section_content.replace('*', '').replace('_', '').replace('`', '').strip() %}
-        {% set pdf_content = pdf_content + section_title + '\n' + clean_section_content + '\n\n' %}
-    {% endif %}
-{% endfor %}
+{% if rebuilt_profile %}
+    {% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'personal interests'] %}
+        {% if rebuilt_profile[section] and rebuilt_profile[section]|length > 0 %}
+            {% set section_title = section.replace('_', ' ').title() %}
+            {% set section_content = rebuilt_profile[section] if rebuilt_profile[section] is string else rebuilt_profile[section]|join('\n') %}
+            {% set clean_section_content = section_content.replace('*', '').replace('_', '').replace('`', '').strip() %}
+            {% set pdf_content = pdf_content + section_title + '\n' + clean_section_content + '\n\n' %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,11 +93,11 @@
                     <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
                         {% set dasharray = 282.74 %}
-                        {% set dashoffset = dasharray - (dasharray * (current_score+5|default(75)) / 100) %}
+                        {% set dashoffset = dasharray - (dasharray * (current_score|default(75)) / 100) %}
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-3xl font-bold text-blue-700">{{ current_score+5|default(75) }}</span>
+                        <span class="text-3xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
                         <span class="text-gray-500 text-sm">/100</span>
                     </div>
                 </div>
@@ -163,7 +165,11 @@
             <div class="bg-white rounded-xl shadow-md p-6 transition-colors duration-300">
                 <div class="bg-gray-50 rounded-lg p-6 shadow-sm transition-colors duration-300">
                     <div class="rebuilt-profile">
-                        {{ render_profile(rebuilt_profile.summary) }}
+                        {% if rebuilt_profile and rebuilt_profile.summary %}
+                            {{ render_profile(rebuilt_profile.summary) }}
+                        {% else %}
+                            <p class="text-gray-500 italic">No rebuilt profile content available.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -184,10 +190,10 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-gray-500">After</span>
-                        <span class="font-semibold text-blue-700">{{ current_score+5|default(75) }}</span>
+                        <span class="font-semibold text-blue-700">{{ current_score|default(75) }}</span>
                     </div>
                     <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden transition-colors duration-300">
-                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score+5|default(75) }}%"></div>
+                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score|default(75) }}%"></div>
                     </div>
                 </div>
                 <!-- Radial Chart (again, for visual emphasis) -->
@@ -195,11 +201,11 @@
                     <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
                         {% set dasharray = 282.74 %}
-                        {% set dashoffset2 = dasharray - (dasharray * (current_score+5|default(75)) / 100) %}
+                        {% set dashoffset2 = dasharray - (dasharray * (current_score|default(75)) / 100) %}
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset2 }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-blue-700">{{ current_score+5|default(75) }}</span>
+                        <span class="text-2xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
                         <span class="text-gray-500 text-xs">/100</span>
                     </div>
                 </div>
