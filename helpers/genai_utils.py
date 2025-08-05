@@ -146,7 +146,6 @@ STRICT INSTRUCTIONS:
 - [x] Markdown structure consistent?
 - [x] No extra commentary?
 
-
 """
 
     def is_output_complete(text):
