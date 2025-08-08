@@ -53,7 +53,8 @@ if (analyzeForm) {
                 if (loader) loader.style.display = 'none';
             }
         } catch (err) {
-            alert('Error: ' + (err.message || err));
+            // Graceful network error handling
+            alert('Network error. Please check your connection and try again.');
             if (loader) loader.style.display = 'none';
         }
     });
