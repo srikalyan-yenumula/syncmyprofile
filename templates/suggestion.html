@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Suggestions</title>
-     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -16,7 +16,73 @@
             <p class="text-gray-600 text-base">Here are your AI-powered suggestions to improve your LinkedIn profile.</p>
         </header>
         <section id="suggestion-section" class="mb-8">
-            <div id="suggestion-result" class="result-container formatted-output prose max-w-none">{{ suggestion|safe }}</div>
+            <div id="suggestion-result" class="result-container formatted-output prose max-w-none">
+                {# Render suggestion text to highlight bold headings like **Programming Languages:** ,**Frameworks:** #}
+                {% set lines = suggestion.split('\n') if suggestion else [] %}
+                <div class="space-y-2">
+                {% for line in lines %}
+                    {% if (line.count('**') >= 4) and (':**' in line) %}
+                        {% set tokens = line.split('**') %}
+                        <div class="flex flex-wrap gap-x-4 gap-y-1">
+                        {% for i in range(1, tokens|length, 2) %}
+                            {% set heading_raw = tokens[i] %}
+                            {% set value_raw = (tokens[i+1] if i + 1 < tokens|length else '') %}
+                            {% set heading_text = heading_raw.rstrip(':').strip() %}
+                            {% set value_text = value_raw.lstrip(' ,;|-').strip() %}
+                            {% if heading_text %}
+                                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+                            {% endif %}
+                            {% if value_text %}
+                                <div class="text-gray-800">{{ value_text }}</div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    {% elif '**' in line and ',**' in line %}
+                        {% set chunks = line.split(',') %}
+                        <div class="flex flex-wrap gap-x-4 gap-y-1">
+                        {% for chunk in chunks %}
+                            {% set sub = chunk.strip() %}
+                            {% if sub.startswith('**') and ':**' in sub %}
+                                {% set parts = sub.split(':**', 1) %}
+                                {% set heading_text = parts[0][2:] %}
+                                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+                                {% if parts|length > 1 and parts[1].strip() %}
+                                    <div class="text-gray-800">{{ parts[1].strip() }}</div>
+                                {% endif %}
+                            {% elif sub.startswith('**') and sub.endswith('**') %}
+                                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ sub[2:-2] }}</h3>
+                            {% elif sub %}
+                                <div class="text-gray-800">{{ sub }}</div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    {% elif line.startswith('## ') %}
+                        <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ line[3:] }}</h2>
+                    {% elif line.startswith('### ') %}
+                        <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ line[4:] }}</h3>
+                    {% elif line.startswith('**') and ':**' in line %}
+                        {% set parts = line.split(':**', 1) %}
+                        {% set heading_text = parts[0][2:] %}
+                        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ heading_text }}</h3>
+                        {% if parts|length > 1 and parts[1].strip() %}
+                            <div class="text-gray-800">{{ parts[1].strip() }}</div>
+                        {% endif %}
+                    {% elif line.startswith('**') and line.strip().endswith('**') %}
+                        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line[2:-2] }}</h3>
+                    {% elif line.strip().endswith(':') and line.strip().replace(':','').replace(' ','').isalpha() and line|length < 40 %}
+                        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line.rstrip(':') }}</h3>
+                    {% elif line.startswith('- ') %}
+                        <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ line[2:] }}</span></div>
+                    {% elif line.startswith('* ') %}
+                        <div class="pl-6 relative"><span class="absolute left-0 top-0" style="color:#0A66C2;font-size:1.2em;">*</span><span class="text-gray-800">{{ line[2:] }}</span></div>
+                    {% elif line.strip() == '' %}
+                        <div class="h-4"></div>
+                    {% else %}
+                        <div class="text-gray-800">{{ line }}</div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
         </section>
         <div class="text-center">
             <a href="/" class="inline-block text-blue-700 hover:text-blue-900 font-medium transition-colors duration-150">&larr; Back to Analyzer</a>
