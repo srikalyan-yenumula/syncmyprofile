@@ -39,6 +39,8 @@ def analyze():
     """Handle AJAX analyze request, save PDF, run analysis, and redirect to suggestion page."""
     profile_file = request.files.get('profile_pdf')
     job_role = request.form.get('job_role')
+    extra_sections = request.form.get('extra_sections', '').strip()
+    print('Extra sections textarea content:', repr(extra_sections))
 
     if not profile_file or not allowed_file(profile_file.filename):
         return jsonify({'error': 'A valid LinkedIn profile PDF is required.'}), 400
@@ -48,11 +50,6 @@ def analyze():
     profile_file.save(profile_path)
     profile_text = extract_text_from_pdf(profile_path)
     print('✅ PDF text extraction successful.')
-
-    if profile_text.startswith('Error'):
-        session['suggestion'] = None
-        session['error'] = profile_text
-        return jsonify({'redirect': url_for('suggestion')})
 
     # Get both job description and role
     job_desc = request.form.get('job_desc', '').strip()
@@ -68,13 +65,17 @@ def analyze():
     if not jd_text:
         return jsonify({'error': 'Please provide either a job description or a target role.'}), 400
 
-    analysis = analyze_profile(profile_text, jd_text)
+    analysis = analyze_profile(profile_text, jd_text, extra_sections)
     print('✅ Gemini API response received and stored in session.')
     
  
     if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
         session['suggestion'] = None
-        session['error'] = analysis or 'Unknown error during analysis.'
+        session['error'] = (
+            'The AI service is temporarily unavailable. Please try again in a minute.'
+            if (isinstance(analysis, str) and 'temporarily unavailable' in analysis)
+            else analysis or 'Unknown error during analysis.'
+        )
         return jsonify({'redirect': url_for('suggestion')})
     # Store result in session and redirect
     session['suggestion'] = analysis
@@ -105,6 +106,10 @@ def suggestion():
         if profile_text.startswith('Error'):
             return render_template('result.html', error=profile_text)
 
+        # Get extra sections from form
+        extra_sections = request.form.get('extra_sections', '').strip()
+        print('Extra sections textarea content:', repr(extra_sections))
+
         # Compose the JD text for the AI prompt
         jd_text = ''
         if job_desc:
@@ -114,12 +119,17 @@ def suggestion():
                 jd_text += "\n\n"
             jd_text += f"Target Job Role/Title: {job_role}"
 
-        analysis = analyze_profile(profile_text, jd_text)
+        analysis = analyze_profile(profile_text, jd_text, extra_sections)
      
         print('✅ Gemini API response received and stored in session.')
       
         if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
-            return render_template('result.html', error=analysis or 'Unknown error during analysis.')
+            friendly = (
+                'The AI service is temporarily unavailable. Please try again in a minute.'
+                if (isinstance(analysis, str) and 'temporarily unavailable' in analysis)
+                else analysis or 'Unknown error during analysis.'
+            )
+            return render_template('result.html', error=friendly)
         
         try:
             parsed = parse_ai_markdown(analysis)
@@ -348,6 +358,7 @@ def parse_ai_markdown(suggestion):
     # Use the full rebuilt profile text for the summary (so the preview shows all sections)
     summary = rebuilt_text
 
+    # Ensure skills and other sections keep formatting where bold headings like **Programming Languages:** may appear
     rebuilt_profile = {
         'summary': summary,
         'experience': [],
