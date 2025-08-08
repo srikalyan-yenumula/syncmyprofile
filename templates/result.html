@@ -2,7 +2,44 @@
 {%- set lines = text.split('\n') -%}
 <div class="space-y-2">
 {%- for line in lines %}
-    {%- if line.startswith('## ') %}
+    {# General handler for multiple bold headings on the same line, regardless of separators #}
+    {%- if (line.count('**') >= 4) and (':**' in line) %}
+        {%- set tokens = line.split('**') -%}
+        <div class="flex flex-wrap gap-x-4 gap-y-1">
+        {%- for i in range(1, tokens|length, 2) %}
+            {%- set heading_raw = tokens[i] -%}
+            {%- set value_raw = (tokens[i+1] if i + 1 < tokens|length else '') -%}
+            {%- set heading_text = heading_raw.rstrip(':').strip() -%}
+            {%- set value_text = value_raw.lstrip(' ,;|-').strip() -%}
+            {%- if heading_text %}
+                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+            {%- endif %}
+            {%- if value_text %}
+                <div class="text-gray-800">{{ value_text }}</div>
+            {%- endif %}
+        {%- endfor %}
+        </div>
+    {%- elif '**' in line and ',**' in line %}
+        {# Fallback handler for comma-separated bold headings #}
+        {%- set chunks = line.split(',') -%}
+        <div class="flex flex-wrap gap-x-4 gap-y-1">
+        {%- for chunk in chunks %}
+            {%- set sub = chunk.strip() -%}
+            {%- if sub.startswith('**') and ':**' in sub %}
+                {%- set parts = sub.split(':**', 1) -%}
+                {%- set heading_text = parts[0][2:] -%}
+                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+                {%- if parts|length > 1 and parts[1].strip() %}
+                    <div class="text-gray-800">{{ parts[1].strip() }}</div>
+                {%- endif %}
+            {%- elif sub.startswith('**') and sub.endswith('**') %}
+                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ sub[2:-2] }}</h3>
+            {%- elif sub %}
+                <div class="text-gray-800">{{ sub }}</div>
+            {%- endif %}
+        {%- endfor %}
+        </div>
+    {%- elif line.startswith('## ') %}
         <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ line[3:] }}</h2>
     {%- elif line.startswith('### ') %}
         <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ line[4:] }}</h3>
@@ -63,6 +100,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/static/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script id="pdf-json" type="application/json">{{ pdf_content | tojson }}</script>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans transition-colors duration-300">
     {% if error %}
@@ -186,14 +224,14 @@
                         <span class="font-semibold text-gray-700">{{ previous_score|default(60) }}</span>
                     </div>
                     <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden mb-2 transition-colors duration-300">
-                        <div class="h-4 bg-red-400 rounded-full transition-all" style="width: {{ previous_score|default(60) }}%"></div>
+                        <div class="h-4 bg-red-400 rounded-full transition-all" data-width="{{ previous_score|default(60) }}"></div>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-gray-500">After</span>
                         <span class="font-semibold text-blue-700">{{ current_score|default(75) }}</span>
                     </div>
                     <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden transition-colors duration-300">
-                        <div class="h-4 bg-blue-500 rounded-full transition-all" style="width: {{ current_score|default(75) }}%"></div>
+                        <div class="h-4 bg-blue-500 rounded-full transition-all" data-width="{{ current_score|default(75) }}"></div>
                     </div>
                 </div>
                 <!-- Radial Chart (again, for visual emphasis) -->
@@ -236,6 +274,13 @@
     </main>
 
     <script>
+    // Initialize bar widths from data-width to avoid template syntax inside style attribute
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('[data-width]').forEach(el => {
+            const pct = parseInt(el.getAttribute('data-width'), 10) || 0;
+            el.style.width = pct + '%';
+        });
+    });
     // Accordion toggle logic with accessibility and keyboard support
     function toggleAccordion(id) {
         const panel = document.getElementById(id);
@@ -271,7 +316,7 @@
     // Download PDF implementation
     function downloadPDF() {
         const doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
-        const rebuiltProfile = {{ pdf_content | tojson }};
+        const rebuiltProfile = JSON.parse(document.getElementById('pdf-json').textContent);
         doc.setFont('helvetica', '');
         doc.setFontSize(13);
         const marginLeft = 40;
