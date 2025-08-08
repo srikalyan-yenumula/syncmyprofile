@@ -4,11 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>LinkedIn Profile Analyzer</title>
     <!-- Tailwind CDN for utility classes -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+  /* Smooth fade-in for loader overlay */
+  #loader {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  #loader.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  /* Smooth fade-in for modal */
+  #extra-modal .modal-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  #extra-modal.show .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body class="bg-gray-50 min-h-screen flex items-center justify-center">
     <!-- Loader overlay (hidden by default) -->
@@ -38,34 +60,104 @@
             </div>
             <div>
                 <label for="job_role" class="block font-medium text-gray-700 mb-1">Or Target Job Role/Title</label>
-                <input id="job_role" type="text" name="job_role" placeholder="e.g. Junior Data Analyst at TCS" class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input id="job_role" type="text" name="job_role" placeholder="e.g. Junior Data Analyst or at TCS,google "
+                class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
-            <div class="text-blue-700 text-sm mb-2">
-                <p class="text-sm text-blue-300 mt-2">
-  <strong>💡 Tip:</strong> Can’t copy the Job Description? <br>
-  Use <strong>Google Lens</strong> or <strong>Circle to Search</strong> to extract text from the JD on LinkedIn and paste it here for better analysis.
-                </p>
+            <div class="text-sm text-blue-700 mb-2">
+              <p class="mt-2">
+                <strong>💡 Tip:</strong>
+                <span class="text-blue-500">If you're using a mobile device, make sure to open LinkedIn in <strong>desktop mode</strong> in your browser.</span>
+              </p>
             </div>
+            
             <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Analyze</button>
+            <textarea id="extra_sections" name="extra_sections" style="display:none;"></textarea>
         </form>
+        <!-- Modal for extra sections -->
+        <div id="extra-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+          <div class="modal-content bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative">
+            <div class="mb-4 text-lg font-semibold text-blue-700 flex items-center gap-2">
+              <span class="text-2xl">🚀</span> Want Better Results?
+            </div>
+            <div class="mb-3 text-gray-700 text-sm">
+              We’re ready to analyze your LinkedIn profile, but LinkedIn PDFs usually miss important sections like:
+              <ul class="list-disc pl-6 mt-2 mb-2">
+                <li>Projects</li>
+                <li>Certifications</li>
+                <li>Full list of Skills</li>
+                <li>Courses</li>
+                <li>Volunteering</li>
+                <li>Organizations</li>
+              </ul>
+              <span class="block mt-2">📋 Please paste these sections below (if available) to help us give you more accurate feedback. or simply skip this step.</span>
+            </div>
+            <textarea id="extra-sections-textarea" rows="6" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical mb-4" placeholder="Paste missing sections here..."></textarea>
+            <button id="continue-modal" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Continue</button>
+          </div>
+        </div>
         <script>
-        document.getElementById('analyze-form').addEventListener('submit', function(e) {
+        // Modal logic
+        const analyzeForm = document.getElementById('analyze-form');
+        const extraModal = document.getElementById('extra-modal');
+        const continueModal = document.getElementById('continue-modal');
+        const extraSectionsInput = document.getElementById('extra_sections');
+        const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
+        const loader = document.getElementById('loader');
+
+        function showLoader() {
+          if (loader) {
+            loader.style.display = 'flex';
+            setTimeout(() => loader.classList.add('show'), 10); // allow DOM to paint
+          }
+        }
+        function showModalWithFade() {
+          extraModal.classList.remove('hidden');
+          setTimeout(() => extraModal.classList.add('show'), 10); // allow DOM to paint
+          setTimeout(() => { extraSectionsTextarea.focus(); }, 200);
+        }
+        function hideModalWithFade() {
+          extraModal.classList.remove('show');
+          setTimeout(() => extraModal.classList.add('hidden'), 400);
+        }
+
+        if (analyzeForm) {
+          analyzeForm.addEventListener('submit', function(e) {
             var jd = this.job_desc.value.trim();
             var role = this.job_role.value.trim();
-            if (!jd && !role) {
-                // Use a more user-friendly alert
-                if (window.confirm) {
-                    window.alert('Please provide at least a job description or a target job role/title.');
-                }
-                e.preventDefault();
-                // Optionally, focus the first empty field
-                if (!jd) {
-                    document.getElementById('job_desc').focus();
-                } else {
-                    document.getElementById('job_role').focus();
-                }
+            // Always set hidden field to modal textarea value as a failsafe
+            if (extraSectionsInput && extraSectionsTextarea) {
+              extraSectionsInput.value = extraSectionsTextarea.value.trim();
             }
-        });
+            if (!jd && !role) {
+              if (window.confirm) {
+                window.alert('Please provide at least a job description or a target job role/title.');
+              }
+              e.preventDefault();
+              if (!jd) {
+                document.getElementById('job_desc').focus();
+              } else {
+                document.getElementById('job_role').focus();
+              }
+              return;
+            }
+            // Always show modal and prevent default submit
+            e.preventDefault();
+            showModalWithFade();
+          });
+        }
+        if (continueModal) {
+          continueModal.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (extraSectionsInput && extraSectionsTextarea) {
+              extraSectionsInput.value = extraSectionsTextarea.value.trim();
+            }
+            hideModalWithFade();
+            showLoader();
+            // Wait for loader to appear, then submit the form
+            setTimeout(() => analyzeForm.submit(), 400);
+          });
+        }
+        // No close button, modal is unskippable
         </script>
     </main>
     <script src="/static/main.js"></script>
