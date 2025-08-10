@@ -2,69 +2,76 @@
 {%- set lines = text.split('\n') -%}
 <div class="space-y-2">
 {%- for line in lines %}
-    {# General handler for multiple bold headings on the same line, regardless of separators #}
-    {%- if (line.count('**') >= 4) and (':**' in line) %}
-        {%- set tokens = line.split('**') -%}
-        <div class="flex flex-wrap gap-x-4 gap-y-1">
+    {%- set l = line.strip() -%}
+    {# General handler for multiple bold headings on the same line, regardless of separators or colon placement #}
+    {%- if l.count('**') >= 4 %}
+        {%- set tokens = l.split('**') -%}
+        <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
         {%- for i in range(1, tokens|length, 2) %}
             {%- set heading_raw = tokens[i] -%}
             {%- set value_raw = (tokens[i+1] if i + 1 < tokens|length else '') -%}
             {%- set heading_text = heading_raw.rstrip(':').strip() -%}
             {%- set value_text = value_raw.lstrip(' ,;|-').strip() -%}
             {%- if heading_text %}
-                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+                <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
             {%- endif %}
             {%- if value_text %}
-                <div class="text-gray-800">{{ value_text }}</div>
+                <span class="text-gray-800">{{ value_text }}</span>
             {%- endif %}
         {%- endfor %}
         </div>
-    {%- elif '**' in line and ',**' in line %}
+    {%- elif '**' in l and ',' in l %}
         {# Fallback handler for comma-separated bold headings #}
-        {%- set chunks = line.split(',') -%}
-        <div class="flex flex-wrap gap-x-4 gap-y-1">
+        {%- set chunks = l.split(',') -%}
+        <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
         {%- for chunk in chunks %}
             {%- set sub = chunk.strip() -%}
             {%- if sub.startswith('**') and ':**' in sub %}
                 {%- set parts = sub.split(':**', 1) -%}
                 {%- set heading_text = parts[0][2:] -%}
-                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ heading_text }}</h3>
+                <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
                 {%- if parts|length > 1 and parts[1].strip() %}
-                    <div class="text-gray-800">{{ parts[1].strip() }}</div>
+                    <span class="text-gray-800">{{ parts[1].strip() }}</span>
                 {%- endif %}
+            {%- elif sub.startswith('**') and sub.endswith('**:') %}
+                {# Handle pattern like **Heading**: #}
+                <span class="font-semibold text-[#0A66C2]">{{ sub[2:-3].strip() }}:</span>
             {%- elif sub.startswith('**') and sub.endswith('**') %}
-                <h3 class="text-lg font-bold text-[#0A66C2] mt-2">{{ sub[2:-2] }}</h3>
+                <span class="font-semibold text-[#0A66C2]">{{ sub[2:-2] }}:</span>
             {%- elif sub %}
-                <div class="text-gray-800">{{ sub }}</div>
+                <span class="text-gray-800">{{ sub }}</span>
             {%- endif %}
         {%- endfor %}
         </div>
-    {%- elif line.startswith('## ') %}
-        <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ line[3:] }}</h2>
-    {%- elif line.startswith('### ') %}
-        <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ line[4:] }}</h3>
-    {%- elif line.startswith('**') and ':**' in line %}
+    {%- elif l.startswith('## ') %}
+        <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ l[3:] }}</h2>
+    {%- elif l.startswith('### ') %}
+        <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ l[4:] }}</h3>
+    {%- elif l.startswith('**') and ':**' in l %}
         {# Handle lines like **Name:** Tarun Panga #}
-        {%- set parts = line.split(':**', 1) %}
+        {%- set parts = l.split(':**', 1) %}
         {%- set heading_text = parts[0][2:] %}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ heading_text }}</h3>
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ heading_text }}:</h3>
         {%- if parts|length > 1 and parts[1].strip() %}
             <div class="text-gray-800">{{ parts[1].strip() }}</div>
         {%- endif %}
-    {%- elif line.startswith('**') and line.strip().endswith('**') %}
+    {%- elif l.startswith('**') and l.endswith('**:') %}
+        {# Handle lines like **Programming Languages**: #}
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-3].strip() }}:</h3>
+    {%- elif l.startswith('**') and l.endswith('**') %}
         {# Handle standalone bold headings like **Summary** #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line[2:-2] }}</h3>
-    {%- elif line.strip().endswith(':') and line.strip().replace(':','').replace(' ','').isalpha() and line|length < 40 %}
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-2] }}:</h3>
+    {%- elif l.endswith(':') and l.replace(':','').replace(' ','').isalpha() and l|length < 40 %}
         {# Treat any short line ending with a colon as a heading #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ line.rstrip(':') }}</h3>
-    {%- elif line.startswith('- ') %}
-        <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ line[2:] }}</span></div>
-    {%- elif line.startswith('* ') %}
-        <div class="pl-6 relative"><span class="absolute left-0 top-0" style="color:#0A66C2;font-size:1.2em;">*</span><span class="text-gray-800">{{ line[2:] }}</span></div>
-    {%- elif line.strip() == '' %}
+        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l }}</h3>
+    {%- elif l.startswith('- ') %}
+        <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ l[2:] }}</span></div>
+    {%- elif l.startswith('* ') %}
+        <div class="pl-6 relative"><span class="absolute left-0 top-0" style="color:#0A66C2;font-size:1.2em;">*</span><span class="text-gray-800">{{ l[2:] }}</span></div>
+    {%- elif l == '' %}
         <div class="h-4"></div>
     {%- else %}
-        <div class="text-gray-800">{{ line }}</div>
+        <div class="text-gray-800">{{ l }}</div>
     {%- endif %}
 {%- endfor %}
 </div>
