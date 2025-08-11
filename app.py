@@ -67,6 +67,7 @@ def analyze():
 
     analysis = analyze_profile(profile_text, jd_text, extra_sections)
     print('✅ Gemini API response received and stored in session.')
+ 
     
  
     if analysis is None or (isinstance(analysis, str) and analysis.startswith('Error')):
@@ -208,36 +209,47 @@ def suggestion():
         )
 
 def parse_ai_markdown(suggestion):
+    # Strip AI control markers and separators from the raw suggestion first
+    s = suggestion or ""
+    # Remove block markers like <<<REBUILT_PROFILE_START>>> etc.
+    s = re.sub(r"<<<[^>\n]+>>>", "", s)
+    # Remove horizontal rules consisting of only --- on a line
+    s = re.sub(r"^\s*---\s*$", "", s, flags=re.MULTILINE)
+    # Remove lines that became only commas/whitespace after marker removal
+    s = re.sub(r"^[\s,]+$", "", s, flags=re.MULTILINE)
+    # Collapse excessive blank lines
+    s = re.sub(r"\n{3,}", "\n\n", s)
+
     # Extract Name from the response
-    name_match = re.search(r'\*\*Name:\*\*\s*(.+?)(?:\n|$)', suggestion, re.MULTILINE)
+    name_match = re.search(r'\*\*Name:\*\*\s*(.+?)(?:\n|$)', s, re.MULTILINE)
     name = name_match.group(1).strip() if name_match else "Name not found"
     print("\n✨ User Name:", name)
 
     # Extract Education from the response
-    education_match = re.search(r'### Education\s*(.*?)(?=###|$)', suggestion, re.DOTALL)
+    education_match = re.search(r'### Education\s*(.*?)(?=###|$)', s, re.DOTALL)
     education = education_match.group(1).strip() if education_match else "Education not found"
     print("📚 Education:", education)
 
     # Extract Target Role from the very top if present
-    top_role_match = re.search(r'^\*\*Target Role:\*\*\s*(.+)$', suggestion, re.MULTILINE)
+    top_role_match = re.search(r'^\*\*Target Role:\*\*\s*(.+)$', s, re.MULTILINE)
     if top_role_match:
         target_role = top_role_match.group(1).strip()
     else:
         # Fallback: Extract Target Role (if present) from previous logic
-        target_role_match = re.search(r'Target (Job )?Role/Title:\s*(.*)', suggestion)
+        target_role_match = re.search(r'Target (Job )?Role/Title:\s*(.*)', s)
         target_role = target_role_match.group(2).strip() if target_role_match else ""
     print("🎯 Target Role:", target_role)
 
     # Extract Current Profile Score (before improvements) from API response
-    score_match = re.search(r'##\s*Current Profile Score.*?\*\*Score:\*\*\s*(\d+)', suggestion, re.DOTALL)
+    score_match = re.search(r'##\s*Current Profile Score.*?\*\*Score:\*\*\s*(\d+)', s, re.DOTALL)
     previous_score = int(score_match.group(1)) if score_match else 0
 
     # Extract New Score After Improvements (final profile score) from API response
-    final_score_match = re.search(r'##\s*[⭐️\*]*\s*Final Profile Score.*?\*\*Score:\*\*\s*(\d+)', suggestion, re.DOTALL)
+    final_score_match = re.search(r'##\s*[⭐️\*]*\s*Final Profile Score.*?\*\*Score:\*\*\s*(\d+)', s, re.DOTALL)
     current_score = int(final_score_match.group(1)) if final_score_match else previous_score
 
     # Extract rationale from the Current Profile Score section
-    rationale_match = re.search(r'##\s*Current Profile Score.*?Rationale:\s*(.*?)(?:\n\s*[-*]|\n\s*Score:|\n\s*$)', suggestion, re.DOTALL)
+    rationale_match = re.search(r'##\s*Current Profile Score.*?Rationale:\s*(.*?)(?:\n\s*[-*]|\n\s*Score:|\n\s*$)', s, re.DOTALL)
     rationale = rationale_match.group(1).strip() if rationale_match else ""
 
     # Clean the rationale to remove any headings like '## Section-by-Section Audit' or '### Profile Summary (About)'
@@ -250,10 +262,10 @@ def parse_ai_markdown(suggestion):
 
     # --- Robust Section-by-Section Parsing ---
     # 1. Extract the Section-by-Section Audit block
-    section_audit = re.search(r'## Section-by-Section Audit(.*?)## Rebuilt Profile', suggestion, re.DOTALL)
+    section_audit = re.search(r'## Section-by-Section Audit(.*?)## Rebuilt Profile', s, re.DOTALL)
     section_text = section_audit.group(1) if section_audit else ""
     if not section_text:
-        section_audit = re.search(r'## Section-by-Section Audit(.*)', suggestion, re.DOTALL)
+        section_audit = re.search(r'## Section-by-Section Audit(.*)', s, re.DOTALL)
         section_text = section_audit.group(1) if section_audit else ""
 
     # 2. Split into sections by heading
@@ -270,8 +282,11 @@ def parse_ai_markdown(suggestion):
 
         # Extract fields with tolerant regex (allow blank lines, extra spaces, any order)
         def extract_field(label, text):
-            # Match **Label:** (possibly with extra spaces, possibly on same line)
-            m = re.search(rf'\*\*{label}:\*\*\s*(.*?)(?=\n\*\*|\Z)', text, re.DOTALL | re.IGNORECASE)
+            # Match **Label:** and capture until the next real field label or section boundary,
+            # allowing bold subheadings inside the content (e.g., **Programming Languages:**)
+            boundary_labels = r"Weaknesses|Suggestions|Rewritten\s+Example"
+            pattern = rf"\*\*{label}:\*\*\s*(.*?)(?=\n\*\*(?:{boundary_labels}):\*\*|\n###|\Z)"
+            m = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
             return m.group(1).strip() if m else "No information provided."
 
         weaknesses = extract_field("Weaknesses", rest)
@@ -282,11 +297,34 @@ def parse_ai_markdown(suggestion):
         weaknesses_list = [w.strip('- ').strip() for w in weaknesses.split('\n') if w.strip()]
         suggestions_list = [s.strip('- ').strip() for s in suggestions.split('\n') if s.strip()]
 
+        # Cleanups for rewritten content by section
+        cleaned_rewritten = rewritten
+        if cleaned_rewritten:
+            # Skills: convert **Label:** to Label:
+            if title.strip().lower() == 'skills':
+                cleaned_rewritten = re.sub(r"\*\*\s*([^*]+?)\s*:\s*\*\*", r"\1:", cleaned_rewritten)
+                cleaned_rewritten = re.sub(r"\*\*\s*([^*]+?)\s*\*\*\s*:\s*", r"\1:", cleaned_rewritten)
+            # Experience: strip bold wrappers like **Company** / **Title**
+            elif title.strip().lower() == 'experience':
+                cleaned_rewritten = re.sub(r"\*\*(.*?)\*\*", r"\1", cleaned_rewritten)
+            # Education: strip bold wrappers in institution/degree lines
+            elif title.strip().lower() == 'education':
+                cleaned_rewritten = re.sub(r"\*\*(.*?)\*\*", r"\1", cleaned_rewritten)
+            # Projects: strip bold wrappers in project headings
+            elif title.strip().lower() == 'projects':
+                cleaned_rewritten = re.sub(r"\*\*(.*?)\*\*", r"\1", cleaned_rewritten)
+            # Awards & Accomplishments: strip bold wrappers in award titles
+            elif title.strip().lower() == 'awards & accomplishments':
+                cleaned_rewritten = re.sub(r"\*\*(.*?)\*\*", r"\1", cleaned_rewritten)
+            # Certifications: strip bold wrappers in certification titles
+            elif title.strip().lower() == 'certifications':
+                cleaned_rewritten = re.sub(r"\*\*(.*?)\*\*", r"\1", cleaned_rewritten)
+
         sections.append({
             'title': title,
             'weaknesses': weaknesses_list or ["No information provided."],
             'suggestions': suggestions_list or ["No information provided."],
-            'rewritten': rewritten or "No rewritten example available."
+            'rewritten': (cleaned_rewritten or "No rewritten example available.")
         })
 
     # If sections is empty, fill with all required sections as placeholders
@@ -341,14 +379,14 @@ def parse_ai_markdown(suggestion):
     
     rebuilt_text = ""
     for pattern in rebuilt_patterns:
-        rebuilt_match = re.search(pattern, suggestion, re.DOTALL)
+        rebuilt_match = re.search(pattern, s, re.DOTALL)
         if rebuilt_match:
             rebuilt_text = rebuilt_match.group(1).strip()
             break
     
     # If no pattern matched, try to extract anything after "Rebuilt Profile" section
     if not rebuilt_text:
-        rebuilt_match = re.search(r'## Rebuilt Profile(.*)', suggestion, re.DOTALL)
+        rebuilt_match = re.search(r'## Rebuilt Profile(.*)', s, re.DOTALL)
         if rebuilt_match:
             rebuilt_text = rebuilt_match.group(1).strip()
             # Remove any trailing sections
@@ -374,7 +412,7 @@ def parse_ai_markdown(suggestion):
    
 
     # Extract remarks from the Final Profile Score section
-    remarks_match = re.search(r'##\s*[⭐️\*]*\s*Final Profile Score.*?\*\*Remarks:\*\*\s*(.*?)(?:\n|$)', suggestion, re.DOTALL)
+    remarks_match = re.search(r'##\s*[⭐️\*]*\s*Final Profile Score.*?\*\*Remarks:\*\*\s*(.*?)(?:\n|$)', s, re.DOTALL)
     remarks = remarks_match.group(1).strip() if remarks_match else ""
 
     return {
