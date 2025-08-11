@@ -49,7 +49,7 @@
             <h1 class="text-3xl font-bold text-blue-700 mb-2">AI-Powered LinkedIn Profile Analyzer</h1>
             <p class="text-gray-600 text-base">Get instant, actionable feedback on your LinkedIn profile for your dream job.</p>
         </header>
-        <form id="analyze-form" action="/analyze" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <form id="analyze-form" action="/suggestion" method="POST" enctype="multipart/form-data" class="space-y-5">
             <div>
                 <label for="profile_pdf" class="block font-medium text-gray-700 mb-1">Upload LinkedIn Profile (PDF) <span class="text-red-500">*</span></label>
                 <input id="profile_pdf" type="file" name="profile_pdf" accept="application/pdf" required class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -71,6 +71,7 @@
             </div>
             
             <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Analyze</button>
+            <textarea id="extra_sections" name="extra_sections" style="display:none;"></textarea>
         </form>
         <!-- Modal for extra sections -->
         <div id="extra-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
@@ -90,76 +91,73 @@
               </ul>
               <span class="block mt-2">📋 Please paste these sections below (if available) to help us give you more accurate feedback. or simply skip this step.</span>
             </div>
-            <textarea id="extra-sections-textarea" name="extra_sections" form="analyze-form" rows="6" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical mb-4" placeholder="Paste missing sections here..."></textarea>
+            <textarea id="extra-sections-textarea" rows="6" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical mb-4" placeholder="Paste missing sections here..."></textarea>
             <button id="continue-modal" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Continue</button>
           </div>
         </div>
         <script>
-        (function() {
-          // Modal logic (scoped to avoid globals that collide with static/main.js)
-          const modalAnalyzeForm = document.getElementById('analyze-form');
-          const extraModal = document.getElementById('extra-modal');
-          const continueModal = document.getElementById('continue-modal');
-          const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
-          const loaderEl = document.getElementById('loader');
+        // Modal logic
+        const analyzeForm = document.getElementById('analyze-form');
+        const extraModal = document.getElementById('extra-modal');
+        const continueModal = document.getElementById('continue-modal');
+        const extraSectionsInput = document.getElementById('extra_sections');
+        const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
+        const loader = document.getElementById('loader');
 
-          function showLoader() {
-            if (loaderEl) {
-              loaderEl.style.display = 'flex';
-              setTimeout(() => loaderEl.classList.add('show'), 10); // allow DOM to paint
+        function showLoader() {
+          if (loader) {
+            loader.style.display = 'flex';
+            setTimeout(() => loader.classList.add('show'), 10); // allow DOM to paint
+          }
+        }
+        function showModalWithFade() {
+          extraModal.classList.remove('hidden');
+          setTimeout(() => extraModal.classList.add('show'), 10); // allow DOM to paint
+          setTimeout(() => { extraSectionsTextarea.focus(); }, 200);
+        }
+        function hideModalWithFade() {
+          extraModal.classList.remove('show');
+          setTimeout(() => extraModal.classList.add('hidden'), 400);
+        }
+
+        if (analyzeForm) {
+          analyzeForm.addEventListener('submit', function(e) {
+            var jd = this.job_desc.value.trim();
+            var role = this.job_role.value.trim();
+            // Always set hidden field to modal textarea value as a failsafe
+            if (extraSectionsInput && extraSectionsTextarea) {
+              extraSectionsInput.value = extraSectionsTextarea.value.trim();
             }
-          }
-          function showModalWithFade() {
-            extraModal.classList.remove('hidden');
-            setTimeout(() => extraModal.classList.add('show'), 10); // allow DOM to paint
-            setTimeout(() => { extraSectionsTextarea.focus(); }, 200);
-          }
-          function hideModalWithFade() {
-            extraModal.classList.remove('show');
-            setTimeout(() => extraModal.classList.add('hidden'), 400);
-          }
-
-          if (modalAnalyzeForm) {
-            modalAnalyzeForm.addEventListener('submit', function(e) {
-              var jd = this.job_desc.value.trim();
-              var role = this.job_role.value.trim();
-              // No copy needed: textarea is bound directly to the form via form attribute
-              // If we've chosen to skip the modal (after clicking Continue), let other handlers (main.js) handle submission
-              if (this.dataset.skipModal === '1') {
-                return; // do not preventDefault; allow main.js listener to run
+            if (!jd && !role) {
+              if (window.confirm) {
+                window.alert('Please provide at least a job description or a target job role/title.');
               }
-              if (!jd && !role) {
-                if (window.confirm) {
-                  window.alert('Please provide at least a job description or a target job role/title.');
-                }
-                e.preventDefault();
-                if (!jd) {
-                  document.getElementById('job_desc').focus();
-                } else {
-                  document.getElementById('job_role').focus();
-                }
-                return;
+              e.preventDefault();
+              if (!jd) {
+                document.getElementById('job_desc').focus();
+              } else {
+                document.getElementById('job_role').focus();
               }
-              // Always show modal and prevent default submit
-              e.preventDefault();
-              showModalWithFade();
-            });
-          }
-          if (continueModal) {
-            continueModal.addEventListener('click', function(e) {
-              e.preventDefault();
-              // No copy needed: textarea is bound directly to the form via form attribute
-              hideModalWithFade();
-              showLoader();
-              // Signal to the submit handler to skip showing the modal on this attempt
-              if (modalAnalyzeForm) modalAnalyzeForm.dataset.skipModal = '1';
-              // Wait for loader to appear, then trigger a normal submit event
-              // so the JS handler in /static/main.js can POST to /analyze
-              setTimeout(() => modalAnalyzeForm && modalAnalyzeForm.requestSubmit(), 400);
-            });
-          }
-          // No close button, modal is unskippable
-        })();
+              return;
+            }
+            // Always show modal and prevent default submit
+            e.preventDefault();
+            showModalWithFade();
+          });
+        }
+        if (continueModal) {
+          continueModal.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (extraSectionsInput && extraSectionsTextarea) {
+              extraSectionsInput.value = extraSectionsTextarea.value.trim();
+            }
+            hideModalWithFade();
+            showLoader();
+            // Wait for loader to appear, then submit the form
+            setTimeout(() => analyzeForm.submit(), 400);
+          });
+        }
+        // No close button, modal is unskippable
         </script>
     </main>
     <script src="/static/main.js"></script>
