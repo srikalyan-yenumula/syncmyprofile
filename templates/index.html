@@ -128,6 +128,10 @@
             if (extraSectionsInput && extraSectionsTextarea) {
               extraSectionsInput.value = extraSectionsTextarea.value.trim();
             }
+            // If we've chosen to skip the modal (after clicking Continue), let other handlers (main.js) handle submission
+            if (this.dataset.skipModal === '1') {
+              return; // do not preventDefault; allow main.js listener to run
+            }
             if (!jd && !role) {
               if (window.confirm) {
                 window.alert('Please provide at least a job description or a target job role/title.');
@@ -153,8 +157,11 @@
             }
             hideModalWithFade();
             showLoader();
-            // Wait for loader to appear, then submit the form
-            setTimeout(() => analyzeForm.submit(), 400);
+            // Signal to the submit handler to skip showing the modal on this attempt
+            analyzeForm.dataset.skipModal = '1';
+            // Wait for loader to appear, then trigger a normal submit event
+            // so the JS handler in /static/main.js can POST to /analyze
+            setTimeout(() => analyzeForm.requestSubmit(), 400);
           });
         }
         // No close button, modal is unskippable
