@@ -26,8 +26,13 @@ const loader = document.getElementById('loader');
 const mainContent = document.getElementById('main-content');
 if (analyzeForm) {
     analyzeForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
         const form = e.target;
+        // Only proceed when the modal flow signals to continue
+        if (form.dataset.skipModal !== '1') {
+            return; // Inline script will handle showing the modal and preventDefault
+        }
+
+        e.preventDefault();
         const formData = new FormData(form);
 
         // Show loader immediately
