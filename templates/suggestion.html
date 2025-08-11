@@ -22,18 +22,18 @@
                 <div class="space-y-2">
                 {% for line in lines %}
                     {% set l = line.strip() %}
-                    {% if l.count('**') >= 4 %}
+                    {% if l.count('**') >= 2 %}
                         {% set tokens = l.split('**') %}
                         <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
                         {% for i in range(1, tokens|length, 2) %}
                             {% set heading_raw = tokens[i] %}
                             {% set value_raw = (tokens[i+1] if i + 1 < tokens|length else '') %}
                             {% set heading_text = heading_raw.rstrip(':').strip() %}
-                            {% set value_text = value_raw.lstrip(' ,;|-').strip() %}
+                            {% set value_text = value_raw.lstrip(' ,;|-*•').strip() %}
                             {% if heading_text %}
                                 <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
                             {% endif %}
-                            {% if value_text %}
+                            {% if value_text and value_text not in ['*', '•'] %}
                                 <span class="text-gray-800">{{ value_text }}</span>
                             {% endif %}
                         {% endfor %}
@@ -43,12 +43,16 @@
                         <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
                         {% for chunk in chunks %}
                             {% set sub = chunk.strip() %}
+                            {% set sub = sub.lstrip('* ').lstrip('- ').lstrip('• ') %}
                             {% if sub.startswith('**') and ':**' in sub %}
                                 {% set parts = sub.split(':**', 1) %}
                                 {% set heading_text = parts[0][2:] %}
                                 <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
                                 {% if parts|length > 1 and parts[1].strip() %}
-                                    <span class="text-gray-800">{{ parts[1].strip() }}</span>
+                                    {% set val = parts[1].strip().lstrip(' ,;|-*•').strip() %}
+                                    {% if val and val not in ['*', '•'] %}
+                                        <span class="text-gray-800">{{ val }}</span>
+                                    {% endif %}
                                 {% endif %}
                             {% elif sub.startswith('**') and sub.endswith('**:') %}
                                 <span class="font-semibold text-[#0A66C2]">{{ sub[2:-3].strip() }}:</span>
@@ -74,7 +78,9 @@
                         <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-3].strip() }}:</h3>
                     {% elif l.startswith('**') and l.endswith('**') %}
                         <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-2] }}:</h3>
-                    {% elif l.endswith(':') and l.replace(':','').replace(' ','').isalpha() and l|length < 40 %}
+                    {% elif (l.startswith('*') or l.startswith('-') or l.startswith('•')) and (l.lstrip('*-• ').strip().endswith(':')) and (l.lstrip('*-• ').strip()|length < 60) %}
+                        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l.lstrip('*-• ').strip() }}</h3>
+                    {% elif l.endswith(':') and l|length < 60 %}
                         <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l }}</h3>
                     {% elif l.startswith('- ') %}
                         <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ l[2:] }}</span></div>
