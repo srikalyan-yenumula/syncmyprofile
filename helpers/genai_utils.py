@@ -110,12 +110,69 @@ STRICT INSTRUCTIONS:
     - Keep it concise, varied in sentence length, and optimized for LinkedIn’s 2-line preview.
 14. After the Current Profile Score, include a short "Verdict" section that summarizes practical recruiter value and what would be needed to reach a practical 100 using the provided template in the Output Format.
 15. Volunteering: If the source does not mention volunteering, provide a realistic placeholder tied to college or community events (e.g., event coordination, hackathon volunteering, campus outreach). Do not use brand-name nonprofits unless present in the source. Keep the scope credible and aligned to the user’s domain where possible.
-16. Languages: Only include spoken languages. If proficiency levels are present in the source, annotate each language with a concise level in parentheses using Title Case (acceptable set: Native, Fluent, Professional, Intermediate, Conversational). Do not infer or fabricate proficiency levels. If no level is provided, list the language without a level.
+            16. Languages:
+                - Always include English in the Languages section. If the source does not specify a level, use "English (Fluent)" by default.
+                - Never mark English as Native unless the source explicitly says Native.
+                - Include other spoken languages that appear in the source.
+                - If any location (city/country) is explicitly mentioned in the profile, include exactly one additional non-English language inferred from the most recent/current location, choosing the country's primary official language (e.g., Spain → Spanish, Germany → German, India → Hindi). If the only explicit locations are English-majority countries and there is no other clear signal, do not add a second language.
+                - If proficiency levels are present in the source, annotate each language with a concise level in parentheses using Title Case (acceptable set: Native, Fluent, Professional, Intermediate, Conversational).
+                - Do not infer or fabricate proficiency levels for non-English languages. For location-inferred languages where no level is provided, list the language name without a level.
+                - Ensure the final list contains at least two languages where possible (English + one additional from source or clear location inference); if not possible, include English only.
 17. Headline: Lead with the role focus and specialization, add 2–3 high-value keywords (tools, domains), and avoid fluff.
 18. Experience bullets: Use action-first, outcome-oriented bullets (STAR-aligned). Prefer metrics from the source; if no numbers exist, use scope/complexity/quality proof points. Keep 2–5 bullets per role.
-19. Skills: Group into clear categories (e.g., Programming Languages, Frameworks/Libraries, Data/ML, Cloud/DevOps, Tools & Platforms, Soft/Analytical Skills). Remove duplicates, prefer canonical names, and cap each category to the most relevant ~8 items.
+        19. Skills: Group into clear categories (e.g., Programming Languages, Frameworks/Libraries, Databases, Tools & Technologies, Soft Skills; optionally Data/ML and Cloud/DevOps when relevant). Remove duplicates, prefer canonical names, and cap each category to the most relevant ~8 items.
 20. Projects: For each project, provide a one-line hook (problem + outcome), 1–2 bullets with technologies and impact, and a GitHub link (if present in source).
 21. Recommendations: If real recommendations are absent, include 2 short, role-specific recommendation request prompts tailored to past collaborators or managers.
+
+        ---
+
+        FORMAT ENFORCEMENT (CRITICAL):
+        - Use the EXACT headings and order below. Do NOT add emojis, extra symbols, or rename any headings:
+          1) ## Current Profile Score
+          2) ## Verdict
+          3) ## Section-by-Section Audit
+          4) ## Rebuilt Profile
+          5) ### HERE IS YOUR NEW LINKEDIN PROFILE:
+          6) ## Final Profile Score
+        - For each audit subsection: start with "### <Section Name>" then include exactly these fields (any order): "**Weaknesses:**", "**Suggestions:**", "**Rewritten Example:**".
+        - Label syntax must be strictly "**Label:** value" (colon INSIDE bold). Never output "**Label**:".
+        - Never prefix labels with list markers. Lines must not begin with -, *, or • immediately before a bold label.
+        - Rebuilt Profile Skills formatting must be multi-line categories, one category per line, like:
+              **Programming Languages:** C#, TypeScript, Python
+              **Frameworks/Libraries:** .NET Framework, ASP.NET, React
+              **Databases:** SQL Server, MySQL
+              **Tools & Technologies:** Git, Azure DevOps, Docker
+              **Soft Skills:** Leadership, Public Speaking, Problem Solving, Teamwork, Communication
+          Do NOT use list bullets for these lines; render them as plain lines as above.
+
+        BLOCK DELIMITERS (for reliable parsing):
+        - Surround each major block with the following markers on their own lines:
+          <<<CURRENT_PROFILE_SCORE_START>>>
+          <<<CURRENT_PROFILE_SCORE_END>>>
+          <<<VERDICT_START>>>
+          <<<VERDICT_END>>>
+          <<<SECTION_AUDIT_START>>>
+          <<<SECTION_AUDIT_END>>>
+          <<<REBUILT_PROFILE_START>>>
+          <<<REBUILT_PROFILE_END>>>
+          <<<FINAL_PROFILE_SCORE_START>>>
+          <<<FINAL_PROFILE_SCORE_END>>>
+
+        JSON MIRROR (append at the very end):
+        - After all markdown output, include a fenced code block labeled json that mirrors key fields with this structure:
+          ```json
+          {{
+            "targetRole": "<string>",
+            "previousScore": <number>,
+            "currentScore": <number>,
+            "rationale": "<string>",
+            "sections": [
+              {{ "title": "<string>", "weaknesses": ["..."], "suggestions": ["..."], "rewritten": "<string>" }}
+            ],
+            "rebuiltProfileText": "<string>",
+            "languages": [ {{ "name": "English", "level": "Fluent" }}, {{ "name": "<Other>", "level": null }} ]
+          }}
+          ```
 
 ---
 
@@ -130,7 +187,7 @@ STRICT INSTRUCTIONS:
     - Optimized for LinkedIn’s 2-line preview (role focus and differentiators surfaced immediately)
     - Distinctiveness: highlights unique differentiators compared to typical profiles
     - Volunteering: present and realistic; if absent in the source, uses a credible college/community event placeholder aligned to the domain
-    - Languages: only spoken languages included; proficiency levels shown only when present in the source (Native/Fluent/Professional/Intermediate), otherwise omitted; no guessing
+            - Languages: English is always included (default to English (Fluent) if level unspecified); when a location is present, include exactly one additional non-English language inferred from that location's primary official language; do not mark English as Native unless explicitly stated; do not invent proficiency levels; show levels only when present in the source (Native/Fluent/Professional/Intermediate), otherwise omit
     - Include at least two projects (real or placeholder) with GitHub links and impact metrics
     - Mention MLflow, Weights & Biases, or reproducibility tools if relevant
     - Include ethical or responsible AI practices if applicable to the role
@@ -267,7 +324,6 @@ Minor gaps they’d see:
 - [ ] GitHub and portfolio in final section  
 - [ ] Follows strict markdown format
 - [ ] Includes a Verdict section after Current Profile Score
-
 
 """
         print("\n\n==== USER-PASTED EXTRA BLOCK ====")
