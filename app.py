@@ -31,7 +31,17 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    """Render the home page with the upload form."""
+    """Render the landing page by default when visiting the root URL."""
+    return render_template('landing.html')
+
+@app.route('/landing')
+def landing():
+    """Render the marketing landing page with CTA to start."""
+    return render_template('landing.html')
+
+@app.route('/start')
+def start():
+    """Render the upload/analyzer tool page."""
     return render_template('index.html')
 
 @app.route('/analyze', methods=['POST'])
