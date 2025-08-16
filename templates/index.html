@@ -1,165 +1,461 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <title>LinkedIn Profile Analyzer</title>
-    <!-- Tailwind CDN for utility classes -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Upload your LinkedIn profile and target job to get instant AI-powered analysis and feedback." />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <title>Analyze Profile | ProfilePerfect AI</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/style.css">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-  /* Smooth fade-in for loader overlay */
-  #loader {
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-  #loader.show {
-    opacity: 1;
-    pointer-events: all;
-  }
-  /* Smooth fade-in for modal */
-  #extra-modal .modal-content {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1);
-  }
-  #extra-modal.show .modal-content {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* gray-50 */
+        }
+
+        /* Custom focus ring for better accessibility */
+        .focus-ring:focus-visible {
+            outline: 2px solid #3B82F6; /* blue-500 */
+            outline-offset: 2px;
+        }
+        
+        /* Enhanced file drop zone with smooth transitions */
+        .file-drop-zone {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .file-drop-zone.dragover,
+        .file-drop-zone:hover {
+            background-color: #eff6ff; /* blue-50 */
+            border-color: #2563eb; /* blue-600 */
+        }
+        
+        /* Fade-in transitions for overlays */
+        .overlay {
+            display: none;              /* hidden by default */
+            opacity: 0;                 /* transparent */
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;       /* ignore clicks when hidden */
+        }
+        .overlay.visible {
+            display: flex;              /* show and center using flex */
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            pointer-events: all;        /* accept clicks */
+        }
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .overlay.visible .modal-content {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Hide scrollbar for modal content while keeping scrollable */
+        .modal-content.hide-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;    /* Firefox */
+        }
+        .modal-content.hide-scrollbar::-webkit-scrollbar { /* Chrome, Safari */
+            width: 0;
+            height: 0;
+        }
+
+        /* Ensure sticky action bar is docked to the bottom of the modal */
+        #extra-modal .sticky.bottom-0 {
+            bottom: 0;
+        }
+        
+        /* Selected tab styling */
+        .tab-button[aria-selected="true"] {
+            background-color: #2563eb; /* blue-600 */
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center">
-    <!-- Loader overlay (hidden by default) -->
-    <div id="loader" class="loading-container" style="display:none;">
-        <div class="loader-spinner" style="color:#0077b5;">
-            <svg width="60" height="60" viewBox="0 0 50 50">
-                <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="90,150" stroke-dashoffset="0">
-                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-            <div style="margin-top:16px; font-weight:600; font-size:1.1em;">Analyzing your profile...</div>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                    <img src="{{ url_for('static', filename='favicon.ico') }}" alt="ProfilePerfect AI Logo" class="h-8 w-8 rounded-lg" />
+                    <span class="font-bold text-lg text-gray-900 tracking-tight">ProfilePerfect AI</span>
+                </a>
+                <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-colors duration-200">
+                    &larr; Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-12 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 lg:gap-16 items-start">
+            
+            <!-- Left Column: Form -->
+            <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-lg border border-gray-200/80">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-blue-700">Analyze Your Profile</h1>
+                    <p class="mt-2 text-gray-600">Upload your profile and tell us your goal. We'll handle the rest.</p>
+                </div>
+
+                <form id="analyze-form" action="/suggestion" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <!-- Step 1: File Upload -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-800 mb-2">1. Upload LinkedIn Profile PDF</label>
+                        <label for="profile_pdf" class="file-drop-zone flex flex-col items-center justify-center w-full h-40 px-4 text-center bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                <p id="file-upload-text" class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500">PDF only (MAX. 5MB)</p>
+                            </div>
+                            <input id="profile_pdf" name="profile_pdf" type="file" class="hidden" accept="application/pdf" required>
+                        </label>
+                        <p id="pdf-error" class="text-sm text-red-600 mt-1 hidden">Please upload your LinkedIn PDF.</p>
+                    </div>
+
+                    <!-- Step 2: Job Target -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-800 mb-2">2. Define Your Target</label>
+                        <!-- Tabs -->
+                        <div class="flex p-1 bg-gray-200 rounded-lg mb-4">
+                            <button type="button" id="tab-jd" class="tab-button w-1/2 p-2 rounded-md text-sm font-semibold transition-colors focus-ring" aria-selected="true">Job Description</button>
+                            <button type="button" id="tab-role" class="tab-button w-1/2 p-2 rounded-md text-sm font-semibold transition-colors focus-ring" aria-selected="false">Job Title</button>
+                        </div>
+                        <!-- Tab Panels -->
+                        <div id="panel-jd">
+                            <textarea id="job_desc" name="job_desc" placeholder="Paste the full job description here for the most accurate analysis..." rows="6" class="block w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[160px]"></textarea>
+                        </div>
+                        <div id="panel-role" class="hidden">
+                            <input id="job_role" name="job_role" type="text" placeholder="e.g., Senior Product Manager at Google" class="block w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                         <p id="target-error" class="text-sm text-red-600 mt-1 hidden">Please provide a job description or a target role.</p>
+                    </div>
+
+                    <!-- Hidden input for extra sections -->
+                    <textarea id="extra_sections" name="extra_sections" class="hidden"></textarea>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring transition-all duration-200 transform hover:scale-105">
+                        Analyze My Profile
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Guidance -->
+            <aside class="lg:col-span-2 hidden lg:block space-y-8">
+                <div class="p-8 bg-blue-50 border border-blue-200 rounded-2xl">
+                    <h2 class="text-xl font-bold text-blue-900">How to Get Your LinkedIn PDF</h2>
+                    <ol class="mt-4 space-y-3 list-decimal list-inside text-blue-800/80 text-sm">
+                        <li>Go to your LinkedIn profile and click the <span class="font-semibold">"More"</span> button below your name.</li>
+                        <li>Select <span class="font-semibold">"Save to PDF"</span> from the dropdown menu.</li>
+                        <li>Upload the downloaded file here.</li>
+                    </ol>
+                    <p class="mt-4 text-xs text-blue-700/70">Tip: On mobile, you may need to use "Desktop site" mode in your browser to see this option.</p>
+                </div>
+
+                <div class="p-8 bg-gray-100 border border-gray-200 rounded-2xl">
+                    <h3 class="text-xl font-bold text-gray-900">For the Best Results</h3>
+                     <ul class="mt-4 space-y-3 list-disc list-inside text-gray-700 text-sm">
+                        <li><span class="font-semibold">Use a Job Description:</span> Pasting a full JD gives our AI the most context to tailor your profile.</li>
+                        <li><span class="font-semibold">Be Specific:</span> A target role like "Software Engineer at a fintech startup" is better than just "Software Engineer".</li>
+                        <li><span class="font-semibold">Add Extra Details:</span> Use the next step to add missing projects or skills for a more complete analysis.</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Mobile Guidance (bottom) -->
+    <section id="mobile-guidance" class="lg:hidden px-4 sm:px-6 mt-8 mb-12 space-y-8">
+        <div id="mobile-linkedin-guide" class="p-8 bg-blue-50 border border-blue-200 rounded-2xl">
+            <h2 class="text-xl font-bold text-blue-900">How to Get Your LinkedIn PDF</h2>
+            <ol class="mt-4 space-y-3 list-decimal list-inside text-blue-800/80 text-sm">
+                <li>Go to your LinkedIn profile and click the <span class="font-semibold">"More"</span> button below your name.</li>
+                <li>Select <span class="font-semibold">"Save to PDF"</span> from the dropdown menu.</li>
+                <li>Upload the downloaded file here.</li>
+            </ol>
+            <p class="mt-4 text-xs text-blue-700/70">Tip: On mobile, you may need to use "Desktop site" mode in your browser to see this option.</p>
+        </div>
+
+        <div class="p-8 bg-gray-100 border border-gray-200 rounded-2xl">
+            <h3 class="text-xl font-bold text-gray-900">For the Best Results</h3>
+            <ul class="mt-4 space-y-3 list-disc list-inside text-gray-700 text-sm">
+                <li><span class="font-semibold">Use a Job Description:</span> Pasting a full JD gives our AI the most context to tailor your profile.</li>
+                <li><span class="font-semibold">Be Specific:</span> A target role like "Software Engineer at a fintech startup" is better than just "Software Engineer".</li>
+                <li><span class="font-semibold">Add Extra Details:</span> Use the next step to add missing projects or skills for a more complete analysis.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200/80 mt-16 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='favicon.ico') }}" alt="ProfilePerfect AI" class="h-6 w-6 rounded" />
+                <span class="font-semibold text-gray-900">ProfilePerfect AI</span>
+            </a>
+            <p class="text-sm text-gray-500">&copy; <span id="current-year">2025</span> All rights reserved.</p>
+            <button id="back-to-top-btn" class="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-all">
+                Back to Top
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+    // Footer year + back-to-top behavior
+    document.addEventListener('DOMContentLoaded', () => {
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn?.classList.remove('hidden');
+                backToTopBtn?.classList.add('inline-flex');
+            } else {
+                backToTopBtn?.classList.add('hidden');
+                backToTopBtn?.classList.remove('inline-flex');
+            }
+        });
+        backToTopBtn?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+    </script>
+
+    <!-- Modal for Extra Sections -->
+    <div id="extra-modal" class="overlay fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 bg-black/50 backdrop-blur-sm">
+        <div class="modal-content hide-scrollbar bg-white rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl p-6 sm:p-8 lg:p-10 pb-6 lg:pb-8 relative max-h-[85vh] sm:max-h-[80vh] min-h-[60vh] sm:min-h-[50vh] overflow-y-auto flex flex-col">
+            <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <span class="text-3xl">🚀</span>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-gray-900">Want Better Results?</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        We’re ready to analyze your LinkedIn profile, but LinkedIn PDFs usually miss important sections like:
+                    </p>
+                    <ul class="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 bg-gray-50 p-3 rounded-md border border-gray-200">
+                        <li>Projects</li>
+                        <li>Certifications</li>
+                        <li>Full list of Skills</li>
+                        <li>Courses</li>
+                        <li>Volunteering</li>
+                        <li>Organizations</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-600">
+                        📋 For the best results, you can paste missing parts from your profile, type them out simply as shown in the example below, or add other accomplishments not mentioned on your LinkedIn. Please add any extra details here, or simply skip this step.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6">
+                 <label for="extra-sections-textarea" class="block text-sm font-medium text-gray-700 mb-2">Missing Sections (Optional)</label>
+                 <textarea id="extra-sections-textarea" rows="6" class="w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[160px] sm:min-h-[180px] md:min-h-[220px] lg:min-h-[260px] max-h-[50vh]" placeholder="Example:&#10;&#10;PROJECTS&#10;- AI Chatbot (Python, TensorFlow)&#10;&#10;CERTIFICATIONS&#10;- AWS Certified Cloud Practitioner"></textarea>
+            </div>
+            <div class="mt-auto flex flex-col sm:flex-row-reverse gap-3 bg-white pt-3 border-t border-gray-200">
+                <button id="continue-modal" class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring">Continue to Analysis</button>
+                <button id="skip-modal" class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-ring">Skip and Analyze</button>
+            </div>
         </div>
     </div>
-    <main id="main-content" class="w-full max-w-md mx-auto p-8 bg-white rounded-xl shadow-lg fade-in">
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-blue-700 mb-2">AI-Powered LinkedIn Profile Analyzer</h1>
-            <p class="text-gray-600 text-base">Get instant, actionable feedback on your LinkedIn profile for your dream job.</p>
-        </header>
-        <form id="analyze-form" action="/suggestion" method="POST" enctype="multipart/form-data" class="space-y-5">
-            <div>
-                <label for="profile_pdf" class="block font-medium text-gray-700 mb-1">Upload LinkedIn Profile (PDF) <span class="text-red-500">*</span></label>
-                <input id="profile_pdf" type="file" name="profile_pdf" accept="application/pdf" required class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-            <div>
-                <label for="job_desc" class="block font-medium text-gray-700 mb-1">Job Description</label>
-                <textarea id="job_desc" name="job_desc" placeholder="Paste the job description here..." rows="5" class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical"></textarea>
-            </div>
-            <div>
-                <label for="job_role" class="block font-medium text-gray-700 mb-1">Or Target Job Role/Title</label>
-                <input id="job_role" type="text" name="job_role" placeholder="e.g. Junior Data Analyst or at TCS,google "
-                class="block w-full text-sm text-gray-700 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-            <div class="text-sm text-blue-700 mb-2">
-              <p class="mt-2">
-                <strong>💡 Tip:</strong>
-                <span class="text-blue-500">If you're using a mobile device, make sure to open LinkedIn in <strong>desktop mode</strong> in your browser.</span>
-              </p>
-            </div>
-            
-            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Analyze</button>
-            <textarea id="extra_sections" name="extra_sections" style="display:none;"></textarea>
-        </form>
-        <!-- Modal for extra sections -->
-        <div id="extra-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
-          <div class="modal-content bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative">
-            <div class="mb-4 text-lg font-semibold text-blue-700 flex items-center gap-2">
-              <span class="text-2xl">🚀</span> Want Better Results?
-            </div>
-            <div class="mb-3 text-gray-700 text-sm">
-              We’re ready to analyze your LinkedIn profile, but LinkedIn PDFs usually miss important sections like:
-              <ul class="list-disc pl-6 mt-2 mb-2">
-                <li>Projects</li>
-                <li>Certifications</li>
-                <li>Full list of Skills</li>
-                <li>Courses</li>
-                <li>Volunteering</li>
-                <li>Organizations</li>
-              </ul>
-              <span class="block mt-2">📋 Please paste these sections below (if available) to help us give you more accurate feedback. or simply skip this step.</span>
-            </div>
-            <textarea id="extra-sections-textarea" rows="6" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical mb-4" placeholder="Paste missing sections here..."></textarea>
-            <button id="continue-modal" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition-colors duration-150">Continue</button>
-          </div>
+
+    <!-- Loader Overlay -->
+    <div id="loader" class="overlay fixed inset-0 z-[60] flex items-center justify-center bg-white/80 backdrop-blur-md">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-blue-600 animate-spin" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Loading">
+                <circle cx="25" cy="25" r="20" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="90 150" stroke-dashoffset="0"></circle>
+            </svg>
+            <p class="mt-4 text-lg font-semibold text-blue-700">Analyzing your profile...</p>
         </div>
-        <script>
-        // Modal logic
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Form Elements ---
         const analyzeForm = document.getElementById('analyze-form');
-        const extraModal = document.getElementById('extra-modal');
-        const continueModal = document.getElementById('continue-modal');
+        const pdfInput = document.getElementById('profile_pdf');
+        const jdInput = document.getElementById('job_desc');
+        const roleInput = document.getElementById('job_role');
         const extraSectionsInput = document.getElementById('extra_sections');
-        const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
+        
+        // --- UI Elements ---
+        const fileDropZone = document.querySelector('.file-drop-zone');
+        const fileUploadText = document.getElementById('file-upload-text');
+        const tabJd = document.getElementById('tab-jd');
+        const tabRole = document.getElementById('tab-role');
+        const panelJd = document.getElementById('panel-jd');
+        const panelRole = document.getElementById('panel-role');
+        const pdfError = document.getElementById('pdf-error');
+        const targetError = document.getElementById('target-error');
+
+        // --- Modal & Loader Elements ---
+        const extraModal = document.getElementById('extra-modal');
         const loader = document.getElementById('loader');
+        const continueModalBtn = document.getElementById('continue-modal');
+        const skipModalBtn = document.getElementById('skip-modal');
+        const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
+        
+        // --- Footer Elements ---
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+        const currentYearSpan = document.getElementById('current-year');
 
-        function showLoader() {
-          if (loader) {
-            loader.style.display = 'flex';
-            setTimeout(() => loader.classList.add('show'), 10); // allow DOM to paint
-          }
-        }
-        function showModalWithFade() {
-          extraModal.classList.remove('hidden');
-          setTimeout(() => extraModal.classList.add('show'), 10); // allow DOM to paint
-          setTimeout(() => { extraSectionsTextarea.focus(); }, 200);
-        }
-        function hideModalWithFade() {
-          extraModal.classList.remove('show');
-          setTimeout(() => extraModal.classList.add('hidden'), 400);
+        // --- Set current year in footer ---
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
         }
 
-        if (analyzeForm) {
-          analyzeForm.addEventListener('submit', function(e) {
-            var jd = this.job_desc.value.trim();
-            var role = this.job_role.value.trim();
-            // Always set hidden field to modal textarea value as a failsafe
-            if (extraSectionsInput && extraSectionsTextarea) {
-              extraSectionsInput.value = extraSectionsTextarea.value.trim();
-            }
-            if (!jd && !role) {
-              if (window.confirm) {
-                window.alert('Please provide at least a job description or a target job role/title.');
-              }
-              e.preventDefault();
-              if (!jd) {
-                document.getElementById('job_desc').focus();
-              } else {
-                document.getElementById('job_role').focus();
-              }
-              return;
-            }
-            // Always show modal and prevent default submit
+        // --- File Upload Logic ---
+        fileDropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            showModalWithFade();
-          });
-        }
-        if (continueModal) {
-          continueModal.addEventListener('click', function(e) {
+            fileDropZone.classList.add('dragover');
+        });
+        fileDropZone.addEventListener('dragleave', () => fileDropZone.classList.remove('dragover'));
+        fileDropZone.addEventListener('drop', (e) => {
             e.preventDefault();
-            if (extraSectionsInput && extraSectionsTextarea) {
-              extraSectionsInput.value = extraSectionsTextarea.value.trim();
+            fileDropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                pdfInput.files = e.dataTransfer.files;
+                updateFileName();
             }
-            hideModalWithFade();
-            showLoader();
-            // Wait for loader to appear, then submit the form
-            setTimeout(() => analyzeForm.submit(), 400);
-          });
+        });
+        pdfInput.addEventListener('change', updateFileName);
+
+        function updateFileName() {
+            if (pdfInput.files.length > 0) {
+                fileUploadText.innerHTML = `<span class="font-semibold text-blue-600">${pdfInput.files[0].name}</span>`;
+                pdfError.classList.add('hidden');
+            } else {
+                fileUploadText.innerHTML = `<span class="font-semibold">Click to upload</span> or drag and drop`;
+            }
         }
-        // No close button, modal is unskippable
-        </script>
-    </main>
-    <script src="/static/main.js"></script>
+
+        // --- Tab Logic ---
+        function switchTab(selectedTab) {
+            if (selectedTab === 'jd') {
+                tabJd.setAttribute('aria-selected', 'true');
+                tabRole.setAttribute('aria-selected', 'false');
+                panelJd.classList.remove('hidden');
+                panelRole.classList.add('hidden');
+                roleInput.value = ''; // Clear other input
+            } else {
+                tabJd.setAttribute('aria-selected', 'false');
+                tabRole.setAttribute('aria-selected', 'true');
+                panelJd.classList.add('hidden');
+                panelRole.classList.remove('hidden');
+                jdInput.value = ''; // Clear other input
+            }
+            targetError.classList.add('hidden');
+        }
+        tabJd.addEventListener('click', () => switchTab('jd'));
+        tabRole.addEventListener('click', () => switchTab('role'));
+
+        // --- Form Submission Logic ---
+        analyzeForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Always prevent default first
+            if (validateForm()) {
+                extraModal.classList.add('visible');
+                // Prevent background scrolling and hide body scrollbar
+                document.body.style.overflow = 'hidden';
+                // Auto-scroll the modal to reveal the textarea after 5 seconds
+                setTimeout(() => {
+                    if (!extraModal.classList.contains('visible')) return;
+                    const modalContent = extraModal.querySelector('.modal-content');
+                    const textarea = document.getElementById('extra-sections-textarea');
+                    if (modalContent && textarea) {
+                        const offset = Math.max(0, textarea.offsetTop - 12);
+                        modalContent.scrollTo({ top: offset, behavior: 'smooth' });
+                    }
+                }, 5000);
+            }
+        });
+        
+        function validateForm() {
+            let isValid = true;
+            // Validate PDF
+            if (pdfInput.files.length === 0) {
+                pdfError.classList.remove('hidden');
+                isValid = false;
+            } else {
+                pdfError.classList.add('hidden');
+            }
+            // Validate Target
+            if (jdInput.value.trim() === '' && roleInput.value.trim() === '') {
+                targetError.classList.remove('hidden');
+                isValid = false;
+            } else {
+                targetError.classList.add('hidden');
+            }
+            return isValid;
+        }
+
+        // --- Modal & Final Submission ---
+        function submitAndLoad() {
+            extraModal.classList.remove('visible');
+            // Restore body scroll
+            document.body.style.overflow = '';
+            loader.classList.add('visible');
+            
+            // Copy modal textarea content to the hidden form input
+            extraSectionsInput.value = extraSectionsTextarea.value.trim();
+            
+            // Use a timeout to allow the loader to appear before form submission freezes the page
+            setTimeout(() => {
+                analyzeForm.submit(); 
+            }, 200);
+        }
+        continueModalBtn.addEventListener('click', submitAndLoad);
+        skipModalBtn.addEventListener('click', submitAndLoad);
+
+        // --- Back to Top Button Logic ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+                backToTopBtn.classList.add('inline-flex');
+            } else {
+                backToTopBtn.classList.add('hidden');
+                backToTopBtn.classList.remove('inline-flex');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // --- Mobile initial scroll logic ---
+        function isMobile() {
+            return window.innerWidth < 1024; // Tailwind's lg breakpoint
+        }
+        const mobileLinkedinGuide = document.getElementById('mobile-linkedin-guide');
+        const uploadSection = document.getElementById('analyze-form');
+        if (isMobile() && mobileLinkedinGuide && uploadSection) {
+            setTimeout(() => {
+                // Scroll to the blue LinkedIn guide box with offset for sticky header
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.offsetHeight : 70;
+                const boxTop = mobileLinkedinGuide.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ top: boxTop - headerHeight - 12, behavior: 'auto' });
+                // After 10 seconds, scroll to upload PDF (top)
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 10000);
+            }, 100); // slight delay to ensure layout is ready
+        }
+    });
+    </script>
 </body>
-</html> 
+</html>
