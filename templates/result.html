@@ -1,99 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Profile Analyzer — Result</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Custom Styles and Animations -->
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom animation for score counter */
+        @property --num {
+            syntax: '<integer>';
+            initial-value: 0;
+            inherits: false;
+        }
+        .score-counter {
+            animation: count-up 2s ease-out forwards;
+            counter-reset: num var(--num);
+        }
+        .score-counter::after {
+            content: counter(num);
+        }
+        @keyframes count-up {
+            to {
+                --num: {{ current_score|default(75) }};
+            }
+        }
+
+        /* Animation for progress bars filling up */
+        .progress-bar-animated {
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Fade-in and slide-up animation for page load */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up-anim {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+        
+        /* Accordion transition */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-in-out;
+        }
+        .accordion-content > div {
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            grid-template-rows: 1fr;
+        }
+
+        /* Custom scrollbar for raw output */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        
+        /* Custom focus ring */
+        .focus-ring:focus-visible {
+            outline: 2px solid #3B82F6; /* blue-500 */
+            outline-offset: 2px;
+        }
+
+        /* Bullet formatting: show '-' only before the first line with hanging indent */
+        .weak-list li,
+        .sugg-list li {
+            position: relative;
+            padding-left: 1rem; /* space for hyphen */
+        }
+        .weak-list li::before,
+        .sugg-list li::before {
+            content: '-';
+            position: absolute;
+            left: 0;
+            top: 0; /* only before the first line */
+        }
+    </style>
+
+    <!-- Data for PDF generation is prepared below, just before the script tag -->
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Jinja Macro for rendering the rebuilt profile -->
 {% macro render_profile(text) %}
 {%- set lines = text.split('\n') -%}
-<div class="space-y-2">
+        <div class="space-y-4 text-slate-700">
 {%- for line in lines %}
     {%- set l = line.strip() -%}
-    {# General handler for bold headings on the same line (supports single or multiple), regardless of separators or colon placement #}
-    {%- if l.count('**') >= 2 %}
+            
+            {# Section Heading: ## Title #}
+            {%- if l.startswith('## ') %}
+                <h2 class="text-2xl font-bold text-slate-800 pt-6 pb-2 border-b border-slate-200">{{ l[3:] }}</h2>
+            
+            {# Sub-heading: ### Title #}
+            {%- elif l.startswith('### ') %}
+                <h3 class="text-xl font-semibold text-blue-600 pt-4">{{ l[4:] }}</h3>
+
+            {# Bolded Heading on its own line: **Title:** or **Title** #}
+            {%- elif (l.startswith('**') and l.endswith('**')) or (l.startswith('**') and l.endswith('**:')) %}
+                {%- set heading_text = l.replace('**', '').rstrip(':').strip() -%}
+                <h3 class="text-lg font-bold text-blue-600 pt-4">{{ heading_text }}:</h3>
+            
+            {# Bullet points starting with - or * #}
+            {%- elif l.startswith('- ') or l.startswith('* ') %}
+                <div class="flex items-start pl-2">
+                    <span class="text-blue-500 text-xl mt-0.5 mr-3 leading-tight">•</span>
+                    <span>{{ l[2:] }}</span>
+                </div>
+
+            {# Key-Value pairs on a single line: **Key:** Value, **Key2:** Value2 #}
+            {%- elif l.count('**') >= 2 %}
+                <div class="flex flex-wrap gap-x-6 gap-y-2 items-baseline">
         {%- set tokens = l.split('**') -%}
-        <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
         {%- for i in range(1, tokens|length, 2) %}
             {%- set heading_raw = tokens[i] -%}
             {%- set value_raw = (tokens[i+1] if i + 1 < tokens|length else '') -%}
             {%- set heading_text = heading_raw.rstrip(':').strip() -%}
             {%- set value_text = value_raw.lstrip(' ,;|-*•').strip() -%}
             {%- if heading_text %}
-                <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
-            {%- endif %}
+                        <div class="flex items-baseline">
+                            <span class="font-semibold text-slate-800 mr-2">{{ heading_text }}:</span>
             {%- if value_text and value_text not in ['*', '•'] %}
-                <span class="text-gray-800">{{ value_text }}</span>
+                                <span class="text-slate-600">{{ value_text }}</span>
             {%- endif %}
-        {%- endfor %}
         </div>
-    {%- elif '**' in l and ',' in l %}
-        {# Fallback handler for comma-separated bold headings #}
-        {%- set chunks = l.split(',') -%}
-        <div class="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
-        {%- for chunk in chunks %}
-            {%- set sub = chunk.strip() -%}
-            {%- set sub = sub.lstrip('* ').lstrip('- ').lstrip('• ') -%}
-            {%- if sub.startswith('**') and ':**' in sub %}
-                {%- set parts = sub.split(':**', 1) -%}
-                {%- set heading_text = parts[0][2:] -%}
-                <span class="font-semibold text-[#0A66C2]">{{ heading_text }}:</span>
-                {%- if parts|length > 1 and parts[1].strip() %}
-                    {%- set val = parts[1].strip().lstrip(' ,;|-*•').strip() -%}
-                    {%- if val and val not in ['*', '•'] %}
-                        <span class="text-gray-800">{{ val }}</span>
                     {%- endif %}
-                {%- endif %}
-            {%- elif sub.startswith('**') and sub.endswith('**:') %}
-                {# Handle pattern like **Heading**: #}
-                <span class="font-semibold text-[#0A66C2]">{{ sub[2:-3].strip() }}:</span>
-            {%- elif sub.startswith('**') and sub.endswith('**') %}
-                <span class="font-semibold text-[#0A66C2]">{{ sub[2:-2] }}:</span>
-            {%- elif sub %}
-                <span class="text-gray-800">{{ sub }}</span>
-            {%- endif %}
-        {%- endfor %}
-        </div>
-    {%- elif l.startswith('## ') %}
-        <h2 class="text-xl font-bold text-[#0A66C2] mt-6 mb-2 border-b border-blue-100 pb-1">{{ l[3:] }}</h2>
-    {%- elif l.startswith('### ') %}
-        <h3 class="text-lg font-semibold text-blue-600 mt-4 mb-1">{{ l[4:] }}</h3>
-    {%- elif l.startswith('**') and ':**' in l %}
-        {# Handle lines like **Name:** Tarun Panga #}
-        {%- set parts = l.split(':**', 1) %}
-        {%- set heading_text = parts[0][2:] %}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ heading_text }}:</h3>
-        {%- if parts|length > 1 and parts[1].strip() %}
-            <div class="text-gray-800">{{ parts[1].strip() }}</div>
-        {%- endif %}
-    {%- elif l.startswith('**') and l.endswith('**:') %}
-        {# Handle lines like **Programming Languages**: #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-3].strip() }}:</h3>
-    {%- elif l.startswith('**') and l.endswith('**') %}
-        {# Handle standalone bold headings like **Summary** #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l[2:-2] }}:</h3>
-    {%- elif (l.startswith('*') or l.startswith('-') or l.startswith('•')) and (l.lstrip('*-• ').strip().endswith(':')) and (l.lstrip('*-• ').strip()|length < 60) %}
-        {# Bullet-style heading lines like *Programming Languages: or - Frameworks/Libraries: #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l.lstrip('*-• ').strip() }}</h3>
-    {%- elif l.endswith(':') and l|length < 60 %}
-        {# Treat any short line ending with a colon as a heading #}
-        <h3 class="text-lg font-bold text-[#0A66C2] mt-4 mb-2">{{ l }}</h3>
-    {%- elif l.startswith('- ') %}
-        <div class="pl-6 relative"><span class="absolute left-0 top-0 text-blue-500 text-lg">•</span><span class="text-gray-800">{{ l[2:] }}</span></div>
-    {%- elif l.startswith('* ') %}
-        <div class="pl-6 relative"><span class="absolute left-0 top-0" style="color:#0A66C2;font-size:1.2em;">*</span><span class="text-gray-800">{{ l[2:] }}</span></div>
-    {%- elif l == '' %}
-        <div class="h-4"></div>
-    {%- else %}
-        <div class="text-gray-800">{{ l }}</div>
+                {%- endfor %}
+                </div>
+            
+            {# Blank lines for spacing #}
+            {%- elif l == '' %}
+                <div class="h-2"></div>
+
+            {# Default paragraph text #}
+            {%- else %}
+                <p>{{ l }}</p>
     {%- endif %}
 {%- endfor %}
 </div>
 {% endmacro %}
 
+    <!-- PDF Content Preparation -->
+    {% set rebuilt_profile = rebuilt_profile or {} %} {# Defensive assignment to prevent type errors #}
 {% set pdf_content = 'Rebuilt LinkedIn Profile\n\n' %}
-{% if rebuilt_profile and rebuilt_profile.summary %}
+    {% if rebuilt_profile.summary %}
     {% set clean_summary = rebuilt_profile.summary.replace('*', '').replace('_', '').replace('`', '').replace('### ', '').replace('## ', '').replace('# ', '').strip() %}
     {% set pdf_content = pdf_content + clean_summary + '\n\n' %}
 {% endif %}
-{% if rebuilt_profile and rebuilt_profile.headline %}
+    {% if rebuilt_profile.headline %}
     {% set clean_headline = rebuilt_profile.headline.replace('*', '').replace('_', '').replace('`', '').strip() %}
     {% set pdf_content = pdf_content + 'Headline\n' + clean_headline + '\n\n' %}
 {% endif %}
-{% if rebuilt_profile %}
     {% for section in ['experience', 'projects', 'skills', 'education', 'certifications', 'awards', 'languages', 'personal interests'] %}
         {% if rebuilt_profile[section] and rebuilt_profile[section]|length > 0 %}
             {% set section_title = section.replace('_', ' ').title() %}
@@ -102,244 +203,379 @@
             {% set pdf_content = pdf_content + section_title + '\n' + clean_section_content + '\n\n' %}
         {% endif %}
     {% endfor %}
-{% endif %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkedIn Profile Analysis Result</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script id="pdf-json" type="application/json">{{ pdf_content | tojson }}</script>
-</head>
-<body class="bg-gray-50 min-h-screen font-sans transition-colors duration-300">
-    {% if error %}
-    <div class="max-w-2xl mx-auto mt-8 mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded text-center text-lg font-semibold">
-        {{ error }}
-    </div>
-    {% endif %}
-    {% if raw_output %}
-    <div class="max-w-2xl mx-auto mb-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded text-sm font-mono overflow-x-auto">
-        <b>Raw AI Output:</b>
-        <pre style="white-space: pre-wrap;">{{ raw_output }}</pre>
-    </div>
-    {% endif %}
-    <!-- Header -->
-    <header class="bg-white shadow-sm py-6 px-4 md:px-12 mb-8 flex items-center justify-between">
-        <div class="max-w-5xl mx-auto w-full">
-            <h1 class="text-3xl font-bold text-blue-700 mb-1">LinkedIn Profile Analysis Result</h1>
-            <p class="text-gray-600 text-lg">Tailored improvement suggestions based on your profile and target role.</p>
+
+    <!-- Page Header aligned with index page -->
+    <header class="bg-white border-b border-gray-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                    <img src="{{ url_for('static', filename='favicon.ico') }}" alt="ProfilePerfect AI" class="h-8 w-8 rounded-lg" />
+                    <span class="font-bold text-lg text-gray-900 tracking-tight">ProfilePerfect AI</span>
+                </a>
+                <a href="/start" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-colors duration-200">&larr; Back</a>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-2 md:px-0 fade-in slide-up-fade-in">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <!-- Error and Raw Output sections -->
+    {% if error %}
+        <div class="max-w-4xl mx-auto my-8 p-4 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-r-lg">
+            <p class="font-semibold">An error occurred: {{ error }}</p>
+    </div>
+    {% endif %}
+    {% if raw_output %}
+        <div class="max-w-4xl mx-auto my-8 p-4 bg-slate-100 border border-slate-200 text-slate-700 rounded-lg">
+            <b class="text-sm font-medium">Raw AI Output (for debugging):</b>
+            <pre class="text-xs font-mono overflow-x-auto whitespace-pre-wrap mt-2 p-3 bg-slate-200 rounded custom-scrollbar">{{ raw_output }}</pre>
+        </div>
+        {% endif %}
+
+        <div class="fade-in-up-anim space-y-12">
+
         <!-- Score Summary Card -->
-        <section class="bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between mb-8 transition-colors duration-300">
-            <div class="flex-1 flex flex-col md:flex-row items-center gap-6">
-                <!-- Radial Progress -->
-                <div class="relative w-32 h-32 flex items-center justify-center">
-                    <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
-                        {% set dasharray = 282.74 %}
+            <section class="relative bg-white rounded-2xl shadow-xl shadow-slate-200/60 p-6 md:p-8 overflow-hidden">
+                <!-- Subtle background pattern -->
+                <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_#eff6ff,_#ffffff)] opacity-50"></div>
+                
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <!-- Radial Progress Dial -->
+                    <div class="relative w-48 h-48 mx-auto flex items-center justify-center group">
+                        <svg class="w-full h-full" viewBox="0 0 120 120" aria-hidden="true">
+                            <!-- Gradient Definition -->
+                            <defs>
+                                <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6" />
+                                    <stop offset="100%" style="stop-color:#60a5fa" />
+                                </linearGradient>
+                            </defs>
+            
+                            <!-- Background Circle -->
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" stroke-width="10" />
+                            
+                            <!-- Previous Score Circle -->
+                            {% set prev_dasharray = 339.29 %}
+                            {% set prev_dashoffset = prev_dasharray - (prev_dasharray * (previous_score|default(60)) / 100) %}
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#fca5a5" stroke-width="10" 
+                                    stroke-dasharray="{{ prev_dasharray }}" 
+                                    stroke-dashoffset="{{ prev_dashoffset }}" 
+                                    stroke-linecap="round" 
+                                    transform="rotate(-90 60 60)" 
+                                    class="opacity-50 transition-all duration-1000 ease-out" />
+            
+                            <!-- Current Score Circle -->
+                            {% set dasharray = 339.29 %}
                         {% set dashoffset = dasharray - (dasharray * (current_score|default(75)) / 100) %}
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="url(#scoreGradient)" stroke-width="10" 
+                                    stroke-dasharray="{{ dasharray }}" 
+                                    stroke-dashoffset="{{ dashoffset }}" 
+                                    stroke-linecap="round" 
+                                    transform="rotate(-90 60 60)" 
+                                    class="transition-all duration-1000 ease-out" />
                     </svg>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-3xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
-                        <span class="text-gray-500 text-sm">/100</span>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                            <span class="text-6xl font-extrabold text-slate-800 score-counter" style="--num: {{ current_score|default(75) }};"></span>
+                            <span class="text-slate-500 font-medium -mt-1">Profile Score</span>
+                        </div>
                     </div>
+            
+                    <!-- Score Details -->
+                    <div class="lg:col-span-2 text-center lg:text-left space-y-6">
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-800">Excellent Progress!</h2>
+                            {% if rationale %}
+                                <p class="text-slate-500 max-w-xl mx-auto lg:mx-0 mt-2">{{ rationale }}</p>
+                            {% endif %}
+                        </div>
+            
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <!-- Improvement Stat -->
+                            <div class="bg-green-50 border border-green-200/80 rounded-xl p-4">
+                                <p class="text-sm font-medium text-green-600">Improvement</p>
+                                <p class="text-3xl font-bold text-green-700 mt-1">+{{ improvement|default(15) }}</p>
+                            </div>
+                            <!-- Previous Score Stat -->
+                            <div class="bg-rose-50 border border-rose-200/80 rounded-xl p-4">
+                                <p class="text-sm font-medium text-rose-600">Previous Score</p>
+                                <p class="text-3xl font-bold text-rose-700 mt-1">{{ previous_score|default(60) }}</p>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <span class="text-gray-500">Previous Score:</span>
-                        <span class="font-semibold text-gray-700">{{ previous_score|default(60) }}/100</span>
+                            <!-- Target Role Stat -->
+                            <div class="bg-blue-50 border border-blue-200/80 rounded-xl p-4">
+                                <p class="text-sm font-medium text-blue-600 truncate">Target Role</p>
+                                <p class="text-lg font-bold text-blue-700 mt-2 truncate" title="{{ target_role|default('Data Analyst') }}">{{ target_role|default('Data Analyst') }}</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-gray-500">Target Role:</span>
-                        <span class="font-semibold text-blue-700">{{ target_role|default('Data Analyst') }}</span>
-                    </div>
-                    <div class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium mt-2">
-                        📈 +{{ improvement|default(15) }} Improvement
                     </div>
                 </div>
             </div>
         </section>
 
-        {% if rationale %}
-        <section class="bg-white rounded-xl shadow-md p-6 mb-8 transition-colors duration-300">
-            <h2 class="text-lg font-semibold text-blue-700 mb-2">Profile Score Rationale</h2>
-            <p class="text-gray-800">{{ rationale }}</p>
-        </section>
-        {% endif %}
-
-        <!-- Accordion: Section-by-Section Analysis -->
-        <section class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Section-by-Section Analysis</h2>
+            <!-- Section-by-Section Analysis -->
+            <section>
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Section-by-Section Analysis</h2>
             <div class="space-y-4" id="accordion">
                 {% for section in sections %}
-                <div class="bg-white rounded-lg shadow overflow-hidden transition-colors duration-300">
-                    <button type="button" class="w-full flex justify-between items-center px-6 py-4 focus:outline-none focus:bg-blue-50 hover:bg-blue-50 transition-colors duration-200" onclick="toggleAccordion('panel-{{ loop.index }}')" aria-expanded="false" aria-controls="panel-{{ loop.index }}" id="accordion-header-{{ loop.index }}">
-                        <span class="text-lg font-medium text-blue-700">{{ section.title }}</span>
-                        <svg id="icon-panel-{{ loop.index }}" class="w-5 h-5 text-blue-500 transform transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    <div class="bg-white rounded-xl shadow-md shadow-slate-200/30 overflow-hidden transition-all duration-300 has-[[aria-expanded=true]]:shadow-xl">
+                        <button type="button" class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 hover:bg-slate-50" onclick="toggleAccordion('panel-{{ loop.index }}')" aria-expanded="false" aria-controls="panel-{{ loop.index }}" id="accordion-header-{{ loop.index }}">
+                            <span class="text-lg font-semibold text-blue-700">{{ section.title }}</span>
+                            <svg id="icon-panel-{{ loop.index }}" class="w-6 h-6 text-slate-400 transform transition-transform duration-300" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div id="panel-{{ loop.index }}" class="px-6 pb-4 hidden transition-colors duration-300" role="region" aria-labelledby="accordion-header-{{ loop.index }}" tabindex="-1">
-                        <div class="mb-2">
-                            <span class="font-semibold text-red-600">Weaknesses:</span>
-                            <ul class="list-disc list-inside text-red-600 text-sm">
-                                {% for w in section.weaknesses %}<li>{{ w }}</li>{% endfor %}
+                        <div id="panel-{{ loop.index }}" class="accordion-content" role="region" aria-labelledby="accordion-header-{{ loop.index }}">
+                            <div>
+                                <div class="px-6 pb-6 pt-2 border-t border-slate-100 space-y-6">
+                                    <!-- Weaknesses -->
+                                    <div>
+                                        <h4 class="font-semibold text-rose-600 flex items-center gap-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                                            Weaknesses
+                                        </h4>
+                                        <ul class="weak-list space-y-2 text-rose-800/90 text-sm">
+                                            {% for w in section.weaknesses %}<li>{{ w }}</li>{% else %}<li>None identified.</li>{% endfor %}
                             </ul>
                         </div>
-                        <div class="mb-2">
-                            <span class="font-semibold text-green-700">Suggestions:</span>
-                            <ul class="list-disc list-inside text-green-700 text-sm">
-                                {% for s in section.suggestions %}<li>{{ s }}</li>{% endfor %}
+                                    <!-- Suggestions -->
+                                    <div>
+                                        <h4 class="font-semibold text-emerald-600 flex items-center gap-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 001.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" /><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" /></svg>
+                                            Suggestions
+                                        </h4>
+                                        <ul class="sugg-list space-y-2 text-emerald-800/90 text-sm">
+                                            {% for s in section.suggestions %}<li>{{ s }}</li>{% else %}<li>No specific suggestions.</li>{% endfor %}
                             </ul>
                         </div>
+                                    <!-- Rewritten Example -->
                         <div>
-                            <span class="font-semibold text-gray-700">Rewritten Example:</span>
-                            <div class="bg-gray-100 rounded p-3 mt-1 font-mono text-sm text-gray-800 whitespace-pre-line transition-colors duration-300">
+                                        <h4 class="font-semibold text-slate-700 flex items-center gap-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg>
+                                            Rewritten Example
+                                        </h4>
+                                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mt-1 text-sm text-slate-800 whitespace-pre-line">
                                 {{ section.rewritten if section.rewritten else 'No rewritten example available.' }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
             </div>
         </section>
 
         <!-- Rebuilt Profile Preview -->
-        <section class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Rebuilt Profile Preview</h2>
-            <div class="bg-white rounded-xl shadow-md p-6 transition-colors duration-300">
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm transition-colors duration-300">
-                    <div class="rebuilt-profile">
+            <section>
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Rebuilt Profile Preview</h2>
+                <div class="bg-white rounded-2xl shadow-lg shadow-slate-200/50">
+                    <div class="p-6 md:p-8">
+                        <div class="bg-slate-50/50 rounded-xl p-6 md:p-8 border border-slate-200/80">
                         {% if rebuilt_profile and rebuilt_profile.summary %}
                             {{ render_profile(rebuilt_profile.summary) }}
                         {% else %}
-                            <p class="text-gray-500 italic">No rebuilt profile content available.</p>
+                                <p class="text-slate-500 italic text-center py-8">No rebuilt profile content available.</p>
                         {% endif %}
-                    </div>
+                        </div>
                 </div>
             </div>
         </section>
 
         <!-- Visual Score Comparison Chart -->
-        <section class="mb-8 max-w-5xl mx-auto w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Score Comparison</h2>
-            <div class="flex flex-col md:flex-row items-center gap-8 w-full">
-                <!-- Bar Chart -->
-                <div class="w-full flex flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-gray-500">Before</span>
-                        <span class="font-semibold text-gray-700">{{ previous_score|default(60) }}</span>
+            <section class="observe-anim">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Score Comparison</h2>
+                <div class="bg-white rounded-2xl shadow-lg shadow-slate-200/50 p-6 md:p-8">
+                    <div class="space-y-4">
+                        <!-- Before Bar -->
+                        <div>
+                            <div class="flex items-baseline justify-between mb-1">
+                                <span class="text-slate-500 font-medium">Before</span>
+                                <span class="font-bold text-rose-600 text-lg">{{ previous_score|default(60) }}/100</span>
+                            </div>
+                            <div class="w-full h-4 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-rose-400 rounded-full progress-bar-animated" data-width="{{ previous_score|default(60) }}"></div>
+                            </div>
+                        </div>
+                        <!-- After Bar -->
+                        <div>
+                            <div class="flex items-baseline justify-between mb-1">
+                                <span class="text-slate-500 font-medium">After</span>
+                                <span class="font-bold text-blue-600 text-lg">{{ current_score|default(75) }}/100</span>
                     </div>
-                    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden mb-2 transition-colors duration-300">
-                        <div class="h-4 bg-red-400 rounded-full transition-all" data-width="{{ previous_score|default(60) }}"></div>
+                            <div class="w-full h-4 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full progress-bar-animated" data-width="{{ current_score|default(75) }}"></div>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-gray-500">After</span>
-                        <span class="font-semibold text-blue-700">{{ current_score|default(75) }}</span>
                     </div>
-                    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden transition-colors duration-300">
-                        <div class="h-4 bg-blue-500 rounded-full transition-all" data-width="{{ current_score|default(75) }}"></div>
-                    </div>
-                </div>
-                <!-- Radial Chart (again, for visual emphasis) -->
-                <div class="w-32 h-32 flex items-center justify-center relative">
-                    <svg class="w-full h-full" viewBox="0 0 100 100" aria-hidden="true">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="10" />
-                        {% set dasharray = 282.74 %}
-                        {% set dashoffset2 = dasharray - (dasharray * (current_score|default(75)) / 100) %}
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="10" stroke-dasharray="282.74" stroke-dashoffset="{{ dashoffset2 }}" stroke-linecap="round" transform="rotate(-90 50 50)" />
-                    </svg>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-blue-700">{{ current_score|default(75) }}</span>
-                        <span class="text-gray-500 text-xs">/100</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        {% if remarks %}
-        <section class="bg-white rounded-xl shadow-md p-6 mb-8 transition-colors duration-300">
-            <h2 class="text-lg font-semibold text-blue-700 mb-2">Remarks</h2>
-            <p class="text-gray-800">{{ remarks }}</p>
+            <!-- Remarks -->
+            {% if remarks %}
+            <section>
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Final Remarks</h2>
+                <div class="bg-white rounded-2xl shadow-lg shadow-slate-200/50 p-6 md:p-8">
+                    <div class="prose prose-slate max-w-none">
+                        <p>{{ remarks }}</p>
+                    </div>
+                </div>
         </section>
         {% endif %}
 
         <!-- Action Buttons -->
-        <section class="flex flex-wrap gap-4 justify-center mb-12">
-            <button onclick="downloadPDF()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Download PDF">
-                <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            <section class="flex flex-wrap gap-4 justify-center pt-8 pb-4">
+                <button onclick="downloadPDF()" class="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg shadow-blue-500/20 transition-all duration-300 transform hover:scale-105 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download PDF
             </button>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Edit Profile on LinkedIn">
-                Edit Profile on LinkedIn
+                <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener" class="group flex items-center gap-2 bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-lg shadow-lg shadow-slate-500/20 transition-all duration-300 transform hover:scale-105 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:rotate-3" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    Edit on LinkedIn
             </a>
-            <button onclick="shareWithMentor()" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow transition font-semibold focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Share with Mentor">
-                <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h2M12 15v-6m0 0l-3 3m3-3l3 3"/></svg>
+                <button onclick="openShareModal()" class="group flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg shadow-lg shadow-emerald-500/20 transition-all duration-300 transform hover:scale-105 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6.002l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" /></svg>
                 Share with Mentor
             </button>
         </section>
+        </div>
     </main>
 
+    <!-- Share Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="shareModalContent" class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 transform transition-all opacity-0 -translate-y-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="modal-title" class="text-xl font-bold text-slate-800">Share with a Mentor</h2>
+                <button onclick="closeShareModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
+            </div>
+            <p class="text-slate-600 mb-4">This feature is coming soon! For now, you can download the PDF and send it manually.</p>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeShareModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-semibold transition">Close</button>
+                <button onclick="downloadPDF(); closeShareModal();" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition">Download PDF</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer aligned with index page -->
+    <footer class="bg-white border-t border-gray-200/80 mt-16 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='favicon.ico') }}" alt="ProfilePerfect AI" class="h-6 w-6 rounded" />
+                <span class="font-semibold text-gray-900">ProfilePerfect AI</span>
+            </a>
+            <p class="text-sm text-gray-500">&copy; <span id="current-year">2025</span> All rights reserved.</p>
+            <div class="flex items-center gap-3">
+                <button id="back-to-top-btn" class="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-all">
+                    Back to Top
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+
     <script>
-    // Initialize bar widths from data-width to avoid template syntax inside style attribute
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('[data-width]').forEach(el => {
+        // --- Intersection Observer for animations on scroll ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate progress bars
+                    entry.target.querySelectorAll('.progress-bar-animated').forEach(el => {
             const pct = parseInt(el.getAttribute('data-width'), 10) || 0;
-            el.style.width = pct + '%';
+                        el.style.transform = `scaleX(${pct / 100})`;
+                    });
+                    observer.unobserve(entry.target); // Animate only once
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.observe-anim').forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Accordion Logic ---
+        const accordionHeaders = document.querySelectorAll('[id^="accordion-header-"]');
+        accordionHeaders.forEach(header => {
+            header.addEventListener('keydown', function(e) {
+                const idx = parseInt(e.target.id.replace('accordion-header-', ''));
+                let nextHeader = null;
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    nextHeader = document.getElementById('accordion-header-' + (idx + 1));
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    nextHeader = document.getElementById('accordion-header-' + (idx - 1));
+                }
+                if (nextHeader) {
+                    nextHeader.focus();
+                }
+            });
+        });
+        
+        // --- Footer Elements ---
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+        const currentYearSpan = document.getElementById('current-year');
+
+        // --- Set current year in footer ---
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Back to Top Button Logic ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+                backToTopBtn.classList.add('inline-flex');
+            } else {
+                backToTopBtn.classList.add('hidden');
+                backToTopBtn.classList.remove('inline-flex');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
-    // Accordion toggle logic with accessibility and keyboard support
+
     function toggleAccordion(id) {
         const panel = document.getElementById(id);
         const icon = document.getElementById('icon-' + id);
         const header = document.querySelector(`[aria-controls="${id}"]`);
-        const expanded = panel.classList.contains('hidden');
-        document.querySelectorAll('[role="region"]').forEach(p => p.classList.add('hidden'));
-        document.querySelectorAll('[aria-expanded]').forEach(b => b.setAttribute('aria-expanded', 'false'));
-        document.querySelectorAll('[id^="icon-panel-"]').forEach(i => i.classList.remove('rotate-180'));
-        if (expanded) {
-            panel.classList.remove('hidden');
-            header.setAttribute('aria-expanded', 'true');
-            icon.classList.add('rotate-180');
-            panel.focus();
-        }
-    }
-    // Keyboard navigation for accordion
-    document.addEventListener('keydown', function(e) {
-        if (e.target.matches('[id^="accordion-header-"]')) {
-            const idx = parseInt(e.target.id.replace('accordion-header-', ''));
-            if (e.key === 'ArrowDown') {
-                const next = document.getElementById('accordion-header-' + (idx + 1));
-                if (next) next.focus();
-            } else if (e.key === 'ArrowUp') {
-                const prev = document.getElementById('accordion-header-' + (idx - 1));
-                if (prev) prev.focus();
-            } else if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleAccordion('panel-' + idx);
+        const isOpening = !panel.classList.contains('open');
+
+        // Close all other accordions
+        document.querySelectorAll('.accordion-content.open').forEach(openPanel => {
+            if (openPanel.id !== id) {
+                openPanel.classList.remove('open');
+                const otherHeader = document.querySelector(`[aria-controls="${openPanel.id}"]`);
+                const otherIcon = document.getElementById('icon-' + openPanel.id);
+                otherHeader.setAttribute('aria-expanded', 'false');
+                otherIcon.classList.remove('rotate-180');
             }
-        }
-    });
-    // Download PDF implementation
+        });
+
+        // Toggle the clicked accordion
+        panel.classList.toggle('open', isOpening);
+        header.setAttribute('aria-expanded', isOpening);
+        icon.classList.toggle('rotate-180', isOpening);
+    }
+
+    // --- PDF Download Logic ---
     function downloadPDF() {
-        const doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
-        const rebuiltProfile = JSON.parse(document.getElementById('pdf-json').textContent);
-        doc.setFont('helvetica', '');
-        doc.setFontSize(13);
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+        const pdfContent = JSON.parse(document.getElementById('pdf-json').textContent);
+        
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        
         const marginLeft = 40;
         const marginTop = 60;
-        const maxWidth = 515;
-        const lineHeight = 18;
+        const maxWidth = doc.internal.pageSize.getWidth() - (marginLeft * 2);
         const pageHeight = doc.internal.pageSize.getHeight();
+        const lineHeight = 16;
         let y = marginTop;
-        const lines = doc.splitTextToSize(rebuiltProfile, maxWidth);
+
+        const lines = doc.splitTextToSize(pdfContent, maxWidth);
+
         lines.forEach(line => {
             if (y + lineHeight > pageHeight - marginTop) {
                 doc.addPage();
@@ -348,12 +584,43 @@
             doc.text(line, marginLeft, y);
             y += lineHeight;
         });
+
         doc.save('LinkedIn_Rebuilt_Profile.pdf');
     }
-    // Placeholder for Share with Mentor
-    function shareWithMentor() {
-        alert('Share with Mentor functionality coming soon!');
+
+    // --- Share Modal Logic ---
+    const shareModal = document.getElementById('shareModal');
+    const shareModalContent = document.getElementById('shareModalContent');
+
+    function openShareModal() {
+        shareModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        setTimeout(() => {
+            shareModalContent.classList.remove('opacity-0', '-translate-y-4');
+        }, 10);
     }
+
+    function closeShareModal() {
+        shareModalContent.classList.add('opacity-0', '-translate-y-4');
+        setTimeout(() => {
+            shareModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    }
+    
+    // Close modal on escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !shareModal.classList.contains('hidden')) {
+            closeShareModal();
+        }
+    });
+    // Close modal on outside click
+    shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
+            closeShareModal();
+        }
+    });
+
     </script>
 </body>
 </html>
