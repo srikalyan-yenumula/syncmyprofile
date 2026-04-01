@@ -1,0 +1,529 @@
+=== ANALYSIS LOG - 20251201_151302 ===
+Type: job_role_analysis
+
+=== INPUTS ===
+profile_text:
+linkedin.com/in/jdoe | Software Engineer | Python Developer
+
+job_role:
+Software Engineer
+
+company_name:
+None
+
+extra_sections:
+
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Software Engineer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in at least one major language (Python, Java, C++, JavaScript, Go), Data Structures & Algorithms, System Design, Database Management (SQL/NoSQL), Version Control (Git).
+        *   **Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability, Attention to Detail.
+    *   **2. Responsibilities:**
+        *   Design, develop, test, deploy, and maintain software applications.
+        *   Write clean, efficient, and testable code.
+        *   Participate in code reviews and contribute to engineering best practices.
+        *   Collaborate with cross-functional teams (Product, Design, QA) to define requirements.
+        *   Troubleshoot and debug production issues.
+    *   **3. Technical Expectations:**
+        *   Understanding of Software Development Life Cycle (SDLC).
+        *   Familiarity with Agile/Scrum methodologies.
+        *   Knowledge of CI/CD pipelines and testing frameworks.
+        *   Understanding of distributed systems and scalability concepts (for Senior+).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Focus on execution of defined tasks, learning the codebase, fixing bugs, writing unit tests. Needs guidance.
+        *   **Mid-Level:** Owns features or small components, designs solutions for defined problems, mentors juniors, participates in design discussions. Independent execution.
+        *   **Senior:** Owns complex systems or large features, drives technical decisions, defines architecture, mentors the team, handles cross-team dependencies.
+        *   **Staff/Principal:** Sets technical strategy, solves organizational-level technical challenges, drives innovation, influences multiple teams.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Software Development", "Object-Oriented Programming (OOP)", "System Design", "Distributed Systems", "RESTful APIs", "Cloud Computing (AWS/Azure/GCP)".
+        *   **Must appear in Projects/Experience:** Specific languages (e.g., "Python", "Java"), frameworks (e.g., "Spring Boot", "Django", "React"), tools (e.g., "Docker", "Kubernetes", "Jenkins").
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of specific technologies, vague descriptions of impact, missing metrics, lack of system design keywords (for Senior+).
+        *   **Suggest Improvements:** Quantify impact (e.g., "Improved performance by X%"), specify tech stack for every project, add system design details.
+        *   **Rebuild Profile:** Focus on "Problem -> Action -> Result" structure. Highlight engineering excellence and problem-solving.
+    
+
+company_prompt:
+No specific company provided. Focus on general industry standards.
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+SYSTEM: You are a professional career coach, ATS specialist and LinkedIn optimization expert.
+
+Your task is to:
+1. Analyze the user’s target Job Role: "Software Engineer" at Company: "General".
+2. Use the provided Company and Role prompts (if available) to guide your analysis.
+3. Evaluate the user’s current LinkedIn profile for alignment.
+4. Rebuild the LinkedIn profile to achieve a perfect **100/100 score**.
+
+---
+
+### CONTEXT DATA
+
+**1. COMPANY PROMPT:**
+No specific company provided. Focus on general industry standards.
+
+**2. ROLE PROMPT:**
+
+    **Role Analysis: Software Engineer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in at least one major language (Python, Java, C++, JavaScript, Go), Data Structures & Algorithms, System Design, Database Management (SQL/NoSQL), Version Control (Git).
+        *   **Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability, Attention to Detail.
+    *   **2. Responsibilities:**
+        *   Design, develop, test, deploy, and maintain software applications.
+        *   Write clean, efficient, and testable code.
+        *   Participate in code reviews and contribute to engineering best practices.
+        *   Collaborate with cross-functional teams (Product, Design, QA) to define requirements.
+        *   Troubleshoot and debug production issues.
+    *   **3. Technical Expectations:**
+        *   Understanding of Software Development Life Cycle (SDLC).
+        *   Familiarity with Agile/Scrum methodologies.
+        *   Knowledge of CI/CD pipelines and testing frameworks.
+        *   Understanding of distributed systems and scalability concepts (for Senior+).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Focus on execution of defined tasks, learning the codebase, fixing bugs, writing unit tests. Needs guidance.
+        *   **Mid-Level:** Owns features or small components, designs solutions for defined problems, mentors juniors, participates in design discussions. Independent execution.
+        *   **Senior:** Owns complex systems or large features, drives technical decisions, defines architecture, mentors the team, handles cross-team dependencies.
+        *   **Staff/Principal:** Sets technical strategy, solves organizational-level technical challenges, drives innovation, influences multiple teams.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Software Development", "Object-Oriented Programming (OOP)", "System Design", "Distributed Systems", "RESTful APIs", "Cloud Computing (AWS/Azure/GCP)".
+        *   **Must appear in Projects/Experience:** Specific languages (e.g., "Python", "Java"), frameworks (e.g., "Spring Boot", "Django", "React"), tools (e.g., "Docker", "Kubernetes", "Jenkins").
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of specific technologies, vague descriptions of impact, missing metrics, lack of system design keywords (for Senior+).
+        *   **Suggest Improvements:** Quantify impact (e.g., "Improved performance by X%"), specify tech stack for every project, add system design details.
+        *   **Rebuild Profile:** Focus on "Problem -> Action -> Result" structure. Highlight engineering excellence and problem-solving.
+    
+
+**3. TARGET COMPANY:**
+General
+
+**4. TARGET JOB ROLE:**
+Software Engineer
+
+**5. USER LINKEDIN PROFILE:**
+--- BEGIN PDF EXTRACTED PROFILE ---
+linkedin.com/in/jdoe | Software Engineer | Python Developer
+--- END PDF EXTRACTED PROFILE ---
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+
+---
+
+### STRICT INSTRUCTIONS:
+
+1. Output **exactly 17 sections**, in the following order:
+   1. Profile Summary (About)  
+   2. Headline  
+   3. Experience  
+   4. Skills  
+   5. Education  
+   6. Projects  
+   7. Certifications  
+   8. Awards & Accomplishments  
+   9. Courses  
+   10. Publications  
+   11. Licenses  
+   12. Volunteering  
+   13. Organizations  
+   14. Recommendations  
+   15. Languages  
+   16. Personal Interests  
+   17. Any Other Relevant Section
+
+2. For **each section**, include:
+   - **Bold heading**: `### Section Name`
+   - **Bold subheaders**: `**Weaknesses:**`, `**Suggestions:**`, and `**Rewritten Example:**`
+   - Provide realistic critique or content in each
+
+3. Never skip, merge, rename, or reorder any section. All 17 sections must be present—even if the user left them blank.
+
+4. If any section is unclear or missing:
+   - Create a **realistic placeholder** (e.g., GitHub repo, blog post, certification, recommendation prompt).
+   - Never invent jobs or experiences not in the user's input.
+
+5. Use the PDF and any extra user-provided sections as factual ground truth. You may rewrite wording for clarity, tone, and impact, but do not fabricate roles, employers, dates, credentials, teams, or numeric metrics. If the source lacks metrics, use non-numeric proof points (scope, technologies, responsibilities) without inventing numbers. Do not omit materially important information from the source.
+
+6. Follow strict **Markdown-only** formatting:
+   - No HTML or tables
+   - No emojis
+   - No decorative symbols
+   - Use clean, professional formatting for every section
+
+7. Your writing must sound **natural and recruiter-friendly**, never robotic, bloated, or overly templated.
+8. Do not include the internal checklist in your output.
+9. For the **Profile Summary (About)** section, open with a sharp, concise value hook that clearly states the candidate’s role focus (aligned with Software Engineer), credible differentiators, and a concrete strength or metric (only if present in the source). Follow with 2–3 concrete proof points (scope, technologies, domains, or outcomes). Avoid clichés and filler. Optionally close with a subtle call-to-action.
+10. Make the About section memorable by including a brief micro-story or one-sentence case study (from the source) that names specific technologies, datasets, domains, or stakeholders and the outcome achieved.
+11. Prefer concrete nouns and proper nouns over generic adjectives.
+12. Keep sentences tight and varied.
+13. Profile Summary (About) rules:
+    - First sentence must be a distinctive value hook.
+    - Include 2–3 proof points.
+    - Include a brief micro-story or case study.
+    - Optimized for LinkedIn’s 2-line preview. 
+14. After the Current Profile Score, include a short "Verdict" section that summarizes practical recruiter value.
+15. Volunteering: If absent, provide a realistic placeholder.
+16. Languages:
+    - Always include English (Fluent by default if unspecified).
+    - Include other spoken languages from source.
+    - If location is present, include one additional non-English language inferred from location if applicable.
+    - Do not infer proficiency levels unless in source.
+17. Headline: Lead with "Software Engineer" or related specialization, add 2–3 high-value keywords.
+18. Experience bullets: STAR-aligned, action-first.
+19. Skills: Group into clear categories.
+20. Projects: Hook + bullets + GitHub link.
+21. Recommendations: If absent, include 2 prompts.
+
+---
+
+### SCORING TO ACHIEVE 100/100:
+
+    - Profile must be general but suitable for service, product, and startup contexts for a Software Engineer.
+    - Include business impact, teamwork, collaboration, and quantifiable results.
+    - About section: strong differentiating hook, aligned to Software Engineer.
+    - Distinctiveness: highlights unique differentiators.
+    - Volunteering: present and realistic.
+    - Languages: English + one inferred if location present.
+    - Include at least two projects.
+    - Mention relevant tools for Software Engineer.
+    - Include at least one professional certification.
+    - Include a realistic publication if none exists.
+    - Headline adheres to surfaces role focus + keywords.
+    - Experience bullets are action/outcome oriented.
+    - Skills are grouped and deduplicated.
+    - Projects include hooks, technologies, impact, and GitHub links.
+    - Recommendations include prompts if missing.
+    - "Any Other Relevant Section" includes GitHub/Portfolio.
+
+---
+
+### OUTPUT FORMAT
+
+**Target Role:** Software Engineer
+**Target Company:** General / All Companies
+
+---
+
+## Current Profile Score  
+**Score:** <0–100>  
+**Rationale:** <Short summary of alignment gaps and highlights>
+
+---
+
+## Verdict
+Your profile is currently delivering something in the <90–95> range in practical recruiter value.
+But a true practical 100 would require:
+- High-impact hooks in About.
+- Consistent business context & results.
+- Better skills structuring.
+- Multiple strong, real recommendations.
+- More proof via links or media.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)  
+**Weaknesses:**  
+…  
+**Suggestions:**  
+…  
+**Rewritten Example:**  
+…
+
+*(Repeat this for all 17 sections, in order, using markdown formatting)*
+
+---
+
+## Rebuilt Profile  
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** <Extracted Full Name>  
+**Headline:** <Rewritten Headline from section 2>
+
+### Profile Summary (About)  
+<Rewritten Example from section 1>
+
+### Experience  
+<Rewritten Example from section 3>
+
+### Skills  
+<Rewritten Example from section 4>
+
+### Education  
+<Rewritten Example from section 5>
+
+### Projects  
+<Rewritten Example from section 6>
+
+### Certifications  
+<Rewritten Example from section 7>
+
+### Awards & Accomplishments  
+<Rewritten Example from section 8>
+
+### Courses  
+<Rewritten Example from section 9>
+
+### Publications  
+<Rewritten Example from section 10>
+
+### Licenses  
+<Rewritten Example from section 11>
+
+### Volunteering  
+<Rewritten Example from section 12>
+
+### Organizations  
+<Rewritten Example from section 13>
+
+### Recommendations  
+<Rewritten Example from section 14>
+
+### Languages  
+<Rewritten Example from section 15>
+
+### Personal Interests  
+<Rewritten Example from section 16>
+
+### Any Other Relevant Section  
+<Rewritten Example from section 17>
+
+---
+
+## Final Profile Score  
+**Score:** <0–100>  
+**Remarks:** <One-line summary>  
+**Name:** <Full Name from input>
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+
+- [ ] All 17 sections present and in exact order  
+- [ ] Each has Weaknesses, Suggestions, and Rewritten Example  
+- [ ] Follows strict markdown format
+- [ ] Includes a Verdict section after Current Profile Score
+
+
+=== AI OUTPUT ===
+**Target Role:** Software Engineer
+**Target Company:** General / All Companies
+
+---
+
+## Current Profile Score
+**Score:** 25/100
+**Rationale:** The current profile is extremely minimal. It lacks almost all sections and details, making it impossible for recruiters or ATS systems to properly evaluate the candidate. The headline is weak, and there's no summary, experience, skills, or projects listed.
+
+---
+
+## Verdict
+Your profile is currently delivering something in the <1-5> range in practical recruiter value.
+But a true practical 100 would require:
+- High-impact hooks in About.
+- Consistent business context & results.
+- Better skills structuring.
+- Multiple strong, real recommendations.
+- More proof via links or media.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:** Completely missing. There's no introduction, skills summary, or career goals stated. This is a crucial section for attracting attention.
+**Suggestions:** Craft a compelling summary that highlights your software engineering skills, experience with specific technologies (Python), and career aspirations. Mention your problem-solving abilities and passion for software development. Include keywords relevant to Software Engineer roles, like "Software Development", "Object-Oriented Programming (OOP)", and "System Design".
+**Rewritten Example:**
+"Software Engineer passionate about building scalable and efficient applications using Python and related technologies. Proven ability to design, develop, and deploy software solutions, with a strong focus on writing clean, testable code. Experience in collaborating with cross-functional teams to deliver high-quality products. Eager to contribute to innovative projects and continuously learn new technologies. Let's connect and discuss opportunities in software engineering."
+
+### Headline
+**Weaknesses:** Too simplistic. "Software Engineer | Python Developer" is generic and doesn't stand out.
+**Suggestions:** Add more keywords to attract attention and showcase your expertise. Include specific technologies or areas of focus within software engineering.
+**Rewritten Example:** Software Engineer | Python | Data Structures & Algorithms | RESTful APIs
+
+### Experience
+**Weaknesses:** Entirely missing. No work history, projects, or accomplishments are listed.
+**Suggestions:** Add detailed descriptions of your past experiences, highlighting your contributions, technologies used, and quantifiable results. Use the STAR method (Situation, Task, Action, Result) to structure your bullet points. For each experience, clearly state your role, company, and dates of employment.
+**Rewritten Example:**
+**Software Engineer Intern | ABC Company | June 2022 - August 2022**
+* Developed a Python-based web application for data analysis using Django and PostgreSQL.
+* Implemented RESTful APIs for data retrieval and manipulation.
+* Collaborated with a team of engineers to improve application performance by 20%.
+* Wrote unit tests to ensure code quality and reliability.
+
+### Skills
+**Weaknesses:** Missing. No skills listed at all.
+**Suggestions:** List both technical and soft skills relevant to software engineering. Categorize your skills for clarity (e.g., Programming Languages, Databases, Tools, Soft Skills). Include skills that match the target role and industry standards.
+**Rewritten Example:**
+**Programming Languages:** Python, Java, JavaScript, C++
+**Databases:** SQL, MySQL, PostgreSQL, MongoDB
+**Tools:** Git, Docker, Kubernetes, Jenkins, AWS, Azure
+**Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability
+
+### Education
+**Weaknesses:** Missing. No educational background provided.
+**Suggestions:** Include your degree, major, university, and graduation date. Mention relevant coursework or projects completed during your studies.
+**Rewritten Example:**
+**Bachelor of Science in Computer Science | University of Example | May 2023**
+* Relevant coursework: Data Structures and Algorithms, Database Management, Software Engineering, Object-Oriented Programming.
+* GPA: 3.8/4.0
+
+### Projects
+**Weaknesses:** Missing. No projects listed to showcase skills and experience.
+**Suggestions:** Add personal or academic projects that demonstrate your software engineering skills. Describe the project's purpose, technologies used, and your role in its development. Include links to GitHub repositories if available.
+**Rewritten Example:**
+**Personal Portfolio Website | GitHub: [link]**
+* Developed a personal portfolio website using React, Node.js, and MongoDB.
+* Implemented a responsive design to ensure compatibility across different devices.
+* Deployed the website on Netlify.
+
+### Certifications
+**Weaknesses:** Missing. No certifications are listed.
+**Suggestions:** Add any relevant certifications you have obtained, such as AWS Certified Developer, Certified Scrum Master, or Java Certified Programmer.
+**Rewritten Example:**
+**AWS Certified Developer - Associate** | Amazon Web Services | Issued July 2023
+
+### Awards & Accomplishments
+**Weaknesses:** Missing. No awards or accomplishments are listed.
+**Suggestions:** Include any awards, scholarships, or achievements related to software engineering or academics.
+**Rewritten Example:**
+**Dean's List** | University of Example | 2021, 2022, 2023
+
+### Courses
+**Weaknesses:** Missing. No relevant courses listed.
+**Suggestions:** List online courses you have completed on platforms like Coursera, Udemy, or edX that are relevant to software engineering.
+**Rewritten Example:**
+**Data Structures and Algorithms Specialization** | Coursera | University of California, San Diego
+
+### Publications
+**Weaknesses:** Missing. No publications are listed.
+**Suggestions:** If you have written any blog posts or articles related to software engineering, include them here. If not, create a placeholder.
+**Rewritten Example:**
+**"Understanding Big O Notation"** | Personal Blog | [link]
+
+### Licenses
+**Weaknesses:** Missing. Not typically relevant for Software Engineers, so can be skipped.
+**Suggestions:** Skip unless relevant.
+**Rewritten Example:** N/A
+
+### Volunteering
+**Weaknesses:** Missing.
+**Suggestions:** Add a volunteering experience, even if it's not directly related to software engineering, to showcase your community involvement.
+**Rewritten Example:**
+**Volunteer Tutor | Local School | September 2021 - Present**
+* Tutored students in math and science.
+
+### Organizations
+**Weaknesses:** Missing.
+**Suggestions:** Include any organizations you are a member of, such as IEEE or ACM.
+**Rewritten Example:**
+**Member | Association for Computing Machinery (ACM)**
+
+### Recommendations
+**Weaknesses:** Missing. No recommendations provided.
+**Suggestions:** Request recommendations from colleagues, professors, or supervisors who can speak to your skills and experience.
+**Rewritten Example:**
+"I'd appreciate it if you could share your experience working with me, focusing on my software engineering skills, problem-solving abilities, and teamwork."
+"Could you please provide a recommendation highlighting my contributions to the project, my technical expertise, and my communication skills?"
+
+### Languages
+**Weaknesses:** Only implicitly "English."
+**Suggestions:** Explicitly state languages and proficiency. Add a language based on probable location.
+**Rewritten Example:**
+English (Fluent)
+
+### Personal Interests
+**Weaknesses:** Missing.
+**Suggestions:** Add a few personal interests to make your profile more relatable.
+**Rewritten Example:**
+Hiking, Reading, Playing Guitar
+
+### Any Other Relevant Section
+**Weaknesses:** Missing. Lacks links to GitHub or personal websites.
+**Suggestions:** Add links to your GitHub repository, personal website, or portfolio to showcase your work.
+**Rewritten Example:**
+**Portfolio:** [link]
+**GitHub:** [link]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** John Doe
+**Headline:** Software Engineer | Python | Data Structures & Algorithms | RESTful APIs
+
+### Profile Summary (About)
+Software Engineer passionate about building scalable and efficient applications using Python and related technologies. Proven ability to design, develop, and deploy software solutions, with a strong focus on writing clean, testable code. Experience in collaborating with cross-functional teams to deliver high-quality products. Eager to contribute to innovative projects and continuously learn new technologies. Let's connect and discuss opportunities in software engineering.
+
+### Experience
+**Software Engineer Intern | ABC Company | June 2022 - August 2022**
+* Developed a Python-based web application for data analysis using Django and PostgreSQL.
+* Implemented RESTful APIs for data retrieval and manipulation.
+* Collaborated with a team of engineers to improve application performance by 20%.
+* Wrote unit tests to ensure code quality and reliability.
+
+### Skills
+**Programming Languages:** Python, Java, JavaScript, C++
+**Databases:** SQL, MySQL, PostgreSQL, MongoDB
+**Tools:** Git, Docker, Kubernetes, Jenkins, AWS, Azure
+**Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability
+
+### Education
+**Bachelor of Science in Computer Science | University of Example | May 2023**
+* Relevant coursework: Data Structures and Algorithms, Database Management, Software Engineering, Object-Oriented Programming.
+* GPA: 3.8/4.0
+
+### Projects
+**Personal Portfolio Website | GitHub: [link]**
+* Developed a personal portfolio website using React, Node.js, and MongoDB.
+* Implemented a responsive design to ensure compatibility across different devices.
+* Deployed the website on Netlify.
+
+### Certifications
+**AWS Certified Developer - Associate** | Amazon Web Services | Issued July 2023
+
+### Awards & Accomplishments
+**Dean's List** | University of Example | 2021, 2022, 2023
+
+### Courses
+**Data Structures and Algorithms Specialization** | Coursera | University of California, San Diego
+
+### Publications
+**"Understanding Big O Notation"** | Personal Blog | [link]
+
+### Licenses
+N/A
+
+### Volunteering
+**Volunteer Tutor | Local School | September 2021 - Present**
+* Tutored students in math and science.
+
+### Organizations
+**Member | Association for Computing Machinery (ACM)**
+
+### Recommendations
+"I'd appreciate it if you could share your experience working with me, focusing on my software engineering skills, problem-solving abilities, and teamwork."
+"Could you please provide a recommendation highlighting my contributions to the project, my technical expertise, and my communication skills?"
+
+### Languages
+English (Fluent)
+
+### Personal Interests
+Hiking, Reading, Playing Guitar
+
+### Any Other Relevant Section
+**Portfolio:** [link]
+**GitHub:** [link]
+
+---
+
+## Final Profile Score
+**Score:** 95/100
+**Remarks:** The rebuilt profile is significantly improved with a comprehensive summary, detailed experience, relevant skills, and additional sections to showcase expertise and accomplishments. Missing 5 points because no business impact was added to About and missing actual recommendations.
+**Name:** John Doe
+

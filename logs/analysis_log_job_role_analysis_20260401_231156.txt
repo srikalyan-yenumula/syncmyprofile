@@ -1,0 +1,324 @@
+=== ANALYSIS LOG - 20260401_231156 ===
+Type: job_role_analysis
+
+=== INPUTS ===
+profile_text:
+Contact
+tarunpangala7@gmail.com
+www.linkedin.com/in/tarunpangala
+(LinkedIn)
+Tarun Pangala
+Student at R.V.R. & J.C. College of Engineering
+Guntur, Andhra Pradesh, India
+Summary
+I am an aspiring Data Analyst with a strong foundation in statistics,
+programming, and a passion for uncovering actionable insights from
+complex datasets. Proficient in tools like Python, SQL, and Excel,
+I thrive on identifying trends, creating intuitive visualizations, and
+translating data into strategies that drive meaningful outcomes.
+What I Bring to the Table:
+A data-focused mindset to identify patterns and trends.
+Proficiency in designing clear, impactful data visualizations that tell
+compelling stories.
+A blend of technical skills and critical thinking to solve real-world
+problems efficiently.
+What Drives Me:
+Collaboration and continuous learning are the cornerstones of my
+professional journey.
+I am eager to contribute to a data-driven culture, work on impactful
+projects, and expand my knowledge in emerging technologies and
+analytical methodologies.
+What I’m Looking For:
+Opportunities to collaborate with innovative teams.
+Refine my skills and grow as a Data Analyst.
+Make a tangible impact by transforming raw data into valuable
+insights.
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor's degree, Computer Science · (September 2023 - August 2027)
+ 
+Page 1 of 1
+
+job_role:
+Software Engineer
+
+company_name:
+None
+
+extra_sections:
+
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Software Engineer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in at least one major language (Python, Java, C++, JavaScript, Go), Data Structures & Algorithms, System Design, Database Management (SQL/NoSQL), Version Control (Git).
+        *   **Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability, Attention to Detail.
+    *   **2. Responsibilities:**
+        *   Design, develop, test, deploy, and maintain software applications.
+        *   Write clean, efficient, and testable code.
+        *   Participate in code reviews and contribute to engineering best practices.
+        *   Collaborate with cross-functional teams (Product, Design, QA) to define requirements.
+        *   Troubleshoot and debug production issues.
+    *   **3. Technical Expectations:**
+        *   Understanding of Software Development Life Cycle (SDLC).
+        *   Familiarity with Agile/Scrum methodologies.
+        *   Knowledge of CI/CD pipelines and testing frameworks.
+        *   Understanding of distributed systems and scalability concepts (for Senior+).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Focus on execution of defined tasks, learning the codebase, fixing bugs, writing unit tests. Needs guidance.
+        *   **Mid-Level:** Owns features or small components, designs solutions for defined problems, mentors juniors, participates in design discussions. Independent execution.
+        *   **Senior:** Owns complex systems or large features, drives technical decisions, defines architecture, mentors the team, handles cross-team dependencies.
+        *   **Staff/Principal:** Sets technical strategy, solves organizational-level technical challenges, drives innovation, influences multiple teams.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Software Development", "Object-Oriented Programming (OOP)", "System Design", "Distributed Systems", "RESTful APIs", "Cloud Computing (AWS/Azure/GCP)".
+        *   **Must appear in Projects/Experience:** Specific languages (e.g., "Python", "Java"), frameworks (e.g., "Spring Boot", "Django", "React"), tools (e.g., "Docker", "Kubernetes", "Jenkins").
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of specific technologies, vague descriptions of impact, missing metrics, lack of system design keywords (for Senior+).
+        *   **Suggest Improvements:** Quantify impact (e.g., "Improved performance by X%"), specify tech stack for every project, add system design details.
+        *   **Rebuild Profile:** Focus on "Problem -> Action -> Result" structure. Highlight engineering excellence and problem-solving.
+    
+
+company_prompt:
+No specific company provided. Focus on general industry standards.
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+<system_instructions>
+You are an expert Career Coach, ATS Specialist, and LinkedIn Profile Optimizer.
+Your goal is to transform a user's LinkedIn profile into a top-tier, 100/100 scored profile that perfectly aligns with a specific target role and company culture.
+You must strictly follow the output format and structural requirements.
+</system_instructions>
+
+<context>
+    <target_role>Software Engineer</target_role>
+    <target_company>General Industry Standards</target_company>
+    <company_guidelines>
+    No specific company provided. Focus on general industry standards.
+    </company_guidelines>
+    <role_guidelines>
+    
+    **Role Analysis: Software Engineer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in at least one major language (Python, Java, C++, JavaScript, Go), Data Structures & Algorithms, System Design, Database Management (SQL/NoSQL), Version Control (Git).
+        *   **Soft Skills:** Problem-solving, Communication, Teamwork, Adaptability, Attention to Detail.
+    *   **2. Responsibilities:**
+        *   Design, develop, test, deploy, and maintain software applications.
+        *   Write clean, efficient, and testable code.
+        *   Participate in code reviews and contribute to engineering best practices.
+        *   Collaborate with cross-functional teams (Product, Design, QA) to define requirements.
+        *   Troubleshoot and debug production issues.
+    *   **3. Technical Expectations:**
+        *   Understanding of Software Development Life Cycle (SDLC).
+        *   Familiarity with Agile/Scrum methodologies.
+        *   Knowledge of CI/CD pipelines and testing frameworks.
+        *   Understanding of distributed systems and scalability concepts (for Senior+).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Focus on execution of defined tasks, learning the codebase, fixing bugs, writing unit tests. Needs guidance.
+        *   **Mid-Level:** Owns features or small components, designs solutions for defined problems, mentors juniors, participates in design discussions. Independent execution.
+        *   **Senior:** Owns complex systems or large features, drives technical decisions, defines architecture, mentors the team, handles cross-team dependencies.
+        *   **Staff/Principal:** Sets technical strategy, solves organizational-level technical challenges, drives innovation, influences multiple teams.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Software Development", "Object-Oriented Programming (OOP)", "System Design", "Distributed Systems", "RESTful APIs", "Cloud Computing (AWS/Azure/GCP)".
+        *   **Must appear in Projects/Experience:** Specific languages (e.g., "Python", "Java"), frameworks (e.g., "Spring Boot", "Django", "React"), tools (e.g., "Docker", "Kubernetes", "Jenkins").
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of specific technologies, vague descriptions of impact, missing metrics, lack of system design keywords (for Senior+).
+        *   **Suggest Improvements:** Quantify impact (e.g., "Improved performance by X%"), specify tech stack for every project, add system design details.
+        *   **Rebuild Profile:** Focus on "Problem -> Action -> Result" structure. Highlight engineering excellence and problem-solving.
+    
+    </role_guidelines>
+</context>
+
+<user_data>
+    <profile_content>
+    --- BEGIN PDF EXTRACTED PROFILE ---
+Contact
+tarunpangala7@gmail.com
+www.linkedin.com/in/tarunpangala
+(LinkedIn)
+Tarun Pangala
+Student at R.V.R. & J.C. College of Engineering
+Guntur, Andhra Pradesh, India
+Summary
+I am an aspiring Data Analyst with a strong foundation in statistics,
+programming, and a passion for uncovering actionable insights from
+complex datasets. Proficient in tools like Python, SQL, and Excel,
+I thrive on identifying trends, creating intuitive visualizations, and
+translating data into strategies that drive meaningful outcomes.
+What I Bring to the Table:
+A data-focused mindset to identify patterns and trends.
+Proficiency in designing clear, impactful data visualizations that tell
+compelling stories.
+A blend of technical skills and critical thinking to solve real-world
+problems efficiently.
+What Drives Me:
+Collaboration and continuous learning are the cornerstones of my
+professional journey.
+I am eager to contribute to a data-driven culture, work on impactful
+projects, and expand my knowledge in emerging technologies and
+analytical methodologies.
+What I’m Looking For:
+Opportunities to collaborate with innovative teams.
+Refine my skills and grow as a Data Analyst.
+Make a tangible impact by transforming raw data into valuable
+insights.
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor's degree, Computer Science · (September 2023 - August 2027)
+ 
+Page 1 of 1
+--- END PDF EXTRACTED PROFILE ---
+    </profile_content>
+    <extra_sections>
+    
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+    </extra_sections>
+</user_data>
+
+<task_description>
+1.  **Analyze**: Deeply analyze the user's current profile against the Target Role and Company Guidelines. Identify gaps, weak language, and missing keywords.
+2.  **Strategize**: Determine the best angle to position this candidate. How can their past experience be framed to look perfect for this specific role?
+3.  **Rebuild**: Rewrite the profile sections to achieve a **100/100 score**.
+    *   **Score Criteria**:
+        *   About Section (20pts): Must have a killer hook, metric-driven proof points, and a micro-story.
+        *   Experience (20pts): Action-oriented, STAR method, quantified results.
+        *   Skills (15pts): Relevant, categorized, and keyword-rich.
+        *   Projects (15pts): Depth, technical details, and outcomes.
+        *   Certifications (10pts): Relevant to the role.
+        *   Completeness (10pts): All 17 sections present.
+        *   Alignment (10pts): Tone and keywords match the target company/role.
+4.  **Output**: Generate the response in the strict format defined below.
+</task_description>
+
+<output_requirements>
+1.  **Structure**: Output **exactly 17 sections** in the specific order listed below. Do not skip, merge, or reorder.
+2.  **Format**: Use **Markdown** only. No HTML, no tables.
+3.  **Content Constraints (STRICT)**:
+    *   **About Section**: **MAX 3 short paragraphs**. Total reading time must be under 30 seconds. Focus on the "Value Hook" and 2-3 key proof points.
+    *   **Experience**: **STRICT LIMIT: Max 3-4 bullet points per role.** Focus ONLY on high-impact results (ROI, growth, savings). Remove generic duties and technical fluff.
+    *   **Projects**: **Select ONLY the top 2 most relevant projects.** Max 3 bullet points each. Do not overwhelm with technical details.
+    *   **Skills**: **Select ONLY the top 12-15 most critical skills.** Do not list everything you know. Group them logically.
+    *   **Missing Info**: If a section is missing in the input, you MUST still generate a **Rewritten Example** for it (as a realistic placeholder or inferred content). Do not leave it empty.
+    *   **Content Duplication**: You MUST generate the full rewritten content in the 'Section-by-Section Audit' (under 'Rewritten Example') **FIRST**. Then, copy it to the 'Rebuilt Profile' section. Never output "No rewritten example available" if you are able to generate one for the final profile.
+4.  **Tone & Style (Human & Direct)**:
+    *   **Simple & Real**: Write like a busy, high-performing human. Avoid "AI-polished" elegance. Be direct and punchy.
+    *   **Recruiter-Ready**: Optimized for a 6-second scan. No walls of text.
+    *   **Active Voice**: Start with strong verbs (e.g., "Led," "Built," "Saved").
+5.  **Prohibition**: Do NOT explicitly mention the target company name in the rewritten content unless it was already in the source text. Match their *style*, don't name-drop them.
+</output_requirements>
+
+<output_format>
+**Target Role:** Software Engineer
+**Target Company:** General / All Companies
+
+---
+
+## Current Profile Score
+**Score:** [0-100]
+**Rationale:** [Concise explanation of the score]
+
+---
+
+## Verdict
+[Short, punchy verdict on the candidate's current standing vs. what is needed for a top-tier application.]
+
+---
+
+## Section-by-Section Audit
+
+### Headline
+**Weaknesses:**
+...
+**Suggestions:**
+...
+**Rewritten Example:**
+...
+
+### Profile Summary (About)
+**Weaknesses:**
+...
+**Suggestions:**
+...
+**Rewritten Example:**
+...
+
+[... Repeat for all 17 sections ...]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** [Extracted Name]
+**Headline:** [Optimized Headline]
+
+### Profile Summary (About)
+[Optimized Content]
+
+### Experience
+[Optimized Content]
+
+### Skills
+[Optimized Content]
+
+### Education
+[Optimized Content]
+
+### Projects
+[Optimized Content]
+
+### Certifications
+[Optimized Content]
+
+### Awards & Accomplishments
+[Optimized Content]
+
+### Courses
+[Optimized Content]
+
+### Publications
+[Optimized Content]
+
+### Licenses
+[Optimized Content]
+
+### Volunteering
+[Optimized Content]
+
+### Organizations
+[Optimized Content]
+
+### Recommendations
+[Optimized Content]
+
+### Languages
+[Optimized Content]
+
+### Personal Interests
+[Optimized Content]
+
+### Any Other Relevant Section
+[Optimized Content]
+
+---
+
+## Final Profile Score
+**Score:** [0-100]
+**Remarks:** [Final encouraging comment]
+**Name:** [Extracted Name]
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+- [ ] All 17 sections present
+- [ ] Markdown format strict
+- [ ] No company name-dropping
+</output_format>
+
+
+=== AI OUTPUT ===
+Error: Gemini API key not set. Set GEMINI_API_KEY in your environment or .env file.
+

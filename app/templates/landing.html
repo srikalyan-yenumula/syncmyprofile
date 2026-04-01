@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Optimize your LinkedIn profile in minutes. Get AI-powered, copy-ready updates tailored to recruiters and ATS. No sign-up required." />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='favicon.ico') }}">
+    <title>SyncMyProfile.ai | AI-Powered LinkedIn Profile Optimization</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Base font and background styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            /* Tailwind's gray-50 */
+            color: #1f2937;
+            /* Tailwind's gray-800 */
+            overflow-x: hidden;
+        }
+
+        /* Scroll-triggered animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom focus ring */
+        .focus-ring:focus-visible {
+            outline: 2px solid #3B82F6;
+            outline-offset: 2px;
+        }
+
+        /* Accordion icon transition */
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-button[aria-expanded="true"] .accordion-icon {
+            transform: rotate(135deg);
+        }
+
+        /* Animated hero headline */
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: var(--typing-target-width, 100%)
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #2563eb;
+            }
+        }
+
+        .headline-typing {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid #2563eb;
+            /* animation is set/overridden via JS for precise width & steps */
+            animation: typing 2.5s steps(30, end) forwards, blink-caret .75s step-end infinite;
+            padding-bottom: 0.05em;
+            /* avoid descender clipping like g, j, y */
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(to right, #4f46e5, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            /* allow padding to prevent descender clip */
+            padding-bottom: 0.05em;
+            /* give a touch of room for descenders like g,j,y */
+        }
+
+        /* Responsive truncate for the "Before" text */
+        .before-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* How it works connecting lines */
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 3.5rem;
+            right: -2.5rem;
+            width: 5rem;
+            height: 2px;
+            background-image: linear-gradient(to right, #93c5fd 50%, transparent 50%);
+            background-size: 10px 2px;
+            background-repeat: repeat-x;
+        }
+
+        @media (max-width: 768px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+
+        /* Mobile fixes: prevent clipped text/overflow in hero */
+        @media (max-width: 640px) {
+            .headline-typing {
+                white-space: normal;
+                /* allow wrapping on small screens */
+                border-right: 0;
+                /* remove caret to avoid overflow */
+                animation: none;
+                /* disable typing effect on mobile */
+                overflow: visible;
+                /* prevent clipping of descenders on small screens */
+            }
+
+            .headline-typing::after {
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 1em;
+                /* ensure caret has visible height */
+                border-right: .15em solid #2563eb;
+                /* blinking caret */
+                margin-left: 0.05em;
+                vertical-align: -0.1em;
+                /* align with baseline to avoid clipping */
+                animation: blink-caret .75s step-end infinite;
+            }
+
+            .before-text {
+                white-space: normal;
+                /* show full text on mobile */
+                overflow: visible;
+                text-overflow: clip;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                    <img src="{{ url_for('static', path='ChatGPT Image Aug 4, 2025, 09_23_02 PM.png') }}"
+                        alt="SyncMyProfile.ai" class="h-8 w-8 rounded-lg object-cover" />
+                    <span class="font-bold text-lg text-gray-900 tracking-tight">SyncMyProfile.ai</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-6" aria-label="Main">
+                    <a href="#features"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Features</a>
+                    <a href="#how"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">How
+                        It Works</a>
+                    <a href="#faq"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">FAQ</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <a href="/select-service"
+                        class="hidden sm:inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring transition-all duration-200 transform hover:scale-105">
+                        Optimize My Profile
+                    </a>
+                    <a href="/select-service"
+                        class="sm:hidden inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring transition-all duration-200">
+                        Start Free
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="start-now" class="relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-gray-50 -z-10"></div>
+            <!-- Decorative blobs are now hidden on mobile to prevent overflow -->
+            <div
+                class="absolute -top-48 -right-48 w-96 h-96 bg-blue-200/50 rounded-full blur-3xl -z-10 hidden lg:block">
+            </div>
+            <div
+                class="absolute -bottom-48 -left-48 w-96 h-96 bg-indigo-200/50 rounded-full blur-3xl -z-10 hidden lg:block">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-28 pb-20 sm:pb-32">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter text-gray-900">
+                            Stop Guessing. Start <span class="gradient-text">Getting Interviews.</span>
+                        </h1>
+                        <p class="mt-6 max-w-xl mx-auto lg:mx-0 text-lg sm:text-xl text-gray-600">
+                            Our AI instantly rewrites your LinkedIn profile to match your dream job, highlighting your
+                            skills to get you past recruiters and ATS.
+                        </p>
+                        <div class="mt-10 flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
+                            <a href="/select-service"
+                                class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-blue-700 focus-ring transition-all duration-200 transform hover:scale-105">
+                                Optimize for Free &mdash; No Signup
+                            </a>
+                        </div>
+                        <p class="mt-6 text-sm text-gray-500 flex items-center justify-center lg:justify-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-gray-400">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            100% Private. We never store your data.
+                        </p>
+                    </div>
+
+                    <!-- Animated Hero Visual -->
+                    <div class="fade-in-up">
+                        <div class="relative bg-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-gray-200/80">
+                            <div
+                                class="absolute -inset-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl blur-lg opacity-20 -z-10">
+                            </div>
+                            <p class="text-sm font-medium text-gray-500 mb-1">Before:</p>
+                            <div class="bg-gray-100 p-3 rounded-lg text-gray-500 before-text">Seeking new opportunities
+                                in data science</div>
+
+                            <div class="my-4 text-center">
+                                <span
+                                    class="inline-flex items-center justify-center h-10 w-10 bg-blue-100 rounded-full">
+                                    <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456L18 15.75l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 20l-1.035.259a3.375 3.375 0 00-2.456 2.456L18 23.75l-.259-1.035a3.375 3.375 0 00-2.456-2.456L14.25 20l1.035-.259a3.375 3.375 0 002.456-2.456L18 15.75z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <p class="text-sm font-medium text-gray-500 mb-1">After:</p>
+                            <div class="bg-blue-50 p-3 rounded-lg text-blue-800 font-semibold">
+                                <span class="headline-typing">Aspiring Data Scientist | Python, SQL & Machine
+                                    Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how" class="py-20 sm:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase">How It Works</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+                        From PDF to Perfect Profile in 3 Simple Steps
+                    </p>
+                </div>
+                <div class="mt-20 grid md:grid-cols-3 gap-8 md:gap-10">
+                    <!-- Step 1 -->
+                    <div class="relative text-center fade-in-up">
+                        <div class="step-connector">
+                            <div
+                                class="flex items-center justify-center h-16 w-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl shadow-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-5 text-xl font-bold text-gray-900">1. Upload & Target</h3>
+                            <p class="mt-2 text-base text-gray-600">Securely upload your LinkedIn PDF and paste in a job
+                                description you're targeting.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="relative text-center fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="step-connector">
+                            <div
+                                class="flex items-center justify-center h-16 w-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl shadow-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-5 text-xl font-bold text-gray-900">2. Get AI Analysis</h3>
+                            <p class="mt-2 text-base text-gray-600">Our AI analyzes your profile against the job,
+                                identifying gaps and generating optimized, keyword-rich content.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="text-center fade-in-up" style="transition-delay: 0.4s;">
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-xl font-bold text-gray-900">3. Copy & Paste</h3>
+                        <p class="mt-2 text-base text-gray-600">Receive copy-and-paste ready text for your headline,
+                            summary, and experience sections to update your profile in minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="bg-white py-20 sm:py-28 border-y border-gray-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center max-w-3xl mx-auto">
+                    <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase">Everything You Need</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+                        Powerful Features for a Perfect Profile
+                    </p>
+                </div>
+                <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature Item -->
+                    <div
+                        class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38" />
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">Targeted Optimization</h4>
+                        <p class="mt-1 text-gray-600">Refines your headline, summary, and experience to match specific
+                            job descriptions.</p>
+                    </div>
+                    <!-- Feature Item -->
+                    <div class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1"
+                        style="transition-delay: 0.1s;">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" />
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">ATS Keyword Analysis</h4>
+                        <p class="mt-1 text-gray-600">Formats content and injects relevant keywords for both automated
+                            systems and human recruiters.</p>
+                    </div>
+                    <!-- Feature Item -->
+                    <div class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1"
+                        style="transition-delay: 0.2s;">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M2.707 10.293A1 1 0 0 0 2 11v6a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-6a1 1 0 0 0-.707-.949l-9-3.464a1 1 0 0 0-.586 0l-9 3.464z" />
+                                <path d="M2 11.333V20a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-8.667L12 15l-10-3.667z" />
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">Actionable Insights</h4>
+                        <p class="mt-1 text-gray-600">Get clear suggestions and rewritten content, not just vague
+                            advice.</p>
+                    </div>
+                    <!-- NEW Feature Item -->
+                    <div class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1"
+                        style="transition-delay: 0.3s;">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">Profile Score</h4>
+                        <p class="mt-1 text-gray-600">See your before-and-after score to understand the impact of your
+                            changes.</p>
+                    </div>
+                    <!-- NEW Feature Item -->
+                    <div class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1"
+                        style="transition-delay: 0.4s;">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">100% Private</h4>
+                        <p class="mt-1 text-gray-600">Your data is processed and immediately deleted. We never store
+                            your profile information.</p>
+                    </div>
+                    <!-- NEW Feature Item -->
+                    <div class="fade-in-up bg-gray-50 p-6 rounded-2xl border border-gray-200/80 transition-all duration-300 hover:shadow-lg hover:border-blue-200 hover:-translate-y-1"
+                        style="transition-delay: 0.5s;">
+                        <div
+                            class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold mt-4">Instant Copy & Paste</h4>
+                        <p class="mt-1 text-gray-600">Get polished text blocks you can paste directly into LinkedIn in
+                            seconds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 sm:py-28 bg-white border-y border-gray-200/80">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+                <div class="mt-12 space-y-4" id="faq-container">
+                    <!-- FAQ items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+                <div
+                    class="relative isolate overflow-hidden bg-blue-600 px-6 py-20 text-center shadow-2xl rounded-3xl sm:px-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                        Get the Profile That Gets the Job
+                    </h2>
+                    <p class="mt-4 mx-auto max-w-xl text-lg text-blue-100">
+                        Stop guessing what recruiters want to see. Build a profile that gets you interviews, fast.
+                    </p>
+                    <div class="mt-8">
+                        <a href="/select-service"
+                            class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-blue-600 shadow-sm hover:bg-blue-50 focus-ring transition-all duration-200 transform hover:scale-105">
+                            Optimize My Profile for Free
+                        </a>
+                    </div>
+                    <svg viewBox="0 0 1024 1024"
+                        class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
+                        aria-hidden="true">
+                        <circle cx="512" cy="512" r="512" fill="url(#gradient-pattern-cta)" fill-opacity="0.7"></circle>
+                        <defs>
+                            <radialGradient id="gradient-pattern-cta">
+                                <stop stop-color="#7775D6"></stop>
+                                <stop offset="1" stop-color="#4F46E5"></stop>
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="{{ url_for('static', path='ChatGPT Image Aug 4, 2025, 09_23_02 PM.png') }}"
+                        alt="SyncMyProfile.ai" class="h-8 w-8 rounded-lg object-cover" />
+                    <span class="font-bold text-gray-900">SyncMyProfile.ai</span>
+                </div>
+                <p class="text-sm text-gray-500">&copy; <span id="year"></span> SyncMyProfile.ai. All rights reserved.
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="text-sm text-gray-500 hover:text-blue-600">Privacy</a>
+                    <a href="#" class="text-sm text-gray-500 hover:text-blue-600">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Scroll Animation Logic ---
+        const animatedElements = document.querySelectorAll('.fade-in-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElements.forEach(el => observer.observe(el));
+
+        // --- FAQ Accordion Logic ---
+        const faqData = [
+            { question: "How is my data handled?", answer: "Your privacy is our top priority. We process your uploaded files and inputs securely in memory and never store them on our servers. All data is deleted immediately after your session ends." },
+            { question: "Can it target a specific company or role?", answer: "Yes, absolutely. The tool is most effective when you provide a target. You can paste a job description, enter a role title, or specify a company to tailor the AI's suggestions to that specific opportunity." },
+            { question: "Do I need to edit the AI's suggestions?", answer: "We generate ready-to-use content, but we always recommend a final review. You should confirm personal details (like project specifics) and make small tweaks to ensure the tone perfectly matches your voice." },
+            { question: "Will this work for my industry?", answer: "Yes. Our AI adapts its language and keyword suggestions based on the context from your profile and the target job description, making it effective across all industries, from tech to healthcare to creative fields." },
+            { question: "Is the output really ATS-friendly?", answer: "Yes. We designed the output to be optimized for Applicant Tracking Systems (ATS). The suggestions focus on relevant keywords, clear structure, and standard formatting that both automated systems and human recruiters can easily parse." }
+        ];
+
+        const faqContainer = document.getElementById('faq-container');
+        faqData.forEach((item, index) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'bg-gray-50 border border-gray-200/80 rounded-xl overflow-hidden fade-in-up';
+            faqItem.style.transitionDelay = `${index * 0.1}s`;
+            faqItem.innerHTML = `
+                <h2>
+                    <button type="button" class="accordion-button flex items-center justify-between w-full p-5 text-left font-semibold text-gray-800 hover:bg-gray-100 focus-ring" aria-expanded="false" aria-controls="faq-answer-${index}">
+                        <span>${item.question}</span>
+                        <svg class="accordion-icon flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                </h2>
+                <div id="faq-answer-${index}" class="accordion-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out" aria-hidden="true">
+                    <div class="overflow-hidden">
+                        <p class="px-5 pb-5 text-gray-600">${item.answer}</p>
+                    </div>
+                </div>`;
+            faqContainer.appendChild(faqItem);
+            observer.observe(faqItem);
+        });
+
+        faqContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.accordion-button');
+            if (!button) return;
+            const content = button.parentElement.nextElementSibling;
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !isExpanded);
+            content.setAttribute('aria-hidden', isExpanded);
+            if (isExpanded) {
+                content.style.gridTemplateRows = '0fr';
+            } else {
+                content.style.gridTemplateRows = '1fr';
+            }
+        });
+
+        // --- Precise typing width for hero 'After' text ---
+        (function () {
+            function setupTyping() {
+                const el = document.querySelector('.headline-typing');
+                if (!el) return;
+                const clone = el.cloneNode(true);
+                const cs = window.getComputedStyle(el);
+                clone.style.visibility = 'hidden';
+                clone.style.position = 'absolute';
+                clone.style.whiteSpace = 'nowrap';
+                clone.style.width = 'auto';
+                clone.style.borderRight = '0';
+                clone.style.animation = 'none';
+                clone.style.font = cs.font;
+                clone.style.letterSpacing = cs.letterSpacing;
+                clone.style.textTransform = cs.textTransform;
+                el.parentNode.appendChild(clone);
+                let targetWidth = Math.ceil(clone.scrollWidth || clone.getBoundingClientRect().width);
+                if (!targetWidth || targetWidth < 1) {
+                    // fallback: approximate by character count
+                    targetWidth = Math.max(1, Math.ceil((el.textContent || '').length * parseFloat(cs.fontSize || '16') * 0.6));
+                }
+                clone.remove();
+                const extraCaretSpace = 3; // prevent right-edge glyph clipping by caret
+                el.style.setProperty('--typing-target-width', (targetWidth + extraCaretSpace) + 'px');
+                const steps = Math.max(1, (el.textContent || '').length);
+                if (window.matchMedia('(max-width: 640px)').matches) {
+                    // On mobile: no width animation (wrapping allowed), but keep blinking caret via ::after
+                    el.style.animation = 'none';
+                } else {
+                    el.style.animation = `typing 2.5s steps(${steps}, end) forwards, blink-caret .75s step-end infinite`;
+                }
+            }
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => requestAnimationFrame(setupTyping));
+            } else {
+                window.addEventListener('load', () => requestAnimationFrame(setupTyping));
+            }
+        })();
+    </script>
+</body>
+
+</html>

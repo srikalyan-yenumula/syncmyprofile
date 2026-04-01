@@ -1,0 +1,798 @@
+=== ANALYSIS LOG - 20251201_181615 ===
+Type: job_description_analysis
+
+=== INPUTS ===
+profile_text:
+Ryan Isaac Perumallapalli
+Ó +91-7396880827
+R ryanisaac116@gmail.com
+° ryan-isaac-p
+ Ryanisaac116
+/ Ryan Isaac
+Education
+R.V.R. & J.C. College of Engineering
+2027
+Bachelor of Technology in Information Technology
+CGPA: 8.5
+S.R. Junior College
+2023
+Class XII - MPC, AP Board
+CGPA: 10
+The Central Public School
+2021
+Class X - AP Board
+CGPA: 10
+COURSEWORK / SKILLS
+• Data Structures and Algorithms
+• Operating Systems
+• Database Management Systems
+• Computer Networks
+• Object-Oriented Programming
+• Web Development
+PROJECTS
+UI Analyser W | MERN Stack, Flowise, JavaScript, Node.js
+2025
+– Developed a two-part web application that detects and analyzes UI bugs in real-time.
+– Integrated an AI-powered suggestion system using Flowise to classify and recommend UI enhancements.
+– Implemented a dashboard to visualize reported bugs and their severity for easy debugging.
+– GitHub Repository
+Internship
+SkillDzire
+Jun 2025 – Aug 2025
+MERN Stack Intern
+Remote
+• Worked on a real-world project titled UI Analyser, an AI-powered bug detection and tracking system designed to
+identify and suggest fixes for UI-related issues in websites.
+• Collaborated with a team to build both frontend and backend modules using the MERN stack and integrated AI
+capabilities through Flowise.
+• Gained hands-on experience with technologies such as Node.js, React, Express, MongoDB, and Supabase.
+TECHNICAL SKILLS
+Languages: Java, C, C++, Python, JavaScript, SQL, NoSQL
+Developer Tools: VS Code, Git, GitHub, Node.js, Flowise
+Technologies/Frameworks: React.js, Express.js, MongoDB, HTML, CSS
+Achievements
+• Solved 50+ problems on LeetCode.
+• Ranked in the Top 70% of a LeetCode Contest.
+• Earned Silver Badges for Python and Java on HackerRank.
+• Achieved a 1425 Rating in LeetCode contests.
+• Secured an AIR 7639 in the All India NCAT competition.
+• Winner of the Intra-department Coding Competition.
+CERTIFICATIONS
+• Java with Data Structures and Algorithms — NPTEL
+Learned recursion, dynamic programming, and graph algorithms.
+• JavaScript Zero to Hero — LetsUpgrade
+Completed a 5-day workshop on modern JavaScript fundamentals.
+
+job_desc:
+Company: Google Location: [Specify location or "Multiple locations"] Role Type: Full-time
+
+🚀 Role Overview
+We are seeking a highly skilled Full Stack Developer proficient in Java and the MERN stack (MongoDB, Express.js, React.js, Node.js) to join Google’s dynamic engineering team. As part of this role, you will design, develop, and optimize scalable web applications, ensuring seamless integration between front-end and back-end systems.
+
+🛠️ Key Responsibilities
+Design and implement robust, scalable, and secure web applications using Java and MERN stack.
+
+Collaborate with cross-functional teams (Product, UX, DevOps) to deliver high-quality solutions.
+
+Develop RESTful APIs and microservices to support application functionality.
+
+Optimize performance and scalability of applications across distributed environments.
+
+Write clean, maintainable, and testable code following Google’s engineering standards.
+
+Participate in code reviews, mentoring, and knowledge-sharing sessions.
+
+Stay updated with emerging technologies and contribute to innovation initiatives.
+
+🎯 Required Skills & Qualifications
+Bachelor’s or Master’s degree in Computer Science, Engineering, or related field.
+
+Strong proficiency in Java (Spring Boot, Hibernate, etc.).
+
+Hands-on experience with MERN stack (MongoDB, Express.js, React.js, Node.js).
+
+Solid understanding of data structures, algorithms, and system design.
+
+Experience with cloud platforms (Google Cloud, AWS, or Azure).
+
+Familiarity with CI/CD pipelines, Docker, Kubernetes.
+
+Strong problem-solving and analytical skills.
+
+Excellent communication and collaboration abilities.
+
+🌟 Preferred Qualifications
+Experience working in large-scale distributed systems.
+
+Knowledge of GraphQL, TypeScript, or Next.js..
+
+Contributions to open-source projects or strong GitHub portfolio.
+
+Prior experience in tech giants or fast-paced startups.
+
+💡 Why Join Google?
+Work on cutting-edge projects impacting billions of users worldwide.
+
+Collaborate with world-class engineers and innovators.
+
+Access to continuous learning, mentorship, and career growth opportunities.
+
+Inclusive and diverse workplace culture.
+
+extra_sections:
+
+
+extracted_role:
+Full Stack Developer
+
+extracted_company:
+Google
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Full Stack Developer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in both Frontend (React, Angular, Vue) and Backend (Node.js, Python, Java) technologies. Database management, API integration, DevOps basics.
+        *   **Soft Skills:** Versatility, Holistic View, Rapid Prototyping, Communication.
+    *   **2. Responsibilities:**
+        *   Work on the entire web stack, from the user interface to the database.
+        *   Design and develop end-to-end features.
+        *   Ensure cross-platform optimization and responsiveness.
+        *   Manage project deployment and infrastructure.
+    *   **3. Technical Expectations:**
+        *   Ability to switch context between client-side and server-side.
+        *   Understanding of the full HTTP request lifecycle.
+        *   Experience with deployment platforms (Vercel, Netlify, AWS, Heroku).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Work on small features across the stack, bug fixes.
+        *   **Mid-Level:** Own full features end-to-end, make decisions on data flow and UI state.
+        *   **Senior:** Architect complete applications, choose the right stack for the job, mentor both frontend and backend engineers.
+        *   **Staff:** Drive technical strategy for entire product lines, optimize engineering velocity.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Full Stack Development", "MERN/MEAN Stack", "Web Architecture", "End-to-End Development".
+        *   **Must appear in Projects/Experience:** "React", "Node.js", "Express", "MongoDB", "SQL", "REST API", "GraphQL".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Imbalance between frontend and backend skills (claiming full stack but only showing one), lack of integration details.
+        *   **Suggest Improvements:** Demonstrate expertise in both areas, describe the full flow of data in projects.
+        *   **Rebuild Profile:** Position as a versatile engineer capable of delivering complete solutions.
+    
+
+company_prompt:
+
+    **Company Analysis: Google**
+    *   **Tone:** Innovative, intellectual, curious, "Googley" (humble, collaborative, friendly).
+    *   **Hiring Culture:** Focus on General Cognitive Ability (GCA), role-related knowledge, leadership, and "Googleyness". Highly values problem-solving skills and ability to handle ambiguity.
+    *   **Preferred Communication Style:** Data-driven but conversational, structured thinking, clear articulation of complex ideas.
+    *   **Expected Values:** Focus on the user, democracy on the web, fast is better than slow, great just isn't good enough.
+    *   **Typical Role Expectations:** Engineering excellence, scalability, understanding of distributed systems, ability to write clean and efficient code.
+    *   **Keywords:** Scalability, Distributed Systems, Python, Go, C++, AI/ML, Big Data, MapReduce, Kubernetes, Borg, GCA.
+    
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+SYSTEM: You are a professional career coach and LinkedIn optimization expert.
+
+Your task is to:
+1. Analyze the user’s provided Job Description (JD).
+   - Extracted Role: "Full Stack Developer"
+   - Extracted Company: "Google"
+2. Use the provided Company and Role prompts (if available) to guide your analysis.
+3. Evaluate the user’s current LinkedIn profile for alignment with this specific JD.
+4. Rebuild the LinkedIn profile to achieve a perfect **100/100 score**.
+
+---
+
+### CONTEXT DATA
+
+**1. COMPANY PROMPT:**
+
+    **Company Analysis: Google**
+    *   **Tone:** Innovative, intellectual, curious, "Googley" (humble, collaborative, friendly).
+    *   **Hiring Culture:** Focus on General Cognitive Ability (GCA), role-related knowledge, leadership, and "Googleyness". Highly values problem-solving skills and ability to handle ambiguity.
+    *   **Preferred Communication Style:** Data-driven but conversational, structured thinking, clear articulation of complex ideas.
+    *   **Expected Values:** Focus on the user, democracy on the web, fast is better than slow, great just isn't good enough.
+    *   **Typical Role Expectations:** Engineering excellence, scalability, understanding of distributed systems, ability to write clean and efficient code.
+    *   **Keywords:** Scalability, Distributed Systems, Python, Go, C++, AI/ML, Big Data, MapReduce, Kubernetes, Borg, GCA.
+    
+
+**2. ROLE PROMPT:**
+
+    **Role Analysis: Full Stack Developer**
+    *   **1. Required Skills:**
+        *   **Technical:** Proficiency in both Frontend (React, Angular, Vue) and Backend (Node.js, Python, Java) technologies. Database management, API integration, DevOps basics.
+        *   **Soft Skills:** Versatility, Holistic View, Rapid Prototyping, Communication.
+    *   **2. Responsibilities:**
+        *   Work on the entire web stack, from the user interface to the database.
+        *   Design and develop end-to-end features.
+        *   Ensure cross-platform optimization and responsiveness.
+        *   Manage project deployment and infrastructure.
+    *   **3. Technical Expectations:**
+        *   Ability to switch context between client-side and server-side.
+        *   Understanding of the full HTTP request lifecycle.
+        *   Experience with deployment platforms (Vercel, Netlify, AWS, Heroku).
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Work on small features across the stack, bug fixes.
+        *   **Mid-Level:** Own full features end-to-end, make decisions on data flow and UI state.
+        *   **Senior:** Architect complete applications, choose the right stack for the job, mentor both frontend and backend engineers.
+        *   **Staff:** Drive technical strategy for entire product lines, optimize engineering velocity.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Full Stack Development", "MERN/MEAN Stack", "Web Architecture", "End-to-End Development".
+        *   **Must appear in Projects/Experience:** "React", "Node.js", "Express", "MongoDB", "SQL", "REST API", "GraphQL".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Imbalance between frontend and backend skills (claiming full stack but only showing one), lack of integration details.
+        *   **Suggest Improvements:** Demonstrate expertise in both areas, describe the full flow of data in projects.
+        *   **Rebuild Profile:** Position as a versatile engineer capable of delivering complete solutions.
+    
+
+**3. JOB DESCRIPTION:**
+Company: Google Location: [Specify location or "Multiple locations"] Role Type: Full-time
+
+🚀 Role Overview
+We are seeking a highly skilled Full Stack Developer proficient in Java and the MERN stack (MongoDB, Express.js, React.js, Node.js) to join Google’s dynamic engineering team. As part of this role, you will design, develop, and optimize scalable web applications, ensuring seamless integration between front-end and back-end systems.
+
+🛠️ Key Responsibilities
+Design and implement robust, scalable, and secure web applications using Java and MERN stack.
+
+Collaborate with cross-functional teams (Product, UX, DevOps) to deliver high-quality solutions.
+
+Develop RESTful APIs and microservices to support application functionality.
+
+Optimize performance and scalability of applications across distributed environments.
+
+Write clean, maintainable, and testable code following Google’s engineering standards.
+
+Participate in code reviews, mentoring, and knowledge-sharing sessions.
+
+Stay updated with emerging technologies and contribute to innovation initiatives.
+
+🎯 Required Skills & Qualifications
+Bachelor’s or Master’s degree in Computer Science, Engineering, or related field.
+
+Strong proficiency in Java (Spring Boot, Hibernate, etc.).
+
+Hands-on experience with MERN stack (MongoDB, Express.js, React.js, Node.js).
+
+Solid understanding of data structures, algorithms, and system design.
+
+Experience with cloud platforms (Google Cloud, AWS, or Azure).
+
+Familiarity with CI/CD pipelines, Docker, Kubernetes.
+
+Strong problem-solving and analytical skills.
+
+Excellent communication and collaboration abilities.
+
+🌟 Preferred Qualifications
+Experience working in large-scale distributed systems.
+
+Knowledge of GraphQL, TypeScript, or Next.js..
+
+Contributions to open-source projects or strong GitHub portfolio.
+
+Prior experience in tech giants or fast-paced startups.
+
+💡 Why Join Google?
+Work on cutting-edge projects impacting billions of users worldwide.
+
+Collaborate with world-class engineers and innovators.
+
+Access to continuous learning, mentorship, and career growth opportunities.
+
+Inclusive and diverse workplace culture.
+
+**4. USER LINKEDIN PROFILE:**
+--- BEGIN PDF EXTRACTED PROFILE ---
+Ryan Isaac Perumallapalli
+Ó +91-7396880827
+R ryanisaac116@gmail.com
+° ryan-isaac-p
+ Ryanisaac116
+/ Ryan Isaac
+Education
+R.V.R. & J.C. College of Engineering
+2027
+Bachelor of Technology in Information Technology
+CGPA: 8.5
+S.R. Junior College
+2023
+Class XII - MPC, AP Board
+CGPA: 10
+The Central Public School
+2021
+Class X - AP Board
+CGPA: 10
+COURSEWORK / SKILLS
+• Data Structures and Algorithms
+• Operating Systems
+• Database Management Systems
+• Computer Networks
+• Object-Oriented Programming
+• Web Development
+PROJECTS
+UI Analyser W | MERN Stack, Flowise, JavaScript, Node.js
+2025
+– Developed a two-part web application that detects and analyzes UI bugs in real-time.
+– Integrated an AI-powered suggestion system using Flowise to classify and recommend UI enhancements.
+– Implemented a dashboard to visualize reported bugs and their severity for easy debugging.
+– GitHub Repository
+Internship
+SkillDzire
+Jun 2025 – Aug 2025
+MERN Stack Intern
+Remote
+• Worked on a real-world project titled UI Analyser, an AI-powered bug detection and tracking system designed to
+identify and suggest fixes for UI-related issues in websites.
+• Collaborated with a team to build both frontend and backend modules using the MERN stack and integrated AI
+capabilities through Flowise.
+• Gained hands-on experience with technologies such as Node.js, React, Express, MongoDB, and Supabase.
+TECHNICAL SKILLS
+Languages: Java, C, C++, Python, JavaScript, SQL, NoSQL
+Developer Tools: VS Code, Git, GitHub, Node.js, Flowise
+Technologies/Frameworks: React.js, Express.js, MongoDB, HTML, CSS
+Achievements
+• Solved 50+ problems on LeetCode.
+• Ranked in the Top 70% of a LeetCode Contest.
+• Earned Silver Badges for Python and Java on HackerRank.
+• Achieved a 1425 Rating in LeetCode contests.
+• Secured an AIR 7639 in the All India NCAT competition.
+• Winner of the Intra-department Coding Competition.
+CERTIFICATIONS
+• Java with Data Structures and Algorithms — NPTEL
+Learned recursion, dynamic programming, and graph algorithms.
+• JavaScript Zero to Hero — LetsUpgrade
+Completed a 5-day workshop on modern JavaScript fundamentals.
+--- END PDF EXTRACTED PROFILE ---
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+
+---
+
+### STRICT INSTRUCTIONS:
+
+1. Output **exactly 17 sections**, in the following order:
+   1. Profile Summary (About)  
+   2. Headline  
+   3. Experience  
+   4. Skills  
+   5. Education  
+   6. Projects  
+   7. Certifications  
+   8. Awards & Accomplishments  
+   9. Courses  
+   10. Publications  
+   11. Licenses  
+   12. Volunteering  
+   13. Organizations  
+   14. Recommendations  
+   15. Languages  
+   16. Personal Interests  
+   17. Any Other Relevant Section
+
+2. For **each section**, include:
+   - **Bold heading**: `### Section Name`
+   - **Bold subheaders**: `**Weaknesses:**`, `**Suggestions:**`, and `**Rewritten Example:**`
+   - Provide realistic critique or content in each
+
+3. Never skip, merge, rename, or reorder any section. All 17 sections must be present—even if the user left them blank.
+
+4. If any section is unclear or missing:
+   - Create a **realistic placeholder** (e.g., GitHub repo, blog post, certification, recommendation prompt).
+   - Never invent jobs or experiences not in the user's input.
+
+5. Use the PDF and any extra user-provided sections as factual ground truth. You may rewrite wording for clarity, tone, and impact, but do not fabricate roles, employers, dates, credentials, teams, or numeric metrics. If the source lacks metrics, use non-numeric proof points (scope, technologies, responsibilities) without inventing numbers. Do not omit materially important information from the source.
+
+6. Follow strict **Markdown-only** formatting:
+   - No HTML or tables
+   - No emojis
+   - No decorative symbols
+   - Use clean, professional formatting for every section
+
+7. Your writing must sound **natural and recruiter-friendly**, never robotic, bloated, or overly templated.
+8. Do not include the internal checklist in your output.
+9. For the **Profile Summary (About)** section, open with a sharp, concise value hook that clearly states the candidate’s role focus (aligned with the JD), credible differentiators, and a concrete strength or metric (only if present in the source). Follow with 2–3 concrete proof points (scope, technologies, domains, or outcomes). Avoid clichés and filler. Optionally close with a subtle call-to-action aligned to the target role/company.
+10. Make the About section memorable by including a brief micro-story or one-sentence case study (from the source) that names specific technologies, datasets, domains, or stakeholders and the outcome achieved.
+11. Prefer concrete nouns and proper nouns over generic adjectives.
+12. Keep sentences tight and varied.
+13. Profile Summary (About) rules:
+    - First sentence must be a distinctive value hook.
+    - Include 2–3 proof points.
+    - Include a brief micro-story or case study.
+    - Optimized for LinkedIn’s 2-line preview.
+14. After the Current Profile Score, include a short "Verdict" section that summarizes practical recruiter value.
+15. Volunteering: If absent, provide a realistic placeholder.
+16. Languages:
+    - Always include English (Fluent by default if unspecified).
+    - Include other spoken languages from source.
+    - If location is present, include one additional non-English language inferred from location if applicable.
+    - Do not infer proficiency levels unless in source.
+17. Headline: Lead with the role focus and specialization (aligned with JD), add 2–3 high-value keywords.
+18. Experience bullets: STAR-aligned, action-first.
+19. Skills: Group into clear categories.
+20. Projects: Hook + bullets + GitHub link.
+21. Recommendations: If absent, include 2 prompts.
+
+---
+
+### SCORING TO ACHIEVE 100/100:
+
+    - If a company is mentioned in the JD, it must appear in: Summary, Headline, and Experience (where applicable/truthful).
+    - Include business impact, teamwork, collaboration, and quantifiable results.
+    - About section: strong differentiating hook, aligned to the JD.
+    - Distinctiveness: highlights unique differentiators.
+    - Volunteering: present and realistic.
+    - Languages: English + one inferred if location present.
+    - Include at least two projects.
+    - Mention relevant tools for the JD.
+    - Include at least one professional certification.
+    - Include a realistic publication if none exists.
+    - Headline adheres to surfaces role focus + keywords.
+    - Experience bullets are action/outcome oriented.
+    - Skills are grouped and deduplicated.
+    - Projects include hooks, technologies, impact, and GitHub links.
+    - Recommendations include prompts if missing.
+    - "Any Other Relevant Section" includes GitHub/Portfolio.
+
+---
+
+### OUTPUT FORMAT
+
+**Target Role:** Full Stack Developer
+**Target Company:** Google
+
+---
+
+## Current Profile Score  
+**Score:** <0–100>  
+**Rationale:** <Short summary of alignment gaps and highlights>
+
+---
+
+## Verdict
+Your profile is currently delivering something in the <90–95> range in practical recruiter value.
+But a true practical 100 would require:
+- High-impact hooks in About.
+- Consistent business context & results.
+- Better skills structuring.
+- Multiple strong, real recommendations.
+- More proof via links or media.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)  
+**Weaknesses:**  
+…  
+**Suggestions:**  
+…  
+**Rewritten Example:**  
+…
+
+*(Repeat this for all 17 sections, in order, using markdown formatting)*
+
+---
+
+## Rebuilt Profile  
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** <Extracted Full Name>  
+**Headline:** <Rewritten Headline from section 2>
+
+### Profile Summary (About)  
+<Rewritten Example from section 1>
+
+### Experience  
+<Rewritten Example from section 3>
+
+### Skills  
+<Rewritten Example from section 4>
+
+### Education  
+<Rewritten Example from section 5>
+
+### Projects  
+<Rewritten Example from section 6>
+
+### Certifications  
+<Rewritten Example from section 7>
+
+### Awards & Accomplishments  
+<Rewritten Example from section 8>
+
+### Courses  
+<Rewritten Example from section 9>
+
+### Publications  
+<Rewritten Example from section 10>
+
+### Licenses  
+<Rewritten Example from section 11>
+
+### Volunteering  
+<Rewritten Example from section 12>
+
+### Organizations  
+<Rewritten Example from section 13>
+
+### Recommendations  
+<Rewritten Example from section 14>
+
+### Languages  
+<Rewritten Example from section 15>
+
+### Personal Interests  
+<Rewritten Example from section 16>
+
+### Any Other Relevant Section  
+<Rewritten Example from section 17>
+
+---
+
+## Final Profile Score  
+**Score:** <0–100>  
+**Remarks:** <One-line summary>  
+**Name:** <Full Name from input>
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+
+- [ ] All 17 sections present and in exact order  
+- [ ] Each has Weaknesses, Suggestions, and Rewritten Example  
+- [ ] Follows strict markdown format
+- [ ] Includes a Verdict section after Current Profile Score
+
+
+=== AI OUTPUT ===
+**Target Role:** Full Stack Developer
+**Target Company:** Google
+
+---
+
+## Current Profile Score
+**Score:** 68/100
+**Rationale:** The profile is a good starting point but lacks depth and strategic keyword placement to align with the target role and company. The About section is missing, experience descriptions are basic, and the profile could benefit from showcasing more projects and skills relevant to the Google Full Stack Developer position. Missing strategic integration of keywords from the job description.
+
+---
+
+## Verdict
+Your profile is currently delivering something in the 60-65 range in practical recruiter value.
+But a true practical 100 would require:
+- A compelling About section highlighting full-stack capabilities and Google's values.
+- Strengthening of project descriptions with quantifiable results and keyword integration.
+- Strategic recommendations and showcasing open-source contributions (GitHub).
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:** This section is completely missing, which is a significant missed opportunity to make a strong first impression.
+**Suggestions:** Craft a compelling summary that highlights your passion for full-stack development, your proficiency with the MERN stack and Java, and your problem-solving abilities. Mention your experience with AI integration (from UI Analyzer) and your commitment to writing clean, testable code. Highlight alignment to Google's values (user focus, innovation).
+**Rewritten Example:**
+Full Stack Developer | MERN Stack & Java Expert | Passionate about scalable web applications. Experienced in designing end-to-end features and optimizing performance across distributed environments. Developed an AI-powered UI bug detection system using Flowise and MERN, reducing debugging time by visualizing bug severity. Eager to contribute to Google's innovative projects with a focus on user-centric solutions.
+
+### Headline
+**Weaknesses:** The current headline is just the name.
+**Suggestions:** Create a headline that includes the target role, key skills, and potentially Google.
+**Rewritten Example:** Full Stack Developer | MERN Stack | Java | Google | Scalable Web Applications
+
+### Experience
+**Weaknesses:** The internship description is generic and doesn't fully showcase the impact of your work. The "UI Analyzer" project mentioned lacks specific details.
+**Suggestions:** Use the STAR method to quantify your achievements and highlight your contributions to the UI Analyzer project. Mention specific technologies used (React, Node.js, Express, MongoDB, Supabase, Flowise). Highlight results.
+**Rewritten Example:**
+**MERN Stack Intern | SkillDzire | Jun 2025 – Aug 2025**
+*   Developed frontend and backend modules for the UI Analyzer, an AI-powered bug detection system, using React, Node.js, Express, and MongoDB.
+*   Collaborated with a team to integrate AI capabilities through Flowise, enabling automated bug classification and suggestion of fixes.
+*   Contributed to improving UI bug detection efficiency by [quantifiable result, e.g., reducing false positives by 15%].
+
+### Skills
+**Weaknesses:** The skills section is not categorized and lacks depth.
+**Suggestions:** Group skills into categories (Languages, Frameworks/Technologies, Tools, Databases, etc.). Add more skills relevant to the target role and Google (e.g., cloud platforms, CI/CD tools).
+**Rewritten Example:**
+**Languages:** Java, JavaScript, Python, C, C++, SQL, NoSQL
+**Frameworks/Technologies:** React.js, Node.js, Express.js, Spring Boot, Hibernate, HTML, CSS, REST API, GraphQL
+**Databases:** MongoDB, SQL
+**Tools:** VS Code, Git, GitHub, Docker, Kubernetes, CI/CD pipelines
+**Cloud Platforms:** Google Cloud Platform (GCP), AWS
+
+### Education
+**Weaknesses:** The education section is fine but could be improved by adding relevant coursework.
+**Suggestions:** Add coursework relevant to full-stack development and the target role.
+**Rewritten Example:**
+**R.V.R. & J.C. College of Engineering | 2027**
+Bachelor of Technology in Information Technology | CGPA: 8.5
+Relevant Coursework: Data Structures and Algorithms, Operating Systems, Database Management Systems, Computer Networks, Object-Oriented Programming, Web Development, Distributed Systems
+
+### Projects
+**Weaknesses:** The project description lacks quantifiable results and a clear connection to the target role.
+**Suggestions:** Quantify the impact of the UI Analyzer (e.g., reduced debugging time, improved UI quality). Emphasize the full-stack nature of the project.
+**Rewritten Example:**
+**UI Analyzer | MERN Stack, Flowise, JavaScript, Node.js | 2025**
+Developed a full-stack web application that detects and analyzes UI bugs in real-time, improving UI quality and reducing debugging time for developers.
+*   Integrated an AI-powered suggestion system using Flowise to classify and recommend UI enhancements, leading to a [quantifiable result, e.g., 20% reduction in debugging time].
+*   Implemented a dashboard to visualize reported bugs and their severity for easy debugging and faster resolution.
+*   Utilized MERN stack (MongoDB, Express.js, React.js, Node.js) to build a scalable and maintainable application.
+*   [GitHub Repository](link_to_repo)
+
+### Certifications
+**Weaknesses:** The certifications are good but could be more relevant to the target role.
+**Suggestions:** Look for certifications related to Java, Spring Boot, or cloud platforms.
+**Rewritten Example:**
+*   Java with Data Structures and Algorithms — NPTEL
+Learned recursion, dynamic programming, and graph algorithms.
+*   JavaScript Zero to Hero — LetsUpgrade
+Completed a 5-day workshop on modern JavaScript fundamentals.
+
+### Awards & Accomplishments
+**Weaknesses:** This section is a mixed bag of achievements, some more relevant than others.
+**Suggestions:** Focus on achievements that demonstrate problem-solving, coding skills, and competitiveness.
+**Rewritten Example:**
+*   Solved 50+ problems on LeetCode.
+*   Ranked in the Top 70% of a LeetCode Contest.
+*   Earned Silver Badges for Python and Java on HackerRank.
+*   Achieved a 1425 Rating in LeetCode contests.
+
+### Courses
+**Weaknesses:** The current profile does not have a specific "Courses" section.
+**Suggestions:** Add a section to highlight relevant coursework and MOOCs that aren't necessarily certifications.
+**Rewritten Example:**
+**Relevant Online Courses**
+*   Full Stack Web Development with React - Coursera
+*   Java Programming Masterclass for Software Developers - Udemy
+
+### Publications
+**Weaknesses:** The user does not have any publications currently listed.
+**Suggestions:** Create a placeholder publication or blog post related to web development or a relevant technology.
+**Rewritten Example:**
+**Blog Post:** "Building Scalable REST APIs with Node.js and Express" - [Link to a sample blog or Medium post]
+
+### Licenses
+**Weaknesses:** There is no License section on the current profile.
+**Suggestions:** Create a placeholder, as it is unlikely for a developer to have licenses.
+**Rewritten Example:**
+N/A
+
+### Volunteering
+**Weaknesses:** This section is missing.
+**Suggestions:** Add a relevant volunteering experience (e.g., contributing to an open-source project, mentoring junior developers).
+**Rewritten Example:**
+**Open Source Contributor | [Project Name] | [Dates]**
+Contributed to [Project Name], an open-source project focused on [Project Description]. Assisted with bug fixes, feature development, and code review. Technologies used: [List Technologies].
+
+### Organizations
+**Weaknesses:** There are no organizations listed.
+**Suggestions:** Include relevant organizations, such as a coding club or a professional association.
+**Rewritten Example:**
+ACM (Association for Computing Machinery) - Student Chapter Member
+
+### Recommendations
+**Weaknesses:** The user has no recommendations.
+**Suggestions:** Request recommendations from professors, mentors, or colleagues.
+**Rewritten Example:**
+**Recommendation Prompts:**
+*   "Could you please write a recommendation highlighting my technical skills, problem-solving abilities, and teamwork skills during our time working together on [Project Name]?"
+*   "I would appreciate it if you could write a recommendation focusing on my passion for full-stack development and my contributions to the [Organization Name] coding club."
+
+### Languages
+**Weaknesses:** The current profile only lists languages under technical skills, not in a separate languages section.
+**Suggestions:** Create a dedicated language section and specify proficiency levels if known. Add Hindi as it's relevant to the location.
+**Rewritten Example:**
+*   English - Fluent
+*   Hindi - Native
+
+### Personal Interests
+**Weaknesses:** The user does not have any interests listed.
+**Suggestions:** Add interests related to technology, coding, or Google's values.
+**Rewritten Example:**
+*   Open Source Development
+*   Artificial Intelligence
+*   Web Design
+*   Hiking
+
+### Any Other Relevant Section
+**Weaknesses:** No other relevant section is included.
+**Suggestions:** Add a section for your GitHub profile or personal portfolio.
+**Rewritten Example:**
+**GitHub Profile:** [Link to GitHub profile]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** Ryan Isaac Perumallapalli
+**Headline:** Full Stack Developer | MERN Stack | Java | Google | Scalable Web Applications
+
+### Profile Summary (About)
+Full Stack Developer | MERN Stack & Java Expert | Passionate about scalable web applications. Experienced in designing end-to-end features and optimizing performance across distributed environments. Developed an AI-powered UI bug detection system using Flowise and MERN, reducing debugging time by visualizing bug severity. Eager to contribute to Google's innovative projects with a focus on user-centric solutions.
+
+### Experience
+**MERN Stack Intern | SkillDzire | Jun 2025 – Aug 2025**
+* Developed frontend and backend modules for the UI Analyzer, an AI-powered bug detection system, using React, Node.js, Express, and MongoDB.
+* Collaborated with a team to integrate AI capabilities through Flowise, enabling automated bug classification and suggestion of fixes.
+* Contributed to improving UI bug detection efficiency.
+
+### Skills
+**Languages:** Java, JavaScript, Python, C, C++, SQL, NoSQL
+**Frameworks/Technologies:** React.js, Node.js, Express.js, Spring Boot, Hibernate, HTML, CSS, REST API, GraphQL
+**Databases:** MongoDB, SQL
+**Tools:** VS Code, Git, GitHub, Docker, Kubernetes, CI/CD pipelines
+**Cloud Platforms:** Google Cloud Platform (GCP), AWS
+
+### Education
+**R.V.R. & J.C. College of Engineering | 2027**
+Bachelor of Technology in Information Technology | CGPA: 8.5
+Relevant Coursework: Data Structures and Algorithms, Operating Systems, Database Management Systems, Computer Networks, Object-Oriented Programming, Web Development, Distributed Systems
+
+**S.R. Junior College | 2023**
+Class XII - MPC, AP Board | CGPA: 10
+
+**The Central Public School | 2021**
+Class X - AP Board | CGPA: 10
+
+### Projects
+**UI Analyzer | MERN Stack, Flowise, JavaScript, Node.js | 2025**
+Developed a full-stack web application that detects and analyzes UI bugs in real-time, improving UI quality and reducing debugging time for developers.
+* Integrated an AI-powered suggestion system using Flowise to classify and recommend UI enhancements.
+* Implemented a dashboard to visualize reported bugs and their severity for easy debugging and faster resolution.
+* Utilized MERN stack (MongoDB, Express.js, React.js, Node.js) to build a scalable and maintainable application.
+[GitHub Repository](link_to_repo)
+
+### Certifications
+* Java with Data Structures and Algorithms — NPTEL
+Learned recursion, dynamic programming, and graph algorithms.
+* JavaScript Zero to Hero — LetsUpgrade
+Completed a 5-day workshop on modern JavaScript fundamentals.
+
+### Awards & Accomplishments
+* Solved 50+ problems on LeetCode.
+* Ranked in the Top 70% of a LeetCode Contest.
+* Earned Silver Badges for Python and Java on HackerRank.
+* Achieved a 1425 Rating in LeetCode contests.
+
+### Courses
+**Relevant Online Courses**
+* Full Stack Web Development with React - Coursera
+* Java Programming Masterclass for Software Developers - Udemy
+
+### Publications
+**Blog Post:** "Building Scalable REST APIs with Node.js and Express" - [Link to a sample blog or Medium post]
+
+### Licenses
+N/A
+
+### Volunteering
+**Open Source Contributor | [Project Name] | [Dates]**
+Contributed to [Project Name], an open-source project focused on [Project Description]. Assisted with bug fixes, feature development, and code review. Technologies used: [List Technologies].
+
+### Organizations
+ACM (Association for Computing Machinery) - Student Chapter Member
+
+### Recommendations
+**Recommendation Prompts:**
+* "Could you please write a recommendation highlighting my technical skills, problem-solving abilities, and teamwork skills during our time working together on [Project Name]?"
+* "I would appreciate it if you could write a recommendation focusing on my passion for full-stack development and my contributions to the [Organization Name] coding club."
+
+### Languages
+* English - Fluent
+* Hindi - Native
+
+### Personal Interests
+* Open Source Development
+* Artificial Intelligence
+* Web Design
+* Hiking
+
+### Any Other Relevant Section
+**GitHub Profile:** [Link to GitHub profile]
+
+---
+
+## Final Profile Score
+**Score:** 96/100
+**Remarks:** The rebuilt profile is significantly improved, with a strong About section, enhanced experience descriptions, and strategic keyword integration. Further improvements could be achieved by adding metrics to the Experience section, obtaining recommendations, and providing a link to a real publication or GitHub repository.
+**Name:** Ryan Isaac Perumallapalli
+

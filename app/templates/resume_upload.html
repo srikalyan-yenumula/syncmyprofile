@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Upload your Resume and target job to get instant AI-powered analysis and feedback." />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='favicon.ico') }}" />
+    <title>Analyze Resume | SyncMyProfile.ai</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            /* gray-50 */
+        }
+
+        /* Custom focus ring for better accessibility */
+        .focus-ring:focus-visible {
+            outline: 2px solid #3B82F6;
+            /* blue-500 */
+            outline-offset: 2px;
+        }
+
+        /* Enhanced file drop zone with smooth transitions */
+        .file-drop-zone {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .file-drop-zone.dragover,
+        .file-drop-zone:hover {
+            background-color: #eff6ff;
+            /* blue-50 */
+            border-color: #2563eb;
+            /* blue-600 */
+        }
+
+        /* Fade-in transitions for overlays */
+        .overlay {
+            display: none;
+            /* hidden by default */
+            opacity: 0;
+            /* transparent */
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+            /* ignore clicks when hidden */
+        }
+
+        .overlay.visible {
+            display: flex;
+            /* show and center using flex */
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            pointer-events: all;
+            /* accept clicks */
+        }
+
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .overlay.visible .modal-content {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Hide scrollbar for modal content while keeping scrollable */
+        .modal-content.hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .modal-content.hide-scrollbar::-webkit-scrollbar {
+            /* Chrome, Safari */
+            width: 0;
+            height: 0;
+        }
+
+        /* Ensure sticky action bar is docked to the bottom of the modal */
+        #extra-modal .sticky.bottom-0 {
+            bottom: 0;
+        }
+
+        /* Selected tab styling */
+        .tab-button[aria-selected="true"] {
+            background-color: #2563eb;
+            /* blue-600 */
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                    <img src="{{ url_for('static', path='favicon.ico') }}" alt="SyncMyProfile.ai Logo"
+                        class="h-8 w-8 rounded-lg" />
+                    <span class="font-bold text-lg text-gray-900 tracking-tight">SyncMyProfile.ai</span>
+                </a>
+                <a href="{{ url_for('index') }}"
+                    class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-colors duration-200">
+                    &larr; Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-12 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 lg:gap-16 items-start">
+
+            <!-- Left Column: Form -->
+            <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-lg border border-gray-200/80">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-blue-700">Get Your LinkedIn Profile</h1>
+                    <p class="mt-2 text-gray-600">Upload your resume and tell us your goal. We'll handle the rest.</p>
+                </div>
+
+                <form id="analyze-form" action="/suggestion" method="POST" enctype="multipart/form-data"
+                    class="space-y-6">
+                    <input type="hidden" name="upload_type" value="resume">
+                    <!-- Step 1: File Upload -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-800 mb-2">1. Upload Resume PDF</label>
+                        <label for="profile_pdf"
+                            class="file-drop-zone flex flex-col items-center justify-center w-full h-40 px-4 text-center bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                    </path>
+                                </svg>
+                                <p id="file-upload-text" class="mb-2 text-sm text-gray-500"><span
+                                        class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500">PDF only (MAX. 5MB)</p>
+                            </div>
+                            <input id="profile_pdf" name="profile_pdf" type="file" class="hidden"
+                                accept="application/pdf" required>
+                        </label>
+                        <p id="pdf-error" class="text-sm text-red-600 mt-1 hidden">Please upload your Resume PDF.</p>
+                    </div>
+
+                    <!-- Step 2: Job Target -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-800 mb-2">2. Define Your Target</label>
+                        <!-- Tabs -->
+                        <div class="flex p-1 bg-gray-200 rounded-lg mb-4">
+                            <button type="button" id="tab-jd"
+                                class="tab-button w-1/2 p-2 rounded-md text-sm font-semibold transition-colors focus-ring"
+                                aria-selected="true">Job Description</button>
+                            <button type="button" id="tab-role"
+                                class="tab-button w-1/2 p-2 rounded-md text-sm font-semibold transition-colors focus-ring"
+                                aria-selected="false">Job Title</button>
+                        </div>
+                        <!-- Tab Panels -->
+                        <div id="panel-jd">
+                            <textarea id="job_desc" name="job_desc"
+                                placeholder="Paste the full job description here for the most accurate analysis..."
+                                rows="6"
+                                class="block w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[160px]"></textarea>
+                        </div>
+                        <div id="panel-role" class="hidden">
+                            <input id="job_role" name="job_role" type="text" placeholder="e.g., Senior Product Manager"
+                                class="block w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 mb-3">
+                            <input id="company_name" name="company_name" type="text"
+                                placeholder="Target Company (Optional, e.g., Google)"
+                                class="block w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <p id="target-error" class="text-sm text-red-600 mt-1 hidden">Please provide a job description
+                            or a target role.</p>
+                    </div>
+
+                    <!-- Hidden input for extra sections -->
+                    <textarea id="extra_sections" name="extra_sections" class="hidden"></textarea>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring transition-all duration-200 transform hover:scale-105">
+                        Analyze My Resume
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Guidance -->
+            <aside class="lg:col-span-2 hidden lg:block space-y-8">
+                <div class="p-8 bg-blue-50 border border-blue-200 rounded-2xl">
+                    <h2 class="text-xl font-bold text-blue-900">Why Upload a Resume?</h2>
+                    <p class="mt-4 text-sm text-blue-800/80">
+                        Uploading your resume allows our AI to analyze your current experience and skills directly from
+                        your document. We will then transform it into a high-quality LinkedIn profile optimized for your
+                        target role.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-gray-100 border border-gray-200 rounded-2xl">
+                    <h3 class="text-xl font-bold text-gray-900">For the Best Results</h3>
+                    <ul class="mt-4 space-y-3 list-disc list-inside text-gray-700 text-sm">
+                        <li><span class="font-semibold">Use a Job Description:</span> Pasting a full JD gives our AI the
+                            most context to tailor your profile.</li>
+                        <li><span class="font-semibold">Be Specific:</span> A target role like "Software Engineer at a
+                            fintech startup" is better than just "Software Engineer".</li>
+                        <li><span class="font-semibold">Add Extra Details:</span> Use the next step to add missing
+                            projects or skills for a more complete analysis.</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Mobile Guidance (bottom) -->
+    <section id="mobile-guidance" class="lg:hidden px-4 sm:px-6 mt-8 mb-12 space-y-8">
+        <div id="mobile-linkedin-guide" class="p-8 bg-blue-50 border border-blue-200 rounded-2xl">
+            <h2 class="text-xl font-bold text-blue-900">Why Upload a Resume?</h2>
+            <p class="mt-4 text-sm text-blue-800/80">
+                Uploading your resume allows our AI to analyze your current experience and skills directly from your
+                document. We will then transform it into a high-quality LinkedIn profile optimized for your target role.
+            </p>
+        </div>
+
+        <div class="p-8 bg-gray-100 border border-gray-200 rounded-2xl">
+            <h3 class="text-xl font-bold text-gray-900">For the Best Results</h3>
+            <ul class="mt-4 space-y-3 list-disc list-inside text-gray-700 text-sm">
+                <li><span class="font-semibold">Use a Job Description:</span> Pasting a full JD gives our AI the most
+                    context to tailor your profile.</li>
+                <li><span class="font-semibold">Be Specific:</span> A target role like "Software Engineer at a fintech
+                    startup" is better than just "Software Engineer".</li>
+                <li><span class="font-semibold">Add Extra Details:</span> Use the next step to add missing projects or
+                    skills for a more complete analysis.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200/80 mt-16 py-6">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="{{ url_for('index') }}" class="flex items-center gap-2" aria-label="Go to homepage">
+                <img src="{{ url_for('static', path='favicon.ico') }}" alt="SyncMyProfile.ai" class="h-6 w-6 rounded" />
+                <span class="font-semibold text-gray-900">SyncMyProfile.ai</span>
+            </a>
+            <p class="text-sm text-gray-500">&copy; <span id="current-year">2025</span> SyncMyProfile.ai. All rights
+                reserved.</p>
+            <button id="back-to-top-btn"
+                class="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-ring transition-all">
+                Back to Top
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-arrow-up">
+                    <path d="m5 12 7-7 7 7" />
+                    <path d="M12 19V5" />
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        // Footer year + back-to-top behavior
+        document.addEventListener('DOMContentLoaded', () => {
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn?.classList.remove('hidden');
+                    backToTopBtn?.classList.add('inline-flex');
+                } else {
+                    backToTopBtn?.classList.add('hidden');
+                    backToTopBtn?.classList.remove('inline-flex');
+                }
+            });
+            backToTopBtn?.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+
+    <!-- Modal for Extra Sections -->
+    <div id="extra-modal"
+        class="overlay fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 bg-black/50 backdrop-blur-sm">
+        <div
+            class="modal-content hide-scrollbar bg-white rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl p-6 sm:p-8 lg:p-10 pb-6 lg:pb-8 relative max-h-[85vh] sm:max-h-[80vh] min-h-[60vh] sm:min-h-[50vh] overflow-y-auto flex flex-col">
+            <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <span class="text-3xl">🚀</span>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-gray-900">Want Better Results?</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        We’re ready to analyze your Resume, but resumes sometimes miss important sections like:
+                    </p>
+                    <ul
+                        class="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 bg-gray-50 p-3 rounded-md border border-gray-200">
+                        <li>Projects</li>
+                        <li>Certifications</li>
+                        <li>Full list of Skills</li>
+                        <li>Courses</li>
+                        <li>Volunteering</li>
+                        <li>Organizations</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-600">
+                        📋 For the best results, you can paste missing parts from your profile, type them out simply as
+                        shown in the example below, or add other accomplishments not mentioned on your Resume. Please
+                        add any extra details here, or simply skip this step.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6">
+                <label for="extra-sections-textarea" class="block text-sm font-medium text-gray-700 mb-2">Missing
+                    Sections (Optional)</label>
+                <textarea id="extra-sections-textarea" rows="6"
+                    class="w-full text-sm border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[160px] sm:min-h-[180px] md:min-h-[220px] lg:min-h-[260px] max-h-[50vh]"
+                    placeholder="Example:&#10;&#10;PROJECTS&#10;- AI Chatbot (Python, TensorFlow)&#10;&#10;CERTIFICATIONS&#10;- AWS Certified Cloud Practitioner"></textarea>
+            </div>
+            <div class="mt-auto flex flex-col sm:flex-row-reverse gap-3 bg-white pt-3 border-t border-gray-200">
+                <button id="continue-modal"
+                    class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-ring">Continue
+                    to Analysis</button>
+                <button id="skip-modal"
+                    class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-ring">Skip
+                    and Analyze</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader Overlay -->
+    <div id="loader" class="overlay fixed inset-0 z-[60] flex items-center justify-center bg-white/80 backdrop-blur-md">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-blue-600 animate-spin" viewBox="0 0 50 50" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-label="Loading">
+                <circle cx="25" cy="25" r="20" stroke="currentColor" stroke-width="5" stroke-linecap="round"
+                    stroke-dasharray="90 150" stroke-dashoffset="0"></circle>
+            </svg>
+            <p id="loader-message" class="mt-4 text-lg font-semibold text-blue-700">Analyzing your resume...</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal"
+        class="overlay fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm {% if error %}visible{% endif %}">
+        <div
+            class="modal-content bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center transform transition-all">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Validation Error</h3>
+            <p class="text-sm text-gray-600 mb-6">{{ error }}</p>
+            <button id="close-error-modal"
+                class="w-full inline-flex justify-center rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-ring transition-all">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Form Elements ---
+            const analyzeForm = document.getElementById('analyze-form');
+            const pdfInput = document.getElementById('profile_pdf');
+            const jdInput = document.getElementById('job_desc');
+            const roleInput = document.getElementById('job_role');
+            const extraSectionsInput = document.getElementById('extra_sections');
+
+            // --- UI Elements ---
+            const fileDropZone = document.querySelector('.file-drop-zone');
+            const fileUploadText = document.getElementById('file-upload-text');
+            const tabJd = document.getElementById('tab-jd');
+            const tabRole = document.getElementById('tab-role');
+            const panelJd = document.getElementById('panel-jd');
+            const panelRole = document.getElementById('panel-role');
+            const pdfError = document.getElementById('pdf-error');
+            const targetError = document.getElementById('target-error');
+
+            // --- Modal & Loader Elements ---
+            const extraModal = document.getElementById('extra-modal');
+            const loader = document.getElementById('loader');
+            const continueModalBtn = document.getElementById('continue-modal');
+            const skipModalBtn = document.getElementById('skip-modal');
+            const extraSectionsTextarea = document.getElementById('extra-sections-textarea');
+
+            // --- Footer Elements ---
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+            const currentYearSpan = document.getElementById('current-year');
+
+            // --- Set current year in footer ---
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // --- File Upload Logic ---
+            fileDropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileDropZone.classList.add('dragover');
+            });
+            fileDropZone.addEventListener('dragleave', () => fileDropZone.classList.remove('dragover'));
+            fileDropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileDropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    pdfInput.files = e.dataTransfer.files;
+                    updateFileName();
+                }
+            });
+            pdfInput.addEventListener('change', updateFileName);
+
+            function updateFileName() {
+                if (pdfInput.files.length > 0) {
+                    fileUploadText.innerHTML = `<span class="font-semibold text-blue-600">${pdfInput.files[0].name}</span>`;
+                    pdfError.classList.add('hidden');
+                } else {
+                    fileUploadText.innerHTML = `<span class="font-semibold">Click to upload</span> or drag and drop`;
+                }
+            }
+
+            // --- Tab Logic ---
+            function switchTab(selectedTab) {
+                if (selectedTab === 'jd') {
+                    tabJd.setAttribute('aria-selected', 'true');
+                    tabRole.setAttribute('aria-selected', 'false');
+                    panelJd.classList.remove('hidden');
+                    panelRole.classList.add('hidden');
+                    roleInput.value = ''; // Clear other input
+                } else {
+                    tabJd.setAttribute('aria-selected', 'false');
+                    tabRole.setAttribute('aria-selected', 'true');
+                    panelJd.classList.add('hidden');
+                    panelRole.classList.remove('hidden');
+                    jdInput.value = ''; // Clear other input
+                }
+                targetError.classList.add('hidden');
+            }
+            tabJd.addEventListener('click', () => switchTab('jd'));
+            tabRole.addEventListener('click', () => switchTab('role'));
+
+            // --- Form Submission Logic ---
+            analyzeForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Always prevent default first
+                if (validateForm()) {
+                    extraModal.classList.add('visible');
+                    // Prevent background scrolling and hide body scrollbar
+                    document.body.style.overflow = 'hidden';
+                    // Auto-scroll the modal to reveal the textarea after 5 seconds
+                    setTimeout(() => {
+                        if (!extraModal.classList.contains('visible')) return;
+                        const modalContent = extraModal.querySelector('.modal-content');
+                        const textarea = document.getElementById('extra-sections-textarea');
+                        if (modalContent && textarea) {
+                            const offset = Math.max(0, textarea.offsetTop - 12);
+                            modalContent.scrollTo({ top: offset, behavior: 'smooth' });
+                        }
+                    }, 5000);
+                }
+            });
+
+            function validateForm() {
+                let isValid = true;
+                // Validate PDF
+                if (pdfInput.files.length === 0) {
+                    pdfError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    pdfError.classList.add('hidden');
+                }
+                // Validate Target
+                if (jdInput.value.trim() === '' && roleInput.value.trim() === '') {
+                    targetError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    targetError.classList.add('hidden');
+                }
+                return isValid;
+            }
+
+            // --- Modal & Final Submission ---
+            function submitAndLoad() {
+                extraModal.classList.remove('visible');
+                // Restore body scroll
+                document.body.style.overflow = '';
+                loader.classList.add('visible');
+
+                // Copy modal textarea content to the hidden form input
+                extraSectionsInput.value = extraSectionsTextarea.value.trim();
+
+                // Use a timeout to allow the loader to appear before form submission freezes the page
+                setTimeout(() => {
+                    analyzeForm.submit();
+                }, 200);
+            }
+            continueModalBtn.addEventListener('click', submitAndLoad);
+            skipModalBtn.addEventListener('click', submitAndLoad);
+
+            // --- Back to Top Button Logic ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                    backToTopBtn.classList.add('inline-flex');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                    backToTopBtn.classList.remove('inline-flex');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // --- Mobile initial scroll logic ---
+            function isMobile() {
+                return window.innerWidth < 1024; // Tailwind's lg breakpoint
+            }
+            const mobileLinkedinGuide = document.getElementById('mobile-linkedin-guide');
+            const uploadSection = document.getElementById('analyze-form');
+            if (isMobile() && mobileLinkedinGuide && uploadSection) {
+                setTimeout(() => {
+                    // Scroll to the blue LinkedIn guide box with offset for sticky header
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 70;
+                    const boxTop = mobileLinkedinGuide.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({ top: boxTop - headerHeight - 12, behavior: 'auto' });
+                    // After 10 seconds, scroll to upload PDF (top)
+                    setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 10000);
+                }, 100); // slight delay to ensure layout is ready
+            }
+
+            // --- Error Modal Logic ---
+            const errorModal = document.getElementById('error-modal');
+            const closeErrorBtn = document.getElementById('close-error-modal');
+
+            if (closeErrorBtn && errorModal) {
+                closeErrorBtn.addEventListener('click', () => {
+                    errorModal.classList.remove('visible');
+                });
+
+                // Close on click outside
+                errorModal.addEventListener('click', (e) => {
+                    if (e.target === errorModal) {
+                        errorModal.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        // Dynamic loader messages: show the sequence once (4s per message), then show "Almost done..." until the loader hides
+        (function () {
+            const loader = document.getElementById('loader');
+            const messageEl = document.getElementById('loader-message');
+            if (!loader || !messageEl) return;
+
+            const messages = [
+                'Reading Resume...',
+                'Identifying keywords...',
+                'Rewriting sections...',
+                'Finalizing recommendations...'
+            ];
+
+            let timers = [];
+
+            function startMessages() {
+                if (timers.length) return; // already scheduled
+                const per = 12000; // 12 seconds per message
+
+                // schedule each message once (non-looping)
+                messages.forEach((m, i) => {
+                    const t = setTimeout(() => {
+                        messageEl.textContent = m;
+                    }, i * per);
+                    timers.push(t);
+                });
+
+                // after all messages, display 'Almost done...'
+                // Add "Thinking..." after the last message
+                const totalMessageTime = messages.length * per;
+                const tThinking = setTimeout(() => {
+                    messageEl.textContent = 'Thinking...';
+                }, totalMessageTime);
+                timers.push(tThinking);
+
+                // after "Thinking..." (7 seconds later), display 'Almost done...'
+                const tFinal = setTimeout(() => {
+                    messageEl.textContent = 'Almost done...';
+                    // clear timers marker so messages can run again if loader shows later
+                    timers = [];
+                }, totalMessageTime + 60000);
+                timers.push(tFinal);
+            }
+
+            function stopMessages() {
+                // cancel any scheduled message changes
+                timers.forEach(t => clearTimeout(t));
+                timers = [];
+                // show a friendly message while waiting for results (if loader hidden)
+                if (!loader.classList.contains('visible')) {
+                    messageEl.textContent = 'Almost done...';
+                }
+            }
+
+            // Observe visibility changes on the loader element
+            const mo = new MutationObserver(() => {
+                if (loader.classList.contains('visible')) {
+                    startMessages();
+                } else {
+                    stopMessages();
+                }
+            });
+            mo.observe(loader, { attributes: true, attributeFilter: ['class'] });
+
+            // If loader already visible on load, start messages
+            if (loader.classList.contains('visible')) startMessages();
+        })();
+    </script>
+</body>
+
+</html>

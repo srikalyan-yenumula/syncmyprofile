@@ -1,0 +1,285 @@
+/************************************
+ * Custom Styles for LinkedIn Profile Analyzer
+ * (Works harmoniously with Tailwind)
+ ************************************/
+
+/* Glassmorphism Card */
+.glass-card {
+    width: 98vw;
+    max-width: 900px;
+    margin: 32px auto 80px auto;
+    padding: 48px 40px 40px 40px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 20px 60px rgba(0, 119, 181, 0.08),
+        0 8px 24px rgba(0, 119, 181, 0.06),
+        0 2px 8px rgba(0, 119, 181, 0.04);
+    position: relative;
+    animation: fadeInUp 1.2s cubic-bezier(0.23, 1.01, 0.32, 1) both;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: none; }
+}
+
+/************************************
+ * Motivator, Score, and Section Cards
+ ************************************/
+.motivator {
+    text-align: center;
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 100%);
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 16px rgba(56, 249, 215, 0.15);
+    animation: fadeIn 2s 0.5s both;
+    border: 1px solid rgba(56, 249, 215, 0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+
+/************************************
+ * Custom Animations & Effects
+ ************************************/
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+}
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/************************************
+ * Result, Output, and Utility Classes
+ ************************************/
+.result-container {
+    margin-top: 32px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid rgba(0, 119, 181, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    min-height: 40px;
+    white-space: pre-wrap;
+    font-size: 16px;
+    box-shadow: 0 4px 16px rgba(0, 119, 181, 0.04);
+}
+
+.formatted-output {
+    line-height: 1.8;
+    font-size: 16px;
+    color: #374151;
+}
+
+.formatted-output h3 {
+    color: #0077b5;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 1.3em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-left: 6px solid #f59e0b;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.1);
+}
+
+.formatted-output ul {
+    margin: 0 0 16px 24px;
+    padding: 0;
+}
+
+.formatted-output li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 8px;
+}
+
+.formatted-output li::before {
+    content: '•';
+    color: #0077b5;
+    font-weight: bold;
+    position: absolute;
+    left: -16px;
+    top: 0;
+}
+
+.formatted-output strong {
+    color: #005983;
+    font-weight: 700;
+}
+
+/************************************
+ * Loading, Toast, and Sticky Bar
+ ************************************/
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3f6f8 0%, #e8f4f8 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+    transition: backdrop-filter 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+}
+
+.sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 -8px 32px rgba(0, 119, 181, 0.1),
+        0 -4px 16px rgba(0, 119, 181, 0.06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 16px 0 12px 0;
+    z-index: 100;
+    border-top: 1px solid rgba(0, 119, 181, 0.1);
+}
+
+.back-link, .print-btn, .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #0077b5;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin: 0 12px;
+    background: rgba(0, 119, 181, 0.05);
+    border: 1px solid rgba(0, 119, 181, 0.1);
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.back-link:hover, .print-btn:hover, .share-btn:hover {
+    color: #005983;
+    transform: translateY(-2px);
+    background: rgba(0, 119, 181, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 119, 181, 0.15);
+}
+
+.loader-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove the loader-spinner svg animation so the loading circle is as before */
+.loader-spinner svg {
+    animation: none;
+}
+@keyframes loaderPulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: scale(0.98);
+    animation: fadeInPage 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.fade-out {
+    opacity: 1;
+    transform: scale(1);
+    animation: fadeOutPage 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+@keyframes fadeInPage {
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeOutPage {
+    to { opacity: 0; transform: scale(0.98); }
+}
+.slide-up-fade-in {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    animation: slideUpFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+@keyframes slideUpFadeIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/************************************
+ * Responsive Tweaks
+ ************************************/
+@media (max-width: 768px) {
+    .glass-card {
+        margin: 16px auto 100px auto;
+        padding: 24px 20px 20px 20px;
+        border-radius: 20px;
+        width: 95vw;
+    }
+}
+@media (max-width: 480px) {
+    .glass-card {
+        padding: 20px 16px 16px 16px;
+    }
+}
+
+/************************************
+ * Print Styles
+ ************************************/
+@media print {
+    .sticky-bar, .loading-container {
+        display: none !important;
+    }
+    .glass-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        margin: 0;
+        padding: 20px;
+    }
+    body {
+        background: white;
+    }
+} 

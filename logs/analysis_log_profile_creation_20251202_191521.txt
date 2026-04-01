@@ -1,0 +1,570 @@
+=== ANALYSIS LOG - 20251202_191521 ===
+Type: profile_creation
+
+=== INPUTS ===
+full_name:
+srikalyan
+
+education:
+cs
+
+skills:
+python
+
+job_role:
+data analysis
+
+company_name:
+amazon
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+
+company_prompt:
+
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+SSYSTEM: You are a professional career coach, ATS specialist and LinkedIn optimization expert.
+
+Your task is to:
+1. Analyze the user’s provided information for a target Job Role: "data analysis" at Company: "amazon".
+2. Use the provided Company and Role prompts (if available) to guide your creation.
+3. Create a professional LinkedIn profile from scratch using the provided details.
+4. Aim for a perfect **100/100 score**.
+5. Score must be calculated based on:
+    - About Section Quality: 20 points
+    - Experience Quality: 20 points
+    - Skills Relevance: 15 points
+    - Project Depth: 15 points
+    - Certifications & Credibility: 10 points
+    - Completeness of All 17 Sections: 10 points
+    - Role & Company Alignment: 10 points
+
+
+---
+
+### CONTEXT DATA
+
+**1. COMPANY PROMPT:**
+
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+
+**2. ROLE PROMPT:**
+
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+
+**3. TARGET COMPANY:**
+amazon
+
+**4. TARGET JOB ROLE:**
+data analysis
+
+**5. USER INPUT DATA:**
+--- BEGIN USER INPUT DATA ---
+**Full Name:**
+srikalyan
+
+**Education:**
+cs
+
+**Skills:**
+python
+
+--- END USER INPUT DATA ---
+
+---
+
+### STRICT INSTRUCTIONS:
+
+1. Output **exactly 17 sections**, in the following order:
+   1. Profile Summary (About)  
+   2. Headline  
+   3. Experience  
+   4. Skills  
+   5. Education  
+   6. Projects  
+   7. Certifications  
+   8. Awards & Accomplishments  
+   9. Courses  
+   10. Publications  
+   11. Licenses  
+   12. Volunteering  
+   13. Organizations  
+   14. Recommendations  
+   15. Languages  
+   16. Personal Interests  
+   17. Any Other Relevant Section
+
+2. For **each section**, include:
+   - **Bold heading**: `### Section Name`
+   - **Bold subheaders**: `**Weaknesses:**`, `**Suggestions:**`, and `**Rewritten Example:**`
+   - Since this is a creation task, "Weaknesses" should point out what was missing or weak in the raw input, and "Suggestions" should explain why the rewritten version is better.
+   - "Rewritten Example" is the final polished content for the profile.
+
+3. Never skip, merge, rename, or reorder any section. All 17 sections must be present.
+
+4. If any section is missing in the user input:
+   - Create a **realistic placeholder** or suggestion based on the target role (e.g., suggest a relevant certification or project).
+   - Do NOT invent specific experiences or jobs that the user didn't provide. Use placeholders like "[Insert relevant experience here]" if absolutely necessary, but try to infer from context where possible or suggest what *should* be there.
+
+5. Use the provided user data as the factual ground truth. Enhance wording for clarity, tone, and impact.
+
+6. Follow strict **Markdown-only** formatting:
+   - No HTML or tables
+   - No emojis
+   - No decorative symbols
+   - Use clean, professional formatting for every section
+
+7. Your writing must sound **natural and recruiter-friendly**.
+
+8. Do not include the internal checklist in your output.
+
+9. For the **Profile Summary (About)** section, create a strong value hook aligned with data analysis.
+
+10. **Headline**: Create a compelling headline with data analysis and keywords.
+
+11. **Experience**: Polish the provided experience into STAR-aligned bullets.
+
+12. **Skills**: Group and expand on provided skills, adding relevant keywords for the role.
+
+13. **Languages**: Include English (Fluent) and any others provided.
+
+14. **Recommendations**: Provide 2 prompts if none provided.
+
+15. Do NOT explicitly mention the target company's name (e.g., Google, Meta, Amazon, etc.) anywhere in the rewritten LinkedIn profile sections unless it was in the user's input.
+
+---
+
+### SCORING TO ACHIEVE 100/100:
+    - Profile must be general but suitable for service, product, and startup contexts for a data analysis.
+    - Include business impact, teamwork, collaboration, and quantifiable results.
+    - About section: strong differentiating hook, aligned to data analysis.
+    - Distinctiveness: highlights unique differentiators.
+    - Volunteering: present and realistic.
+    - Languages: English + one inferred if location present.
+    - Include at least two projects.
+    - Mention relevant tools for data analysis.
+    - Include at least one professional certification.
+    - Include a realistic publication if none exists.
+    - Headline adheres to surfaces role focus + keywords.
+    - Experience bullets are action/outcome oriented.
+    - Skills are grouped and deduplicated.
+    - Projects include hooks, technologies, impact, and GitHub links.
+    - Recommendations include prompts if missing.
+    - "Any Other Relevant Section" includes GitHub/Portfolio.
+
+---
+
+### OUTPUT FORMAT
+
+**Target Role:** data analysis
+**Target Company:** amazon
+
+---
+
+## Current Profile Score  
+**Score:** <0–100>  
+**Rationale:** <Assessment of the raw input quality>
+
+---
+
+## Verdict
+<Short verdict on the potential of this profile>
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)  
+**Weaknesses:**  
+…  
+**Suggestions:**  
+…  
+**Rewritten Example:**  
+…
+
+*(Repeat this for all 17 sections, in order, using markdown formatting)*
+
+---
+
+## Rebuilt Profile  
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** srikalyan
+**Headline:** <Rewritten Headline from section 2>
+
+### Profile Summary (About)  
+<Rewritten Example from section 1>
+
+### Experience  
+<Rewritten Example from section 3>
+
+### Skills  
+<Rewritten Example from section 4>
+
+### Education  
+<Rewritten Example from section 5>
+
+### Projects  
+<Rewritten Example from section 6>
+
+### Certifications  
+<Rewritten Example from section 7>
+
+### Awards & Accomplishments  
+<Rewritten Example from section 8>
+
+### Courses  
+<Rewritten Example from section 9>
+
+### Publications  
+<Rewritten Example from section 10>
+
+### Licenses  
+<Rewritten Example from section 11>
+
+### Volunteering  
+<Rewritten Example from section 12>
+
+### Organizations  
+<Rewritten Example from section 13>
+
+### Recommendations  
+<Rewritten Example from section 14>
+
+### Languages  
+<Rewritten Example from section 15>
+
+### Personal Interests  
+<Rewritten Example from section 16>
+
+### Any Other Relevant Section  
+<Rewritten Example from section 17>
+
+---
+
+## Final Profile Score  
+**Score:** <0–100>  
+**Remarks:** <One-line summary>  
+**Name:** srikalyan
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+
+- [ ] All 17 sections present and in exact order  
+- [ ] Each has Weaknesses, Suggestions, and Rewritten Example  
+- [ ] Follows strict markdown format
+- [ ] Includes a Verdict section after Current Profile Score
+
+
+=== AI OUTPUT ===
+**Target Role:** data analysis
+**Target Company:** amazon
+
+---
+
+## Current Profile Score
+**Score:** 15/100
+**Rationale:** The provided data is extremely sparse. It lacks a headline, experience, a proper summary, projects, certifications, and many other essential sections. The skills section only contains one generic skill. The profile is fundamentally incomplete and doesn't align with the target role or company.
+
+---
+
+## Verdict
+This profile needs a complete overhaul to even be considered for a data analysis role. It requires significant additions and enhancements to align with the target company's and role's expectations.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:** Completely missing. A strong summary is crucial for grabbing attention and highlighting relevant skills.
+**Suggestions:** Craft a compelling narrative that highlights your passion for data analysis, key skills (SQL, data visualization), and potential impact. Focus on turning data into actionable insights. Mention experience even if it's from academic projects. Quantify achievements whenever possible.
+**Rewritten Example:** Data Analyst passionate about leveraging data to drive impactful business decisions. Proficient in SQL, Excel, and data visualization tools like Tableau. Eager to apply analytical skills to identify trends, create insightful reports, and contribute to data-driven strategies. Seeking to transform raw data into actionable intelligence.
+
+### Headline
+**Weaknesses:** Missing. Headlines are vital for visibility and concisely communicating your value proposition.
+**Suggestions:** Create a headline that clearly states your role and includes relevant keywords, such as "Data Analyst," "SQL," and "Data Visualization."
+**Rewritten Example:** Data Analyst | SQL | Data Visualization | Business Intelligence | Data-Driven Insights
+
+### Experience
+**Weaknesses:** Missing. Experience is the core of any LinkedIn profile, demonstrating practical application of skills.
+**Suggestions:** Even without formal work experience, include academic projects, volunteer work, or personal projects that demonstrate data analysis skills. Use the STAR method (Situation, Task, Action, Result) to describe your contributions and quantify your impact. For example:
+*   **Project:** [Insert Project Name]
+    *   **Situation:** Faced with a large dataset containing [brief description of data].
+    *   **Task:** Required to clean, analyze, and visualize the data to identify key trends.
+    *   **Action:** Used SQL to query and clean the data, Excel for initial analysis, and Tableau to create interactive dashboards.
+    *   **Result:** Identified [quantifiable result, e.g., a 15% increase in efficiency] and presented findings to [audience].
+**Rewritten Example:**
+*   **Data Analysis Project | [Project Name]**
+    *   Utilized SQL to extract, transform, and load (ETL) data from diverse sources, ensuring data integrity and accuracy.
+    *   Developed interactive dashboards using Tableau, visualizing key performance indicators (KPIs) and trends to provide actionable insights to stakeholders.
+    *   Conducted statistical analysis using Python (NumPy, Pandas) to identify correlations and predict future outcomes.
+    *   Presented data-driven recommendations that led to a [quantifiable result, e.g., 10% reduction in operational costs].
+
+### Skills
+**Weaknesses:** Only contains "python". This is insufficient and fails to highlight the breadth of skills required for a data analysis role.
+**Suggestions:** Expand the skills section to include both technical and soft skills relevant to data analysis. Group similar skills together for clarity. Include keywords from the job description.
+**Rewritten Example:**
+*   **Data Analysis:** Data Analysis, Statistical Analysis, Data Mining, Trend Analysis, Predictive Modeling
+*   **Data Visualization:** Tableau, Power BI, Excel (Advanced), Data Storytelling
+*   **Programming Languages:** SQL, Python (Pandas, NumPy), R (Basic)
+*   **Data Management:** Data Cleaning, Data Warehousing, ETL, Database Management
+*   **Business Intelligence:** Reporting, Dashboards, KPI Tracking
+*   **Soft Skills:** Analytical Thinking, Problem Solving, Communication, Attention to Detail
+
+### Education
+**Weaknesses:** Only contains "cs". This is not informative enough.
+**Suggestions:** Add the full degree name (e.g., Bachelor of Science in Computer Science), university name, and graduation date (or expected graduation date). Mention relevant coursework, such as statistics, data mining, or database management.
+**Rewritten Example:**
+*   **Bachelor of Science in Computer Science**
+    [University Name] | [Graduation Date or Expected Graduation Date]
+    *   Relevant Coursework: Data Structures and Algorithms, Database Management, Statistical Analysis, Machine Learning
+
+### Projects
+**Weaknesses:** Missing. Crucial for showcasing practical skills and experience.
+**Suggestions:** Include at least two projects that demonstrate your data analysis abilities. Describe the project goals, your role, the technologies you used, and the results you achieved. Include links to GitHub repositories if available.
+**Rewritten Example:**
+*   **Customer Churn Prediction Model:**
+    *   Developed a machine learning model to predict customer churn using Python (Scikit-learn).
+    *   Cleaned and preprocessed customer data, performed feature engineering, and trained a classification model.
+    *   Achieved an accuracy of [percentage]% in predicting churn, enabling proactive customer retention strategies.
+    *   [Link to GitHub Repository]
+*   **Sales Performance Dashboard:**
+    *   Created an interactive dashboard using Tableau to visualize sales performance across different regions and product lines.
+    *   Identified key trends and insights that helped sales managers optimize their strategies.
+    *   Improved sales forecasting accuracy by [percentage]%.
+
+### Certifications
+**Weaknesses:** Missing. Certifications demonstrate commitment to professional development and validate skills.
+**Suggestions:** Obtain a relevant certification, such as a data analysis certification from Google, Microsoft, or a Tableau certification.
+**Rewritten Example:**
+*   **Google Data Analytics Professional Certificate**
+    Google (Coursera) | [Date of Completion or Expected Completion Date]
+
+### Awards & Accomplishments
+**Weaknesses:** Missing.
+**Suggestions:** Include any relevant awards, scholarships, or accomplishments related to data analysis or computer science.
+**Rewritten Example:**
+*   Dean's List | [University Name] | [Semester/Year]
+*   [Hackathon Name] Winner | [Hackathon Organization] | [Date]
+
+### Courses
+**Weaknesses:** Missing.
+**Suggestions:** Include relevant online courses or workshops you've completed, focusing on data analysis, SQL, or data visualization.
+**Rewritten Example:**
+*   SQL for Data Analysis
+    [Coursera/Udemy/edX] | [Date of Completion]
+*   Tableau Essential Training
+    [LinkedIn Learning] | [Date of Completion]
+
+### Publications
+**Weaknesses:** Missing.
+**Suggestions:** If you haven't published a formal paper, consider writing a blog post or article on a data analysis topic and linking to it here.
+**Rewritten Example:**
+*   Data-Driven Insights: A Beginner's Guide to Data Visualization with Tableau
+    [Link to Blog Post/Article on Medium or Personal Website]
+
+### Licenses
+**Weaknesses:** Missing and likely not applicable for a data analyst role at this stage.
+**Suggestions:** Omit for now. If you obtain a specific professional license later, add it then.
+**Rewritten Example:** N/A
+
+### Volunteering
+**Weaknesses:** Missing.
+**Suggestions:** Include any volunteer experience, especially if it involves data analysis or working with data. Even if it's unrelated, it shows a commitment to contributing to the community.
+**Rewritten Example:**
+*   Data Analyst Volunteer | [Non-profit Organization] | [Dates]
+    *   Analyzed donor data to identify trends and improve fundraising strategies.
+    *   Created reports and visualizations to communicate the organization's impact to stakeholders.
+
+### Organizations
+**Weaknesses:** Missing.
+**Suggestions:** List any relevant professional organizations you're a member of, such as the Data Science Association or a local analytics group.
+**Rewritten Example:**
+*   Data Science Association
+*   [Local Data Analytics Meetup Group]
+
+### Recommendations
+**Weaknesses:** Missing.
+**Suggestions:** Request recommendations from professors, mentors, or colleagues who can speak to your data analysis skills and potential.
+**Rewritten Example:**
+*   **Recommendation Request Prompt 1:** "Hi [Name], I hope you're doing well. As I'm building my LinkedIn profile for data analysis roles, I was hoping you might be willing to write a brief recommendation based on my work on [Project Name] in your [Course Name]. Your insights on my analytical abilities would be greatly appreciated."
+*   **Recommendation Request Prompt 2:** "Hi [Name], I'm updating my LinkedIn profile and would be grateful if you could share your experience working with me on [Project Name]. Your perspective on my skills in SQL and data visualization would be valuable."
+
+### Languages
+**Weaknesses:** Missing.
+**Suggestions:** Include English (Fluent) and any other languages you speak.
+**Rewritten Example:**
+*   English (Fluent)
+*   [Optional: Another Language]
+
+### Personal Interests
+**Weaknesses:** Missing.
+**Suggestions:** Include a few personal interests to make your profile more relatable, but keep them professional. Examples include data visualization, machine learning, or specific technologies.
+**Rewritten Example:**
+*   Data Visualization, Machine Learning, Open Source Projects, Technology Innovation
+
+### Any Other Relevant Section
+**Weaknesses:** Missing.
+**Suggestions:** Include a link to your GitHub profile, personal website, or online portfolio to showcase your projects and skills.
+**Rewritten Example:**
+*   **Portfolio:** [Link to GitHub Profile or Personal Website]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** srikalyan
+**Headline:** Data Analyst | SQL | Data Visualization | Business Intelligence | Data-Driven Insights
+
+### Profile Summary (About)
+Data Analyst passionate about leveraging data to drive impactful business decisions. Proficient in SQL, Excel, and data visualization tools like Tableau. Eager to apply analytical skills to identify trends, create insightful reports, and contribute to data-driven strategies. Seeking to transform raw data into actionable intelligence.
+
+### Experience
+*   **Data Analysis Project | [Project Name]**
+    *   Utilized SQL to extract, transform, and load (ETL) data from diverse sources, ensuring data integrity and accuracy.
+    *   Developed interactive dashboards using Tableau, visualizing key performance indicators (KPIs) and trends to provide actionable insights to stakeholders.
+    *   Conducted statistical analysis using Python (NumPy, Pandas) to identify correlations and predict future outcomes.
+    *   Presented data-driven recommendations that led to a [quantifiable result, e.g., 10% reduction in operational costs].
+
+### Skills
+*   **Data Analysis:** Data Analysis, Statistical Analysis, Data Mining, Trend Analysis, Predictive Modeling
+*   **Data Visualization:** Tableau, Power BI, Excel (Advanced), Data Storytelling
+*   **Programming Languages:** SQL, Python (Pandas, NumPy), R (Basic)
+*   **Data Management:** Data Cleaning, Data Warehousing, ETL, Database Management
+*   **Business Intelligence:** Reporting, Dashboards, KPI Tracking
+*   **Soft Skills:** Analytical Thinking, Problem Solving, Communication, Attention to Detail
+
+### Education
+*   **Bachelor of Science in Computer Science**
+    [University Name] | [Graduation Date or Expected Graduation Date]
+    *   Relevant Coursework: Data Structures and Algorithms, Database Management, Statistical Analysis, Machine Learning
+
+### Projects
+*   **Customer Churn Prediction Model:**
+    *   Developed a machine learning model to predict customer churn using Python (Scikit-learn).
+    *   Cleaned and preprocessed customer data, performed feature engineering, and trained a classification model.
+    *   Achieved an accuracy of [percentage]% in predicting churn, enabling proactive customer retention strategies.
+    *   [Link to GitHub Repository]
+*   **Sales Performance Dashboard:**
+    *   Created an interactive dashboard using Tableau to visualize sales performance across different regions and product lines.
+    *   Identified key trends and insights that helped sales managers optimize their strategies.
+    *   Improved sales forecasting accuracy by [percentage]%.
+
+### Certifications
+*   **Google Data Analytics Professional Certificate**
+    Google (Coursera) | [Date of Completion or Expected Completion Date]
+
+### Awards & Accomplishments
+*   Dean's List | [University Name] | [Semester/Year]
+*   [Hackathon Name] Winner | [Hackathon Organization] | [Date]
+
+### Courses
+*   SQL for Data Analysis
+    [Coursera/Udemy/edX] | [Date of Completion]
+*   Tableau Essential Training
+    [LinkedIn Learning] | [Date of Completion]
+
+### Publications
+*   Data-Driven Insights: A Beginner's Guide to Data Visualization with Tableau
+    [Link to Blog Post/Article on Medium or Personal Website]
+
+### Licenses
+N/A
+
+### Volunteering
+*   Data Analyst Volunteer | [Non-profit Organization] | [Dates]
+    *   Analyzed donor data to identify trends and improve fundraising strategies.
+    *   Created reports and visualizations to communicate the organization's impact to stakeholders.
+
+### Organizations
+*   Data Science Association
+*   [Local Data Analytics Meetup Group]
+
+### Recommendations
+*   **Recommendation Request Prompt 1:** "Hi [Name], I hope you're doing well. As I'm building my LinkedIn profile for data analysis roles, I was hoping you might be willing to write a brief recommendation based on my work on [Project Name] in your [Course Name]. Your insights on my analytical abilities would be greatly appreciated."
+*   **Recommendation Request Prompt 2:** "Hi [Name], I'm updating my LinkedIn profile and would be grateful if you could share your experience working with me on [Project Name]. Your perspective on my skills in SQL and data visualization would be valuable."
+
+### Languages
+*   English (Fluent)
+
+### Personal Interests
+*   Data Visualization, Machine Learning, Open Source Projects, Technology Innovation
+
+### Any Other Relevant Section
+*   **Portfolio:** [Link to GitHub Profile or Personal Website]
+
+---
+
+## Final Profile Score
+**Score:** 85/100
+**Remarks:** The rebuilt profile is significantly improved with a strong summary, relevant skills, experience, projects, and other essential sections. It is much more aligned with the target role and company expectations, but still needs specific quantifiable achievements to be more attractive. Adding specific AWS-related technologies, tailored to the target company, would further improve the score.
+

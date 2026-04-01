@@ -1,0 +1,12 @@
+# Updated requirements.txt
+fastapi
+uvicorn
+python-multipart
+jinja2
+aiofiles
+PyMuPDF
+requests
+python-dotenv
+werkzeug
+# pytesseract # Not used in code seen so far, but keeping if needed, though not in imports
+# Pillow # Not used in code seen so far

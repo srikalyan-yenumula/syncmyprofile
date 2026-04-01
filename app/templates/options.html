@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Service | SyncMyProfile.ai</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg border-b border-gray-200/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2">
+                    <img src="{{ url_for('static', path='favicon.ico') }}" alt="SyncMyProfile.ai"
+                        class="h-8 w-8 rounded-lg object-cover" />
+                    <span class="font-bold text-lg text-gray-900 tracking-tight">SyncMyProfile.ai</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl w-full space-y-12">
+            <div class="text-center fade-in-up" style="animation-delay: 0.1s;">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Choose Your Path
+                </h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Select the tool that best fits your current career goals.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Option 1: LinkedIn Optimize -->
+                <a href="/start"
+                    class="group block bg-white rounded-2xl border border-gray-200 p-8 card-hover fade-in-up relative overflow-hidden"
+                    style="animation-delay: 0.2s;">
+                    <div class="cursor-line absolute top-0 left-0 w-1 bg-blue-500 transition-all duration-1000 ease-out"
+                        style="height: 0;">
+                    </div>
+                    <div
+                        class="h-14 w-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <polyline points="17 11 19 13 23 9"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        LinkedIn Optimize</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Optimize your existing LinkedIn profile for a specific job description to rank higher in
+                        recruiter searches.
+                    </p>
+                    <div
+                        class="flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                        Get Started <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Option 2: Resume to LinkedIn Profile -->
+                <a href="/resume-start"
+                    class="group block bg-white rounded-2xl border border-gray-200 p-8 card-hover fade-in-up relative overflow-hidden"
+                    style="animation-delay: 0.3s;">
+                    <div class="cursor-line absolute top-0 left-0 w-1 bg-blue-500 transition-all duration-1000 ease-out"
+                        style="height: 0;">
+                    </div>
+                    <div
+                        class="h-14 w-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        Resume to LinkedIn</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Turn your resume PDF into a fully fleshed-out LinkedIn profile ready for copy-pasting.
+                    </p>
+                    <div
+                        class="flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                        Get Started <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Option 3: LinkedIn Creation -->
+                <a href="/create-profile"
+                    class="group block bg-white rounded-2xl border border-gray-200 p-8 card-hover fade-in-up relative overflow-hidden"
+                    style="animation-delay: 0.4s;">
+                    <div class="cursor-line absolute top-0 left-0 w-1 bg-blue-500 transition-all duration-1000 ease-out"
+                        style="height: 0;">
+                    </div>
+                    <div
+                        class="h-14 w-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        LinkedIn Creation</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Build a professional LinkedIn profile from scratch with our guided AI assistant.
+                    </p>
+                    <div
+                        class="flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                        Get Started <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200/80 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center text-sm text-gray-500">
+                &copy; <span id="year"></span> SyncMyProfile.ai. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Cursor following line animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-hover');
+
+            cards.forEach(card => {
+                const line = card.querySelector('.cursor-line');
+                if (!line) return;
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const y = e.clientY - rect.top;
+
+                    // If cursor is in the bottom 100px (near "Get Started"), extend line to full height
+                    // Otherwise follow the cursor
+                    const threshold = 100;
+                    let height = y;
+
+                    if (y > rect.height - threshold) {
+                        height = rect.height;
+                    } else {
+                        height = Math.max(0, Math.min(y, rect.height));
+                    }
+
+                    line.style.height = `${height}px`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    line.style.height = '0';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

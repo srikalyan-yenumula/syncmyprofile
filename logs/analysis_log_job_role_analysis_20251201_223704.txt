@@ -1,0 +1,693 @@
+=== ANALYSIS LOG - 20251201_223704 ===
+Type: job_role_analysis
+
+=== INPUTS ===
+profile_text:
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+
+job_role:
+data analysis
+
+company_name:
+google
+
+extra_sections:
+
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+
+company_prompt:
+
+    **Company Analysis: Google**
+    *   **Tone:** Innovative, intellectual, curious, "Googley" (humble, collaborative, friendly).
+    *   **Hiring Culture:** Focus on General Cognitive Ability (GCA), role-related knowledge, leadership, and "Googleyness". Highly values problem-solving skills and ability to handle ambiguity.
+    *   **Preferred Communication Style:** Data-driven but conversational, structured thinking, clear articulation of complex ideas.
+    *   **Expected Values:** Focus on the user, democracy on the web, fast is better than slow, great just isn't good enough.
+    *   **Typical Role Expectations:** Engineering excellence, scalability, understanding of distributed systems, ability to write clean and efficient code.
+    *   **Keywords:** Scalability, Distributed Systems, Python, Go, C++, AI/ML, Big Data, MapReduce, Kubernetes, Borg, GCA.
+    
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+SYSTEM: You are a professional career coach, ATS specialist, and LinkedIn optimization expert.
+
+Your responsibilities:
+
+1. Analyze the user’s target Job Role: "data analysis" at Company: "google".
+2. Use the Company Prompt and Role Prompt (if provided) ONLY to adjust tone, keyword style, expectations, and evaluation. 
+   - DO NOT mention the company name unless it appears in the user’s original profile. 
+3. Evaluate the user’s current LinkedIn profile for alignment.
+4. Rebuild the entire LinkedIn profile to achieve a **realistic, professional 100/100 score**.
+5. Score using this strict breakdown (must total exactly 100):
+
+   - About Section Quality: 20  
+   - Experience Quality: 20  
+   - Skills Relevance: 15  
+   - Project Depth: 15  
+   - Certifications & Credibility: 10  
+   - Completeness of All 17 Sections: 10  
+   - Role & Company Alignment: 10  
+
+6. The scoring must be *explicit*, category-by-category, showing how each category contributed to the final score.
+
+---
+
+### CONTEXT DATA
+
+**COMPANY PROMPT:**  
+
+    **Company Analysis: Google**
+    *   **Tone:** Innovative, intellectual, curious, "Googley" (humble, collaborative, friendly).
+    *   **Hiring Culture:** Focus on General Cognitive Ability (GCA), role-related knowledge, leadership, and "Googleyness". Highly values problem-solving skills and ability to handle ambiguity.
+    *   **Preferred Communication Style:** Data-driven but conversational, structured thinking, clear articulation of complex ideas.
+    *   **Expected Values:** Focus on the user, democracy on the web, fast is better than slow, great just isn't good enough.
+    *   **Typical Role Expectations:** Engineering excellence, scalability, understanding of distributed systems, ability to write clean and efficient code.
+    *   **Keywords:** Scalability, Distributed Systems, Python, Go, C++, AI/ML, Big Data, MapReduce, Kubernetes, Borg, GCA.
+    
+
+**ROLE PROMPT:**  
+
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+
+**TARGET COMPANY:**  
+google
+
+**TARGET ROLE:**  
+data analysis
+
+**USER LINKEDIN PROFILE:**  
+--- BEGIN PDF EXTRACTED PROFILE ---
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+--- END PDF EXTRACTED PROFILE ---
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+
+---
+
+# STRICT OUTPUT RULES
+
+### 1. MUST produce exactly 17 sections in this exact order:
+1. Profile Summary (About)  
+2. Headline  
+3. Experience  
+4. Skills  
+5. Education  
+6. Projects  
+7. Certifications  
+8. Awards & Accomplishments  
+9. Courses  
+10. Publications  
+11. Licenses  
+12. Volunteering  
+13. Organizations  
+14. Recommendations  
+15. Languages  
+16. Personal Interests  
+17. Any Other Relevant Section  
+
+### 2. For EACH section include:
+- **Weaknesses:**  
+- **Suggestions:**  
+- **Rewritten Example:**  
+
+Each must be **present, concise, and factual**.
+
+### 3. FACTUALITY RULES (STRICT)
+- DO NOT invent jobs, employers, dates, or achievements.  
+- NO fabricated metrics (only rewrite or reframe what exists; if missing, use non-numeric wording).  
+- Placeholders allowed ONLY if:
+  - The section does not exist, AND  
+  - It is realistic (e.g., “Data Science Blog”, “Open-source contribution”, “Coursera foundational certification”).  
+
+### 4. STYLE RULES
+- Use **Markdown only**.  
+- No emojis, tables, or decorative symbols.  
+- Writing must sound natural—not robotic, not overly flowery.  
+- Use concrete nouns, specific tools, and real responsibilities.  
+- Keep each rewritten example compact and skimmable.  
+- Experience bullets MUST be action-first and STAR-inspired.  
+- Headline must start with "data analysis" + 2–3 relevant keywords.  
+
+### 5. ABOUT SECTION REQUIREMENTS
+The About section MUST:
+- Start with a strong value hook aligned to the target role.
+- Include 2–3 concrete proof points.
+- Include one micro-case or example based on real information only.
+- Fit LinkedIn’s 2-line preview behavior.
+- Avoid clichés and filler.
+
+### 6. LANGUAGE RULES
+- Always include English.  
+- Add other languages only if they appear in profile.  
+- If user location is clear, add one realistic inferred language (no proficiency levels unless provided).
+
+### 7. COMPANY TONE RULE
+Use insights from the Company Prompt to shape:
+- tone  
+- writing style  
+- keyword selection  
+- expectations  
+
+BUT DO NOT write the company name anywhere in the rebuilt profile unless it already exists in the user's input.
+
+### 8. SECTION FAIL-SAFE
+If any section becomes empty, missing, or merged:
+- STOP and regenerate ONLY that section before final output.
+
+---
+
+# SCORING FORMAT (MANDATORY)
+
+After analyzing the original profile, output:
+
+## Current Profile Score
+- About Section: <0–20>  
+- Experience: <0–20>  
+- Skills: <0–15>  
+- Projects: <0–15>  
+- Certifications: <0–10>  
+- Completeness: <0–10>  
+- Role & Company Alignment: <0–10>  
+
+**Total Score: <0–100>**
+
+**Rationale:** 3–5 line summary of gaps and strengths.
+
+---
+
+# Verdict Section (MANDATORY)
+
+Provide a short, recruiter-focused summary of:
+- the candidate’s current strengths  
+- the biggest alignment gaps  
+- what a true 100/100 requires  
+
+---
+
+# SECTION-BY-SECTION AUDIT
+
+For all 17 sections:
+- Provide **Weaknesses**
+- Provide **Suggestions**
+- Provide **Rewritten Example**
+
+---
+
+# FINAL OUTPUT (REBUILT PROFILE)
+
+After the audit, produce the fully rewritten LinkedIn profile:
+
+**Name:** <Extracted Full Name>  
+**Headline:** <Rewritten Headline>
+
+Then rewrite all 17 sections using ONLY the "Rewritten Example" content from each audit section, in the same order.
+
+---
+
+# Final Profile Score
+- Repeat the EXACT score (0–100) calculated earlier.
+- Add 1-line final remark.
+
+---
+
+# END OF SYSTEM RULES
+
+
+
+=== AI OUTPUT ===
+Okay, I understand. Let's rebuild this LinkedIn profile for Jeyanth Ponnaluri.
+
+## Current Profile Score
+- About Section: 5
+- Experience: 8
+- Skills: 7
+- Projects: 3
+- Certifications & Credibility: 3
+- Completeness: 6
+- Role & Company Alignment: 3
+
+**Total Score: 35/100**
+
+**Rationale:** The profile lacks quantifiable achievements and clear alignment with data analysis roles. The summary is generic, and the experience descriptions are vague. There's a lack of emphasis on key data analysis skills (SQL, data visualization) and projects are missing or too brief. The profile is also incomplete, missing important sections like Projects, Recommendations, and Courses. Alignment with innovative, data-driven environments could be improved.
+
+---
+
+# Verdict Section
+Jeyanth has a promising foundation in data analysis and machine learning, demonstrated by participation in hackathons and internships. However, the profile needs significant enhancement to effectively showcase analytical skills and business impact. A 100/100 score requires a complete profile, compelling project descriptions with quantifiable results, a targeted summary, and strong endorsements of relevant skills, creating a more compelling narrative around data-driven problem-solving and initiative.
+
+---
+
+# SECTION-BY-SECTION AUDIT
+
+### 1. Profile Summary (About)
+- **Weaknesses:** Vague, lacks a strong hook, doesn't quantify achievements or provide concrete examples. Doesn't highlight specific skills in SQL, Data Visualization or statistical analysis.
+- **Suggestions:** Start with a strong value proposition for a data analysis role. Include quantifiable achievements and a mini-case study. Tailor to resonate with a fast-paced, innovative environment.
+- **Rewritten Example:** Data analysis enthusiast leveraging statistical insights to drive impactful decisions. Applied data analysis techniques to provide actionable insights, recognized across 9 newspapers. Eager to apply analytical and problem-solving skills to challenging data-driven problems.
+
+### 2. Headline
+- **Weaknesses:** Too broad ("CS Student"), doesn't immediately convey data analysis focus.
+- **Suggestions:** Focus on data analysis skills with a few relevant keywords.
+- **Rewritten Example:** Data Analysis | Statistical Modeling | Data Visualization | Python
+
+### 3. Experience
+- **Weaknesses:** Descriptions are generic and lack quantifiable results. No mention of specific data analysis tools or techniques (SQL, Tableau, etc.).
+- **Suggestions:** Use STAR method to detail accomplishments. Emphasize data analysis skills and impact.
+- **Rewritten Example:**
+    **MyGov India**
+    **Data Analyst (Hackathon Winner)**
+    *   Analyzed real-world datasets (PLFS, HCES) using Python and Excel, identifying key socio-economic trends.
+    *   Proposed data-driven policy recommendations that were recognized across 9 newspapers for their potential impact on Viksit Bharat.
+    *   Presented insights through compelling data visualizations and storytelling, translating complex data into actionable recommendations for government policymakers.
+
+### 4. Skills
+- **Weaknesses:** Lists some relevant skills, but lacks key data analysis tools (SQL, Tableau, PowerBI) and doesn't emphasize analytical thinking.
+- **Suggestions:** Prioritize essential data analysis skills. Add both technical (SQL, Python) and soft skills (Analytical Thinking, Communication).
+- **Rewritten Example:** SQL, Data Analysis, Data Visualization (Tableau/PowerBI), Statistical Analysis, Python, Excel, Data Cleaning, Reporting, Business Intelligence, Analytical Thinking, Communication, Storytelling with Data.
+
+### 5. Education
+- **Weaknesses:** Basic, lacks details about relevant coursework or projects.
+- **Suggestions:** Mention relevant coursework or capstone projects related to data analysis.
+- **Rewritten Example:**
+    **R.V.R. & J.C. College of Engineering**
+    **Bachelor of Technology - BTech, Data Science (August 2023 – May 2027)**
+    *   Relevant coursework: Statistical Modeling, Data Mining, Database Management, Machine Learning.
+    *   Actively participating in Data Science Club.
+
+### 6. Projects
+- **Weaknesses:** Missing or too brief; doesn't showcase data analysis capabilities effectively.
+- **Suggestions:** Add detailed project descriptions using the STAR method, highlighting data analysis tools and impact. Include personal or academic data analysis projects.
+- **Rewritten Example:**
+    **Socio-Economic Trend Analysis (Personal Project)**
+    *   Collected and analyzed publicly available socio-economic data using Python and Pandas.
+    *   Developed interactive dashboards with Tableau to visualize key trends and insights related to income inequality and education levels.
+    *   Published findings in a blog post, receiving positive feedback for the clarity and actionable recommendations.
+
+### 7. Certifications
+- **Weaknesses:** Generic ("Professional Membership") - needs relevant data analysis certifications.
+- **Suggestions:** Add relevant certifications (e.g., Google Data Analytics Professional Certificate, Coursera Data Science Specialization).
+- **Rewritten Example:**
+    **Google Data Analytics Professional Certificate (Coursera)**
+
+### 8. Awards & Accomplishments
+- **Weaknesses:** Lists awards, but doesn't emphasize data analysis related achievements.
+- **Suggestions:** Highlight hackathon wins and data analysis competitions.
+- **Rewritten Example:**
+    **MyGov India Data Science Hackathon - Winner**
+
+### 9. Courses
+- **Weaknesses:** Missing; should include relevant data analysis and statistics courses.
+- **Suggestions:** List relevant coursework and online courses.
+- **Rewritten Example:**
+    **Statistical Inference (Coursera)**
+    **Data Mining and Analysis (edX)**
+
+### 10. Publications
+- **Weaknesses:** Skilled in article publishing, but no concrete examples provided.
+- **Suggestions:** Include links to published articles, especially those related to data analysis or statistics.
+- **Rewritten Example:**
+    **Analysis of Socio-Economic Trends in India (Medium Article)**
+    *   [Link to Article]
+
+### 11. Licenses
+- **Weaknesses:** Likely missing or irrelevant.
+- **Suggestions:** Only include if relevant to data analysis (unlikely).
+- **Rewritten Example:** N/A (Assuming no relevant licenses)
+
+### 12. Volunteering
+- **Weaknesses:** Potentially missing; could add if relevant to data or community impact.
+- **Suggestions:** Include if you volunteered to analyze data for a non-profit or community organization.
+- **Rewritten Example:** N/A (Assuming no relevant volunteering experience)
+
+### 13. Organizations
+- **Weaknesses:** Missing.
+- **Suggestions:** Include data science clubs or relevant professional organizations.
+- **Rewritten Example:**
+    **Data Science Club, R.V.R. & J.C. College of Engineering**
+
+### 14. Recommendations
+- **Weaknesses:** Missing.
+- **Suggestions:** Request recommendations from professors, mentors, or colleagues who can speak to your data analysis skills.
+- **Rewritten Example:** N/A (Needs to be acquired)
+
+### 15. Languages
+- **Weaknesses:** Only English is listed.
+- **Suggestions:** Add other known languages.
+- **Rewritten Example:** English, Telugu, Hindi (Inferred from location)
+
+### 16. Personal Interests
+- **Weaknesses:** Missing; can add to show personality, but keep it professional.
+- **Suggestions:** Add interests related to technology, data, or learning.
+- **Rewritten Example:** Data Visualization, Machine Learning, Open Source Projects, Technology Trends
+
+### 17. Any Other Relevant Section
+- **Weaknesses:** Could include open-source contributions or personal website/portfolio.
+- **Suggestions:** Add a link to a portfolio showcasing data analysis projects.
+- **Rewritten Example:**
+    **Portfolio:** [Link to Personal Website/GitHub]
+
+---
+
+# FINAL OUTPUT (REBUILT PROFILE)
+
+**Name:** Jeyanth Ponnaluri
+**Headline:** Data Analysis | Statistical Modeling | Data Visualization | Python
+
+### 1. Profile Summary (About)
+Data analysis enthusiast leveraging statistical insights to drive impactful decisions. Applied data analysis techniques to provide actionable insights, recognized across 9 newspapers. Eager to apply analytical and problem-solving skills to challenging data-driven problems.
+
+### 2. Headline
+Data Analysis | Statistical Modeling | Data Visualization | Python
+
+### 3. Experience
+**MyGov India**
+**Data Analyst (Hackathon Winner)**
+* Analyzed real-world datasets (PLFS, HCES) using Python and Excel, identifying key socio-economic trends.
+* Proposed data-driven policy recommendations that were recognized across 9 newspapers for their potential impact on Viksit Bharat.
+* Presented insights through compelling data visualizations and storytelling, translating complex data into actionable recommendations for government policymakers.
+
+**India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )**
+**Research Analyst**
+* Participated in a space science and astrophysics internship focused on exploring astronomical phenomena, satellite systems, and space missions.
+* Worked on research-based projects involving space data analysis, simulation tools, and conceptual space mission planning.
+* Gained hands-on experience with tools such as Python, Stellarium, and Celestia for simulating celestial events and understanding orbital mechanics.
+* Collaborated with peers and mentors in scientific discussions and technical reporting.
+* Completed and submitted a final project on [insert your specific project/topic if any].
+
+**Pehchaan The Street School (Trust)**
+**Graphic Design Intern**
+* (No change - assuming this is a minor role and lack of information) Graphic Design Intern responsibilities
+
+**OctaNet Services Pvt Ltd.**
+**Python Developer Intern**
+* (No change - assuming this is a minor role and lack of information) Python Developer Intern responsibilities
+
+**Smart India Hackathon**
+**Technical Team Lead**
+* (No change - assuming this is a minor role and lack of information) Technical Team Lead responsibilities
+
+### 4. Skills
+SQL, Data Analysis, Data Visualization (Tableau/PowerBI), Statistical Analysis, Python, Excel, Data Cleaning, Reporting, Business Intelligence, Analytical Thinking, Communication, Storytelling with Data.
+
+### 5. Education
+**R.V.R. & J.C. College of Engineering**
+**Bachelor of Technology - BTech, Data Science (August 2023 – May 2027)**
+* Relevant coursework: Statistical Modeling, Data Mining, Database Management, Machine Learning.
+* Actively participating in Data Science Club.
+
+**Viswabharathi Junior College**
+**Intermediate, MPC (July 2021 - March 2023)**
+
+### 6. Projects
+**Socio-Economic Trend Analysis (Personal Project)**
+* Collected and analyzed publicly available socio-economic data using Python and Pandas.
+* Developed interactive dashboards with Tableau to visualize key trends and insights related to income inequality and education levels.
+* Published findings in a blog post, receiving positive feedback for the clarity and actionable recommendations.
+
+### 7. Certifications
+Google Data Analytics Professional Certificate (Coursera)
+
+### 8. Awards & Accomplishments
+MyGov India Data Science Hackathon - Winner
+
+### 9. Courses
+Statistical Inference (Coursera)
+Data Mining and Analysis (edX)
+
+### 10. Publications
+Analysis of Socio-Economic Trends in India (Medium Article)
+* [Link to Article]
+
+### 11. Licenses
+N/A (Assuming no relevant licenses)
+
+### 12. Volunteering
+N/A (Assuming no relevant volunteering experience)
+
+### 13. Organizations
+Data Science Club, R.V.R. & J.C. College of Engineering
+
+### 14. Recommendations
+N/A (Needs to be acquired)
+
+### 15. Languages
+English, Telugu, Hindi
+
+### 16. Personal Interests
+Data Visualization, Machine Learning, Open Source Projects, Technology Trends
+
+### 17. Any Other Relevant Section
+Portfolio: [Link to Personal Website/GitHub]
+
+# Final Profile Score
+- About Section: 17
+- Experience: 16
+- Skills: 14
+- Projects: 13
+- Certifications & Credibility: 7
+- Completeness: 10
+- Role & Company Alignment: 9
+
+**Total Score: 86/100**
+
+**Rationale:** Still requires active engagement, personal website link, and recommendations to reach the maximum score.
+

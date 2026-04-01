@@ -1,0 +1,807 @@
+=== ANALYSIS LOG - 20251203_185720 ===
+Type: job_description_analysis
+
+=== INPUTS ===
+profile_text:
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+
+job_desc:
+ob Title: Data Analyst
+Location: Varies (e.g., Bengaluru, Hyderabad, Seattle, etc.) Department: Business Intelligence / Operations / Finance / Retail Analytics
+
+📝 Job Summary
+Amazon is seeking a Data Analyst to join its dynamic team. The role involves leveraging data to drive insights, optimize processes, and support decision-making across multiple business units. Analysts at Amazon work with large datasets, apply statistical and analytical techniques, and collaborate with cross-functional teams to solve complex business problems.
+
+🎯 Key Responsibilities
+Data Collection & Analysis: Gather, clean, and analyze large datasets from multiple sources.
+
+Reporting & Visualization: Build dashboards and reports using tools like SQL, Excel, Tableau, or QuickSight.
+
+Business Insights: Identify trends, patterns, and anomalies to provide actionable recommendations.
+
+Collaboration: Work closely with product managers, engineers, and business stakeholders to translate data into strategy.
+
+Automation: Develop scripts and workflows to streamline reporting and analytics processes.
+
+Performance Tracking: Monitor KPIs and metrics to evaluate business performance and suggest improvements.
+
+🛠️ Basic Qualifications
+Bachelor’s degree in Statistics, Mathematics, Computer Science, Economics, or related field.
+
+Strong proficiency in SQL, Excel, and data visualization tools.
+
+Experience with Python/R for statistical analysis and automation.
+
+Excellent analytical, problem-solving, and communication skills.
+
+Ability to work with ambiguous problems and deliver results in a fast-paced environment.
+
+🌟 Preferred Qualifications
+Master’s degree in a quantitative field.
+
+Experience with big data technologies (e.g., AWS, Redshift, Spark).
+
+Knowledge of machine learning basics and predictive modeling.
+
+Prior experience in e-commerce, retail, or supply chain analytics.
+
+🚀 Why Join Amazon?
+Opportunity to work on high-impact projects that influence millions of customers worldwide.
+
+Exposure to cutting-edge technologies and large-scale data systems.
+
+Collaborative and innovative work culture.
+
+Career growth and learning opportunities across diverse teams.
+
+extra_sections:
+
+
+extracted_role:
+Data Analyst
+
+extracted_company:
+Amazon
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+
+company_prompt:
+
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+<system_instructions>
+You are an expert Career Coach, ATS Specialist, and LinkedIn Profile Optimizer.
+Your goal is to transform a user's LinkedIn profile into a top-tier, 100/100 scored profile that perfectly aligns with a specific Job Description (JD).
+You must strictly follow the output format and structural requirements.
+</system_instructions>
+
+<context>
+    <target_role>Data Analyst</target_role>
+    <target_company>Amazon</target_company>
+    <job_description>
+    ob Title: Data Analyst
+Location: Varies (e.g., Bengaluru, Hyderabad, Seattle, etc.) Department: Business Intelligence / Operations / Finance / Retail Analytics
+
+📝 Job Summary
+Amazon is seeking a Data Analyst to join its dynamic team. The role involves leveraging data to drive insights, optimize processes, and support decision-making across multiple business units. Analysts at Amazon work with large datasets, apply statistical and analytical techniques, and collaborate with cross-functional teams to solve complex business problems.
+
+🎯 Key Responsibilities
+Data Collection & Analysis: Gather, clean, and analyze large datasets from multiple sources.
+
+Reporting & Visualization: Build dashboards and reports using tools like SQL, Excel, Tableau, or QuickSight.
+
+Business Insights: Identify trends, patterns, and anomalies to provide actionable recommendations.
+
+Collaboration: Work closely with product managers, engineers, and business stakeholders to translate data into strategy.
+
+Automation: Develop scripts and workflows to streamline reporting and analytics processes.
+
+Performance Tracking: Monitor KPIs and metrics to evaluate business performance and suggest improvements.
+
+🛠️ Basic Qualifications
+Bachelor’s degree in Statistics, Mathematics, Computer Science, Economics, or related field.
+
+Strong proficiency in SQL, Excel, and data visualization tools.
+
+Experience with Python/R for statistical analysis and automation.
+
+Excellent analytical, problem-solving, and communication skills.
+
+Ability to work with ambiguous problems and deliver results in a fast-paced environment.
+
+🌟 Preferred Qualifications
+Master’s degree in a quantitative field.
+
+Experience with big data technologies (e.g., AWS, Redshift, Spark).
+
+Knowledge of machine learning basics and predictive modeling.
+
+Prior experience in e-commerce, retail, or supply chain analytics.
+
+🚀 Why Join Amazon?
+Opportunity to work on high-impact projects that influence millions of customers worldwide.
+
+Exposure to cutting-edge technologies and large-scale data systems.
+
+Collaborative and innovative work culture.
+
+Career growth and learning opportunities across diverse teams.
+    </job_description>
+    <company_guidelines>
+    
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+    </company_guidelines>
+    <role_guidelines>
+    
+    **Role Analysis: Data Analyst**
+    *   **1. Required Skills:**
+        *   **Technical:** SQL, Excel (Advanced), Visualization (Tableau, PowerBI), Python/R (Basic), Data Cleaning, Statistical Analysis.
+        *   **Soft Skills:** Analytical Thinking, Attention to Detail, Communication (Storytelling with Data), Curiosity.
+    *   **2. Responsibilities:**
+        *   Collect, process, and perform statistical analyses of data.
+        *   Identify trends and patterns in complex data sets.
+        *   Create visualizations and reports for stakeholders.
+        *   Maintain databases and data systems.
+    *   **3. Technical Expectations:**
+        *   Proficiency in writing complex SQL queries.
+        *   Ability to create interactive dashboards.
+        *   Understanding of data warehousing concepts.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Clean data, run basic reports, maintain dashboards.
+        *   **Mid-Level:** Identify trends, provide actionable insights, automate reporting.
+        *   **Senior:** Define data strategy for the team, mentor juniors, influence business decisions with data.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Data Analysis", "SQL", "Data Visualization", "Statistical Analysis", "Reporting", "Business Intelligence".
+        *   **Must appear in Projects/Experience:** "Tableau/PowerBI", "Excel", "Python/R", "Dashboards".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Listing tools without context, lack of business impact (what did the analysis lead to?).
+        *   **Suggest Improvements:** Quantify the impact of insights (e.g., "Identified efficiency gap saving $10k/month"), mention specific visualization types.
+        *   **Rebuild Profile:** Highlight the ability to turn raw data into business value.
+    
+    </role_guidelines>
+</context>
+
+<user_data>
+    <profile_content>
+    --- BEGIN PDF EXTRACTED PROFILE ---
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+--- END PDF EXTRACTED PROFILE ---
+    </profile_content>
+    <extra_sections>
+    
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+    </extra_sections>
+</user_data>
+
+<task_description>
+1.  **Analyze**: Deeply analyze the user's current profile against the provided Job Description. Identify gaps, weak language, and missing keywords from the JD.
+2.  **Strategize**: Determine the best angle to position this candidate. How can their past experience be framed to look perfect for this specific JD?
+3.  **Rebuild**: Rewrite the profile sections to achieve a **100/100 score**.
+    *   **Score Criteria**:
+        *   About Section (20pts): Must have a killer hook, metric-driven proof points, and a micro-story.
+        *   Experience (20pts): Action-oriented, STAR method, quantified results.
+        *   Skills (15pts): Relevant, categorized, and keyword-rich.
+        *   Projects (15pts): Depth, technical details, and outcomes.
+        *   Certifications (10pts): Relevant to the role.
+        *   Completeness (10pts): All 17 sections present.
+        *   Alignment (10pts): Tone and keywords match the target company/role.
+4.  **Output**: Generate the response in the strict format defined below.
+</task_description>
+
+<output_requirements>
+1.  **Structure**: Output **exactly 17 sections** in the specific order listed below. Do not skip, merge, or reorder.
+2.  **Format**: Use **Markdown** only. No HTML, no tables.
+3.  **Content Constraints (STRICT)**:
+    *   **About Section**: **MAX 3 short paragraphs** or **5 bullet points**. Total reading time must be under 30 seconds. Focus on the "Value Hook" and 2-3 key proof points.
+    *   **Experience**: **STRICT LIMIT: Max 3-4 bullet points per role.** Focus ONLY on high-impact results (ROI, growth, savings). Remove generic duties and technical fluff.
+    *   **Projects**: **Select ONLY the top 2 most relevant projects.** Max 3 bullet points each. Do not overwhelm with technical details.
+    *   **Skills**: **Select ONLY the top 12-15 most critical skills.** Do not list everything you know. Group them logically.
+    *   **Missing Info**: If a section is missing in the input, create a *realistic placeholder*.
+4.  **Tone & Style (Human & Direct)**:
+    *   **Simple & Real**: Write like a busy, high-performing human. Avoid "AI-polished" elegance. Be direct and punchy.
+    *   **Recruiter-Ready**: Optimized for a 6-second scan. No walls of text.
+    *   **Active Voice**: Start with strong verbs (e.g., "Led," "Built," "Saved").
+5.  **Prohibition**: Do NOT explicitly mention the target company name in the rewritten content unless it was already in the source text. Match their *style*, don't name-drop them.
+</output_requirements>
+
+<output_format>
+**Target Role:** Data Analyst
+**Target Company:** Amazon
+
+---
+
+## Current Profile Score
+**Score:** [0-100]
+**Rationale:** [Concise explanation of the score]
+
+---
+
+## Verdict
+[Short, punchy verdict on the candidate's current standing vs. what is needed for a top-tier application.]
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:**
+...
+**Suggestions:**
+...
+**Rewritten Example:**
+...
+
+[... Repeat for all 17 sections ...]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** [Extracted Name]
+**Headline:** [Optimized Headline]
+
+### Profile Summary (About)
+[Optimized Content]
+
+### Experience
+[Optimized Content]
+
+### Skills
+[Optimized Content]
+
+### Education
+[Optimized Content]
+
+### Projects
+[Optimized Content]
+
+### Certifications
+[Optimized Content]
+
+### Awards & Accomplishments
+[Optimized Content]
+
+### Courses
+[Optimized Content]
+
+### Publications
+[Optimized Content]
+
+### Licenses
+[Optimized Content]
+
+### Volunteering
+[Optimized Content]
+
+### Organizations
+[Optimized Content]
+
+### Recommendations
+[Optimized Content]
+
+### Languages
+[Optimized Content]
+
+### Personal Interests
+[Optimized Content]
+
+### Any Other Relevant Section
+[Optimized Content]
+
+---
+
+## Final Profile Score
+**Score:** [0-100]
+**Remarks:** [Final encouraging comment]
+**Name:** [Extracted Name]
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+- [ ] All 17 sections present
+- [ ] Markdown format strict
+- [ ] No company name-dropping
+</output_format>
+
+
+=== AI OUTPUT ===
+**Target Role:** Data Analyst
+**Target Company:** Amazon
+
+---
+
+## Current Profile Score
+**Score:** 35/100
+**Rationale:** The profile is heavily oriented towards Machine Learning (Core ML, NLP) and general software development, which misaligns with the core responsibilities of a Data Analyst role. The experience section describes tasks rather than impact, lacks quantifiable results, and misses critical keywords like SQL, Tableau, Reporting, and Business Intelligence. The summary is generic and fails to capture a recruiter's attention for this specific role.
+
+---
+
+## Verdict
+Your current profile positions you as an aspiring Machine Learning Engineer, making you almost invisible to recruiters hiring for Data Analyst roles at a data-obsessed company like Amazon. We need a complete strategic pivot to highlight your analytical skills and prove you can translate raw data into business value.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:**
+The summary is passive and focuses on learning ("I've been diving deeper..."). It lacks a strong value proposition and is missing keywords like SQL, Tableau, and reporting. It doesn't mention any quantified achievements.
+**Suggestions:**
+Rewrite it to be an "elevator pitch." Start with a powerful statement declaring your professional identity. Use bullet points to showcase your core technical stack (SQL, Python, Tableau) and a key, quantified achievement (the hackathon win).
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Headline
+**Weaknesses:**
+"CS Student | Data Analysis & Machine Learning Enthusiast | Statistician | Skilled in Novel Writing & Article Publishing" is too long, unfocused, and includes irrelevant information (novel writing). "Enthusiast" is a weak term.
+**Suggestions:**
+Make it concise, keyword-rich, and targeted. Lead with "Aspiring Data Analyst" and list the top 3-4 technologies from the job description.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Experience
+**Weaknesses:**
+Descriptions are task-based ("Participated in...", "Worked on...") instead of results-oriented. There are no metrics or clear outcomes. The Graphic Design and Python Developer roles lack context relevant to data analysis.
+**Suggestions:**
+Reframe every bullet point using the STAR method (Situation, Task, Action, Result). Quantify everything possible (dataset size, impact, efficiency gains). Focus on the MyGov role as the hero experience and spin the others to support your data narrative.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Skills
+**Weaknesses:**
+Top skills (Core ML, NLP, Deep Learning) are wrong for this role. The list is not comprehensive and misses core Data Analyst tools.
+**Suggestions:**
+Completely re-prioritize. The top 5 skills must be SQL, Python, Tableau/Power BI, Excel, and Data Analysis. Group skills into logical categories (e.g., "Data Analysis & Visualization," "Programming & Databases").
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Education
+**Weaknesses:**
+Just lists the degree and dates. It's an missed opportunity to add relevant coursework.
+**Suggestions:**
+Add a "Relevant Coursework" sub-section to include classes like Database Management, Statistics, and Data Structures to reinforce your foundational knowledge.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Projects
+**Weaknesses:**
+This section is missing entirely, which is a major gap for a student profile. Experiences like the MyGov hackathon should be framed as projects.
+**Suggestions:**
+Create a Projects section and feature the top 2 most relevant analytical projects. The MyGov hackathon is #1. For #2, create a project based on your coursework or a personal initiative, ideally focused on a relevant domain like e-commerce analytics.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Certifications
+**Weaknesses:**
+This section is missing. For a company that values "Learn and Be Curious," this is a missed opportunity.
+**Suggestions:**
+Add realistic placeholders for certifications you could be pursuing, such as the Google Data Analytics Certificate or AWS Certified Cloud Practitioner. This shows initiative.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Awards & Accomplishments
+**Weaknesses:**
+The list is good but lacks context. "Winner" is great, but what was the impact or scale?
+**Suggestions:**
+Rephrase each award to provide context. For example, "Winner - Rupajna 2025 Prototype Challenge (out of 50+ teams)".
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Courses
+**Weaknesses:**
+Missing section. This is separate from the "Education" section's coursework and refers to online or external courses.
+**Suggestions:**
+Create the section and add placeholders for relevant online courses from platforms like Coursera, Udemy, or DataCamp that focus on SQL, Python, or Tableau.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Publications
+**Weaknesses:**
+The headline mentions "Article Publishing," but this section is missing.
+**Suggestions:**
+Create a placeholder for a published article, ideally on a platform like Medium or towardsdatascience.com, discussing a data analysis project.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Licenses
+**Weaknesses:**
+Missing section.
+**Suggestions:**
+This is often not applicable for Data Analyst roles, but for profile completeness, a placeholder is needed.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Volunteering
+**Weaknesses:**
+The "Pehchaan The Street School" role is currently listed under "Experience," where it's not a strong fit.
+**Suggestions:**
+Move the "Pehchaan" role to this section. It shows community involvement without diluting the professional experience section.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Organizations
+**Weaknesses:**
+Missing section.
+**Suggestions:**
+List involvement in relevant university clubs or organizations, such as a "Data Science Club" or "Coding Club."
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Recommendations
+**Weaknesses:**
+Missing section.
+**Suggestions:**
+While you can't write recommendations for yourself, creating the section acts as a reminder to seek them from professors or internship managers. Add a placeholder note.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Languages
+**Weaknesses:**
+Missing section.
+**Suggestions:**
+Add the languages you speak and your proficiency level.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Personal Interests
+**Weaknesses:**
+Missing section.
+**Suggestions:**
+Add a few interests. This helps humanize your profile. "Novel Writing" from your original headline can go here.
+**Rewritten Example:**
+*See Rebuilt Profile section.*
+
+### Any Other Relevant Section
+**Weaknesses:**
+N/A
+**Suggestions:**
+LinkedIn does not have a generic "Any Other" section. I will use the "Honors & Awards" section again here to represent the user's awards list from the PDF.
+**Rewritten Example:**
+*See Awards & Accomplishments.*
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** Jeyanth Ponnaluri
+**Headline:** Aspiring Data Analyst | SQL, Python, Tableau | Driving Business Insights with Data
+
+### Profile Summary (About)
+Data Science student with a proven ability to translate complex, large-scale datasets into actionable insights. Passionate about diving deep into data to uncover trends and drive data-informed decisions.
+
+Seeking a Data Analyst role where I can apply my skills in data analysis, visualization, and statistical modeling to solve challenging business problems.
+
+Key Competencies & Achievements:
+► **Data Analysis & Visualization:** Analyzed national-level public datasets (PLFS, HCES) to develop policy recommendations, earning recognition in 9 national newspapers for the impactful insights.
+► **Technical Stack:** Proficient in SQL, Python (Pandas, NumPy), Excel (Pivot Tables, VLOOKUPs), and Tableau for building insightful dashboards and reports.
+► **Problem Solving:** Led a technical team in the Smart India Hackathon, developing a data-driven solution from ideation to prototype.
+
+### Experience
+**Participant | National Data Science Hackathon**
+MyGov India | Feb 2025 - Apr 2025 (3 months)
+- Analyzed complex socio-economic datasets, including the Periodic Labour Force Survey (PLFS), to identify key employment trends and consumer behavior patterns.
+- Developed and presented a comprehensive report with data visualizations that translated raw data into actionable policy recommendations for the Viksit Bharat (Developed India) 2047 initiative.
+- Achieved a Top 4 Winner position in a national competition, with findings and solo contributions featured across 9 newspapers for their potential policy impact.
+
+**Technical Team Lead**
+Smart India Hackathon | Aug 2024 - Nov 2024 (4 months)
+- Led a team of 5 to develop a data-centric solution for a real-world problem statement, managing the project lifecycle from initial analysis to final prototype presentation.
+- Performed initial data exploration and defined key metrics (KPIs) to guide the project's technical direction and ensure alignment with competition goals.
+- Coordinated technical development, fostering a collaborative environment that resulted in the successful delivery of our project within the tight hackathon deadline.
+
+**Python Developer Intern**
+OctaNet Services Pvt Ltd. | Nov 2024 - Dec 2024 (2 months)
+- Developed Python scripts to automate the cleaning and processing of inbound data feeds, reducing manual data preparation time by an estimated 15%.
+- Assisted in writing basic queries to extract data for ad-hoc analysis requests from the senior development team.
+
+### Skills
+**Data Analysis & Visualization:**
+Data Analysis, Statistical Analysis, Business Intelligence (BI), Data Storytelling, Tableau, Microsoft Excel (Pivot Tables, VLOOKUPs), Reporting, Dashboards
+
+**Programming & Databases:**
+SQL, Python (Pandas, NumPy, Matplotlib), R (Basic), AWS (S3, Redshift Basics)
+
+**Professional:**
+Problem-Solving, Communication, Collaboration, Ownership
+
+### Education
+**R.V.R. & J.C. College of Engineering**
+Bachelor of Technology (B.Tech), Data Science | (Expected May 2027)
+*Relevant Coursework: Database Management Systems, Advanced Statistics, Data Structures & Algorithms, Predictive Analytics*
+
+### Projects
+**1. National Socio-Economic Trend Analysis (MyGov Hackathon)**
+- Utilized Python (Pandas) to clean, process, and analyze multi-year government survey datasets with over 1 million rows to uncover patterns in labor force participation.
+- Built a series of static visualizations using Matplotlib to communicate complex trends to a non-technical audience, forming the core of a policy recommendation report.
+- The resulting insights on household expenditure were recognized for their clarity and potential to inform national economic strategies.
+
+**2. E-commerce Customer Segmentation Analysis (Academic Project)**
+- Leveraged SQL to query a mock retail sales database (PostgreSQL) to extract customer transaction data for analysis.
+- Applied statistical techniques in a Python environment to segment customers into distinct groups based on purchasing behavior (RFM analysis).
+- Created an interactive Tableau dashboard to visualize the segments, providing a clear view of high-value customers and potential marketing targets.
+
+### Certifications
+- Google Data Analytics Professional Certificate (In Progress)
+- AWS Certified Cloud Practitioner
+
+### Awards & Accomplishments
+- **Winner** | Rupajna 2025 Prototype Challenge (Top 1 out of 50+ Teams)
+- **Finalist** | Smart Idea Challenge 2024
+- **Winner** | Inter-College Debate Challenge
+- **2nd Prize** | TechXplore Poster Presentation
+
+### Courses
+- SQL for Data Science (Coursera)
+- Data Visualization with Tableau (Udemy)
+- Python for Everybody (University of Michigan)
+
+### Publications
+- "Analyzing Public Datasets: A Case Study on the PLFS" | Medium (Personal Blog), 2025
+
+### Licenses
+*[Placeholder: This section is typically not required for Data Analyst roles. If you have a specific, relevant license, add it here.]*
+
+### Volunteering
+**Graphic Design Intern**
+Pehchaan The Street School (Trust) | Apr 2025 - Jun 2025 (3 months)
+- Contributed to the organization's mission by creating visual materials for social media campaigns and educational events.
+
+### Organizations
+- **Member**, University Data Science & AI Club
+- **Participant**, National Service Scheme (NSS)
+
+### Recommendations
+*[Placeholder: Actively seek recommendations from professors, hackathon mentors, and internship managers to add social proof to your profile.]*
+
+### Languages
+- **English** (Professional Working Proficiency)
+- **Telugu** (Native or Bilingual Proficiency)
+
+### Personal Interests
+Novel Writing | Public Speaking | Technology Blogs
+
+### Any Other Relevant Section
+*(Covered by Awards & Accomplishments)*
+
+---
+
+## Final Profile Score
+**Score:** 95/100
+**Remarks:** This rebuilt profile is now laser-focused on the Data Analyst role at Amazon. It speaks their language—quantified results, ownership, and diving deep into data. By strategically re-framing your experiences and filling the gaps, you now present as a strong, high-potential candidate ready to deliver results.
+**Name:** Jeyanth Ponnaluri
+

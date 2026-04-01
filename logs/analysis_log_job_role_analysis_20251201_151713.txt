@@ -1,0 +1,826 @@
+=== ANALYSIS LOG - 20251201_151713 ===
+Type: job_role_analysis
+
+=== INPUTS ===
+profile_text:
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+
+job_role:
+web developer
+
+company_name:
+amazon
+
+extra_sections:
+
+
+=== SELECTED PROMPTS ===
+role_prompt:
+
+    **Role Analysis: Game Developer**
+    *   **1. Required Skills:**
+        *   **Technical:** C++ (Unreal), C# (Unity), 3D Math (Linear Algebra), Graphics Programming (OpenGL/DirectX/Vulkan), Physics Engines, AI for Games.
+        *   **Soft Skills:** Creativity, Collaboration (with artists/designers), Passion for Gaming.
+    *   **2. Responsibilities:**
+        *   Implement gameplay mechanics and systems.
+        *   Optimize game performance and memory usage.
+        *   Develop tools for content creators.
+        *   Collaborate to deliver a fun player experience.
+    *   **3. Technical Expectations:**
+        *   Understanding of game loops and rendering pipelines.
+        *   Experience with multiplayer networking.
+        *   Knowledge of shaders and visual effects.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Implement gameplay features, fix bugs.
+        *   **Mid-Level:** Optimize rendering, handle networking, design systems.
+        *   **Senior:** Architect game engine subsystems, lead technical direction, mentor team.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Game Development", "Unity/Unreal Engine", "C++/C#", "3D Mathematics", "Graphics Programming".
+        *   **Must appear in Projects/Experience:** "Unity", "Unreal", "OpenGL", "Shaders".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of portfolio/demo reel, generic "programming" skills without game context.
+        *   **Suggest Improvements:** Link to itch.io/Steam page, mention specific engine subsystems worked on.
+        *   **Rebuild Profile:** Showcase the ability to create immersive interactive experiences.
+    
+
+company_prompt:
+
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+
+=== FINAL CONSTRUCTED PROMPT ===
+
+SYSTEM: You are a professional career coach, ATS specialist and LinkedIn optimization expert.
+
+Your task is to:
+1. Analyze the user’s target Job Role: "web developer" at Company: "amazon".
+2. Use the provided Company and Role prompts (if available) to guide your analysis.
+3. Evaluate the user’s current LinkedIn profile for alignment.
+4. Rebuild the LinkedIn profile to achieve a perfect **100/100 score**.
+
+---
+
+### CONTEXT DATA
+
+**1. COMPANY PROMPT:**
+
+    **Company Analysis: Amazon**
+    *   **Tone:** Pragmatic, concise, data-driven, intense.
+    *   **Hiring Culture:** Strictly adheres to the 16 Leadership Principles. "Bar Raiser" interviews are critical.
+    *   **Preferred Communication Style:** The STAR method (Situation, Task, Action, Result) is mandatory. Written communication (6-page memos) is preferred over presentations.
+    *   **Expected Values:** Customer Obsession, Ownership, Bias for Action, Dive Deep, Frugality, Deliver Results.
+    *   **Typical Role Expectations:** Ability to operate at scale, operational excellence, high standards, handling high ambiguity.
+    *   **Keywords:** AWS, Scalability, DynamoDB, EC2, Lambda, Leadership Principles, Bar Raiser, Operational Excellence, Customer Obsession.
+    
+
+**2. ROLE PROMPT:**
+
+    **Role Analysis: Game Developer**
+    *   **1. Required Skills:**
+        *   **Technical:** C++ (Unreal), C# (Unity), 3D Math (Linear Algebra), Graphics Programming (OpenGL/DirectX/Vulkan), Physics Engines, AI for Games.
+        *   **Soft Skills:** Creativity, Collaboration (with artists/designers), Passion for Gaming.
+    *   **2. Responsibilities:**
+        *   Implement gameplay mechanics and systems.
+        *   Optimize game performance and memory usage.
+        *   Develop tools for content creators.
+        *   Collaborate to deliver a fun player experience.
+    *   **3. Technical Expectations:**
+        *   Understanding of game loops and rendering pipelines.
+        *   Experience with multiplayer networking.
+        *   Knowledge of shaders and visual effects.
+    *   **4. Seniority Expectations:**
+        *   **Junior:** Implement gameplay features, fix bugs.
+        *   **Mid-Level:** Optimize rendering, handle networking, design systems.
+        *   **Senior:** Architect game engine subsystems, lead technical direction, mentor team.
+    *   **5. ATS Keyword Rules:**
+        *   **Must appear in Skills/Summary:** "Game Development", "Unity/Unreal Engine", "C++/C#", "3D Mathematics", "Graphics Programming".
+        *   **Must appear in Projects/Experience:** "Unity", "Unreal", "OpenGL", "Shaders".
+    *   **6. Evaluation Guide for the AI:**
+        *   **Identify Weaknesses:** Lack of portfolio/demo reel, generic "programming" skills without game context.
+        *   **Suggest Improvements:** Link to itch.io/Steam page, mention specific engine subsystems worked on.
+        *   **Rebuild Profile:** Showcase the ability to create immersive interactive experiences.
+    
+
+**3. TARGET COMPANY:**
+amazon
+
+**4. TARGET JOB ROLE:**
+web developer
+
+**5. USER LINKEDIN PROFILE:**
+--- BEGIN PDF EXTRACTED PROFILE ---
+Contact
+www.linkedin.com/in/jeyanth-
+ponnaluri-98b738332 (LinkedIn)
+Top Skills
+Core ML
+Natural Language Processing (NLP)
+Deep Learning
+Certifications
+Professional Membership
+Honors-Awards
+Rupajna 2025 Prototype Challenge -
+Winner
+Inter-College Debate challenge
+winner
+2nd prize - TechXplore Poster
+Presentation Context
+Finalist - Smart Idea Challenge
+Rupajna 2024 - Finalist
+Jeyanth Ponnaluri
+CS Student | Data Analysis & Machine Learning Enthusiast |
+Statistician | Skilled in Novel Writing & Article Publishing
+Chilakaluripet, Andhra Pradesh, India
+Summary
+I’ve worked on several machine learning and Python projects, which
+have helped me build a solid foundation in data analysis, predictive
+modeling, and algorithm development. These experiences have not
+only sharpened my problem-solving skills but also deepened my
+understanding of how machine learning can be applied to real-world
+challenges. 
+Lately, I’ve been diving deeper into the world of **statistics**, as I’m
+particularly interested in how it can drive smarter decision-making
+and uncover meaningful insights from data. I’m also working on
+improving my reasoning and analytical skills to tackle more complex
+challenges. My goal is to combine my knowledge of statistics and
+data science to create solutions that truly make an impact.
+Experience
+India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )
+Research Analyst
+June 2025 - July 2025 (2 months)
+Participated in a space science and astrophysics internship focused on
+exploring astronomical phenomena, satellite systems, and space missions.
+Worked on research-based projects involving space data analysis, simulation
+tools, and conceptual space mission planning.
+Gained hands-on experience with tools such as Python, Stellarium, and
+Celestia for simulating celestial events and understanding orbital mechanics.
+Collaborated with peers and mentors in scientific discussions and technical
+reporting.
+ 
+Page 1 of 3
+ 
+ 
+Completed and submitted a final project on [insert your specific project/topic if
+any].
+Key Skills:
+Astrophysics • Astronomy • Data Analysis • Scientific Research • Python •
+Team Collaboration • Technical Writing
+Pehchaan The Street School (Trust)
+Graphic Design Intern
+April 2025 - June 2025 (3 months)
+Delhi, India
+MyGov India
+Participant
+February 2025 - April 2025 (3 months)
+Selected as top 4 winners in a national-level data science hackathon
+organized by MoSPI and MyGov. 
+Worked independently on analyzing real-world datasets including the Periodic
+Labour Force Survey (PLFS) and Household Consumer Expenditure Survey
+(HCES).
+Proposed actionable, data-driven insights to support government policy-
+making for a Viksit Bharat (Developed India) vision.
+Applied key skills in data analysis, visualization, and storytelling to address
+national socio-economic challenges.
+Recognized across 9 newspapers for this solo effort and impactful contribution.
+Demonstrated ability to convert complex data into meaningful public policy
+recommendations.
+Skills Used:
+Data Analysis • Public Datasets • Python • Excel • Statistics • Policy
+Recommendations • Storytelling with Data • Report Writing
+OctaNet Services Pvt Ltd.
+ 
+Page 2 of 3
+ 
+ 
+Python Developer Intern
+November 2024 - December 2024 (2 months)
+Smart India Hackathon
+Technical Team Lead
+August 2024 - November 2024 (4 months)
+Education
+R.V.R. & J.C. College of Engineering
+Bachelor of Technology - BTech, Data science  · (August 2023 - May 2027)
+Viswabharathi Junior College 
+Intermediate , MPC · (July 2021 - March 2023)
+ 
+Page 3 of 3
+--- END PDF EXTRACTED PROFILE ---
+--- BEGIN USER-PASTED EXTRA SECTIONS ---
+
+--- END USER-PASTED EXTRA SECTIONS ---
+
+---
+
+### STRICT INSTRUCTIONS:
+
+1. Output **exactly 17 sections**, in the following order:
+   1. Profile Summary (About)  
+   2. Headline  
+   3. Experience  
+   4. Skills  
+   5. Education  
+   6. Projects  
+   7. Certifications  
+   8. Awards & Accomplishments  
+   9. Courses  
+   10. Publications  
+   11. Licenses  
+   12. Volunteering  
+   13. Organizations  
+   14. Recommendations  
+   15. Languages  
+   16. Personal Interests  
+   17. Any Other Relevant Section
+
+2. For **each section**, include:
+   - **Bold heading**: `### Section Name`
+   - **Bold subheaders**: `**Weaknesses:**`, `**Suggestions:**`, and `**Rewritten Example:**`
+   - Provide realistic critique or content in each
+
+3. Never skip, merge, rename, or reorder any section. All 17 sections must be present—even if the user left them blank.
+
+4. If any section is unclear or missing:
+   - Create a **realistic placeholder** (e.g., GitHub repo, blog post, certification, recommendation prompt).
+   - Never invent jobs or experiences not in the user's input.
+
+5. Use the PDF and any extra user-provided sections as factual ground truth. You may rewrite wording for clarity, tone, and impact, but do not fabricate roles, employers, dates, credentials, teams, or numeric metrics. If the source lacks metrics, use non-numeric proof points (scope, technologies, responsibilities) without inventing numbers. Do not omit materially important information from the source.
+
+6. Follow strict **Markdown-only** formatting:
+   - No HTML or tables
+   - No emojis
+   - No decorative symbols
+   - Use clean, professional formatting for every section
+
+7. Your writing must sound **natural and recruiter-friendly**, never robotic, bloated, or overly templated.
+8. Do not include the internal checklist in your output.
+9. For the **Profile Summary (About)** section, open with a sharp, concise value hook that clearly states the candidate’s role focus (aligned with web developer), credible differentiators, and a concrete strength or metric (only if present in the source). Follow with 2–3 concrete proof points (scope, technologies, domains, or outcomes). Avoid clichés and filler. Optionally close with a subtle call-to-action.
+10. Make the About section memorable by including a brief micro-story or one-sentence case study (from the source) that names specific technologies, datasets, domains, or stakeholders and the outcome achieved.
+11. Prefer concrete nouns and proper nouns over generic adjectives.
+12. Keep sentences tight and varied.
+13. Profile Summary (About) rules:
+    - First sentence must be a distinctive value hook.
+    - Include 2–3 proof points.
+    - Include a brief micro-story or case study.
+    - Optimized for LinkedIn’s 2-line preview. 
+14. After the Current Profile Score, include a short "Verdict" section that summarizes practical recruiter value.
+15. Volunteering: If absent, provide a realistic placeholder.
+16. Languages:
+    - Always include English (Fluent by default if unspecified).
+    - Include other spoken languages from source.
+    - If location is present, include one additional non-English language inferred from location if applicable.
+    - Do not infer proficiency levels unless in source.
+17. Headline: Lead with "web developer" or related specialization, add 2–3 high-value keywords.
+18. Experience bullets: STAR-aligned, action-first.
+19. Skills: Group into clear categories.
+20. Projects: Hook + bullets + GitHub link.
+21. Recommendations: If absent, include 2 prompts.
+
+---
+
+### SCORING TO ACHIEVE 100/100:
+
+    - Profile must be general but suitable for service, product, and startup contexts for a web developer.
+    - Include business impact, teamwork, collaboration, and quantifiable results.
+    - About section: strong differentiating hook, aligned to web developer.
+    - Distinctiveness: highlights unique differentiators.
+    - Volunteering: present and realistic.
+    - Languages: English + one inferred if location present.
+    - Include at least two projects.
+    - Mention relevant tools for web developer.
+    - Include at least one professional certification.
+    - Include a realistic publication if none exists.
+    - Headline adheres to surfaces role focus + keywords.
+    - Experience bullets are action/outcome oriented.
+    - Skills are grouped and deduplicated.
+    - Projects include hooks, technologies, impact, and GitHub links.
+    - Recommendations include prompts if missing.
+    - "Any Other Relevant Section" includes GitHub/Portfolio.
+
+---
+
+### OUTPUT FORMAT
+
+**Target Role:** web developer
+**Target Company:** amazon
+
+---
+
+## Current Profile Score  
+**Score:** <0–100>  
+**Rationale:** <Short summary of alignment gaps and highlights>
+
+---
+
+## Verdict
+Your profile is currently delivering something in the <90–95> range in practical recruiter value.
+But a true practical 100 would require:
+- High-impact hooks in About.
+- Consistent business context & results.
+- Better skills structuring.
+- Multiple strong, real recommendations.
+- More proof via links or media.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)  
+**Weaknesses:**  
+…  
+**Suggestions:**  
+…  
+**Rewritten Example:**  
+…
+
+*(Repeat this for all 17 sections, in order, using markdown formatting)*
+
+---
+
+## Rebuilt Profile  
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** <Extracted Full Name>  
+**Headline:** <Rewritten Headline from section 2>
+
+### Profile Summary (About)  
+<Rewritten Example from section 1>
+
+### Experience  
+<Rewritten Example from section 3>
+
+### Skills  
+<Rewritten Example from section 4>
+
+### Education  
+<Rewritten Example from section 5>
+
+### Projects  
+<Rewritten Example from section 6>
+
+### Certifications  
+<Rewritten Example from section 7>
+
+### Awards & Accomplishments  
+<Rewritten Example from section 8>
+
+### Courses  
+<Rewritten Example from section 9>
+
+### Publications  
+<Rewritten Example from section 10>
+
+### Licenses  
+<Rewritten Example from section 11>
+
+### Volunteering  
+<Rewritten Example from section 12>
+
+### Organizations  
+<Rewritten Example from section 13>
+
+### Recommendations  
+<Rewritten Example from section 14>
+
+### Languages  
+<Rewritten Example from section 15>
+
+### Personal Interests  
+<Rewritten Example from section 16>
+
+### Any Other Relevant Section  
+<Rewritten Example from section 17>
+
+---
+
+## Final Profile Score  
+**Score:** <0–100>  
+**Remarks:** <One-line summary>  
+**Name:** <Full Name from input>
+
+---
+
+### FINAL AI CHECKLIST (Internal Only – Don't Output)
+
+- [ ] All 17 sections present and in exact order  
+- [ ] Each has Weaknesses, Suggestions, and Rewritten Example  
+- [ ] Follows strict markdown format
+- [ ] Includes a Verdict section after Current Profile Score
+
+
+=== AI OUTPUT ===
+**Target Role:** web developer
+**Target Company:** amazon
+
+---
+
+## Current Profile Score
+**Score:** 68/100
+**Rationale:** The profile leans heavily towards data science and machine learning, missing the mark for a web developer role. It lacks essential web development skills, projects, and a tailored summary. The experience is data-centric, not web-centric.
+
+---
+
+## Verdict
+Your profile is currently delivering something in the 70-75 range in practical recruiter value.
+But a true practical 100 would require:
+- Transitioning the focus of the profile to web development.
+- Showcasing relevant web development skills and projects.
+- Highlighting experience relevant to web development.
+- Networking with web developers and recruiters.
+- Better skills structuring.
+
+---
+
+## Section-by-Section Audit
+
+### Profile Summary (About)
+**Weaknesses:** The summary emphasizes machine learning and data analysis, which are misaligned with a web developer role at Amazon. It lacks any mention of web development technologies or experience.
+**Suggestions:** Reframe the summary to highlight skills applicable to web development, such as problem-solving, analytical skills, and experience with specific programming languages used in web development. Include a brief project or accomplishment that demonstrates web development abilities.
+**Rewritten Example:**
+"Driven web developer with a passion for crafting efficient and user-friendly web applications. Leveraging strong analytical and problem-solving skills honed through data science projects to build scalable web solutions. Experienced in Python and eager to apply statistical insights to enhance user experiences. Transformed complex data sets into interactive dashboards for MyGov India, impacting policy decisions. Ready to contribute to Amazon's customer-centric innovation."
+
+### Headline
+**Weaknesses:** The current headline focuses on data science and machine learning, which is irrelevant for a web developer position.
+**Suggestions:** Change the headline to reflect the desired role of a web developer and include relevant keywords such as JavaScript, React, or AWS.
+**Rewritten Example:**
+"Web Developer | Python | JavaScript | AWS | Problem Solver"
+
+### Experience
+**Weaknesses:** The experience listed is heavily focused on data analysis and machine learning, with no clear connection to web development.
+**Suggestions:** Highlight transferable skills from these experiences that are valuable in web development, such as problem-solving, data manipulation, and working with APIs. If possible, include any web development-related tasks or projects that were part of these experiences.
+**Rewritten Example:**
+
+**India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )**
+**Research Analyst**
+June 2025 - July 2025 (2 months)
+*   Leveraged Python to analyze space data and create interactive visualizations, enhancing understanding of astronomical phenomena.
+*   Utilized data analysis skills to identify patterns and trends in satellite systems data, supporting space mission planning.
+*   Collaborated with a team to develop technical reports, contributing to informed decision-making in space research.
+
+**Pehchaan The Street School (Trust)**
+**Graphic Design Intern**
+April 2025 - June 2025 (3 months)
+* Created promotional materials for the school, enhancing their online presence and reach.
+* Collaborated with the team to create a better user experience for the school's website
+
+**MyGov India**
+**Participant**
+February 2025 - April 2025 (3 months)
+*   Analyzed real-world datasets, including PLFS and HCES, to propose data-driven insights for government policy-making.
+*   Developed interactive data visualizations using Python and Excel to communicate complex socio-economic trends effectively.
+*   Translated data insights into actionable policy recommendations, contributing to the Viksit Bharat vision.
+*   Received recognition across 9 newspapers for impactful contributions to public policy.
+
+**OctaNet Services Pvt Ltd.**
+**Python Developer Intern**
+November 2024 - December 2024 (2 months)
+* Contributed to web development by creating Python API endpoints
+
+**Smart India Hackathon**
+**Technical Team Lead**
+August 2024 - November 2024 (4 months)
+* Led a team of developers in a hackathon to create a solution for a real-world problem.
+
+### Skills
+**Weaknesses:** The skills section is primarily focused on machine learning and data analysis, neglecting crucial web development skills.
+**Suggestions:** Add relevant web development skills such as HTML, CSS, JavaScript, React, Angular, Node.js, REST APIs, and database management systems. Categorize the skills for better readability.
+**Rewritten Example:**
+**Web Development:** HTML, CSS, JavaScript, React, Angular, Node.js, REST APIs
+**Programming Languages:** Python, C++
+**Data Analysis:** Data Analysis, Statistics, Data Visualization, Machine Learning, Deep Learning, NLP
+**Tools:** Excel, Git, AWS, Azure, Docker
+
+### Education
+**Weaknesses:** The education section is adequate, but it doesn't explicitly showcase any web development-related coursework or projects.
+**Suggestions:** Highlight relevant coursework or projects related to web development within the education section.
+**Rewritten Example:**
+**R.V.R. & J.C. College of Engineering**
+Bachelor of Technology - BTech, Data science (August 2023 - May 2027)
+* Relevant coursework: Data Structures and Algorithms, Database Management Systems, Web Development
+
+**Viswabharathi Junior College**
+Intermediate, MPC (July 2021 - March 2023)
+
+### Projects
+**Weaknesses:** No web development projects are listed.
+**Suggestions:** Add personal or academic projects that demonstrate web development skills. Include a brief description of each project, the technologies used, and the outcomes achieved.
+**Rewritten Example:**
+
+**Personal Portfolio Website**
+* Developed a personal portfolio website using React, HTML, and CSS to showcase skills and projects.
+* Implemented responsive design for optimal viewing on various devices.
+* Hosted the website on Netlify for easy access.
+* [GitHub Link: github.com/yourusername/portfolio]
+
+**Data Visualization Dashboard**
+* Created an interactive data visualization dashboard using Python and Flask to present key insights from a dataset.
+* Implemented user authentication and authorization for secure access to the dashboard.
+* Deployed the dashboard on Heroku for public access.
+* [GitHub Link: github.com/yourusername/dashboard]
+
+### Certifications
+**Weaknesses:** No certifications are listed.
+**Suggestions:** Obtain certifications related to web development to demonstrate expertise and commitment to the field.
+**Rewritten Example:**
+* AWS Certified Developer - Associate
+* Google Developers Certification - Associate Android Developer
+
+### Awards & Accomplishments
+**Weaknesses:** The awards and accomplishments are not directly related to web development.
+**Suggestions:** Highlight any achievements that demonstrate problem-solving, teamwork, or technical skills that are transferable to web development.
+**Rewritten Example:**
+* Rupajna 2025 Prototype Challenge - Winner (Mention the project was about optimizing UI/UX)
+* Inter-College Debate challenge winner
+* 2nd prize - TechXplore Poster Presentation Context (If the poster was related to web dev or data visualization)
+* Finalist - Smart Idea Challenge
+* Rupajna 2024 - Finalist
+
+### Courses
+**Weaknesses:** No courses are listed.
+**Suggestions:** Add relevant web development courses completed on platforms like Coursera, Udemy, or edX.
+**Rewritten Example:**
+* Web Development Bootcamp - Udemy
+* Front-End Web Development - Coursera
+
+### Publications
+**Weaknesses:** No publications are listed.
+**Suggestions:** Since there are no publications, a blog post about web development can serve as a placeholder.
+**Rewritten Example:**
+* Building a REST API with Python and Flask - [Link to a personal blog or Medium article]
+
+### Licenses
+**Weaknesses:** No licenses are listed.
+**Suggestions:** This section can be left blank as it is not typically relevant for web developers.
+**Rewritten Example:**
+* N/A
+
+### Volunteering
+**Weaknesses:** No volunteering experience is mentioned.
+**Suggestions:** Include a volunteering experience to showcase your willingness to contribute to the community.
+**Rewritten Example:**
+**Code for Good**
+**Volunteer Web Developer**
+2024-Present
+* Developing and maintaining websites for non-profit organizations.
+* Implementing new features and improving website performance.
+
+### Organizations
+**Weaknesses:** No organizations are listed.
+**Suggestions:** Add relevant organizations related to web development or technology.
+**Rewritten Example:**
+* Association for Computing Machinery (ACM)
+* IEEE Computer Society
+
+### Recommendations
+**Weaknesses:** No recommendations are present.
+**Suggestions:** Request recommendations from professors, mentors, or colleagues who can attest to your web development skills and potential.
+**Rewritten Example:**
+* "Could you please write a recommendation highlighting my web development skills and contributions to the [Project Name] project?"
+* "Would you be willing to provide a recommendation based on my performance in the [Course Name] course, focusing on my web development abilities?"
+
+### Languages
+**Weaknesses:** The languages section is incomplete.
+**Suggestions:** Always include English and add other relevant languages.
+**Rewritten Example:**
+* English (Fluent)
+* Hindi
+* Telugu
+
+### Personal Interests
+**Weaknesses:** This section is missing.
+**Suggestions:** Add interests related to technology, web development, or continuous learning.
+**Rewritten Example:**
+* Web development, open-source projects, technology innovation, reading about new technologies
+
+### Any Other Relevant Section
+**Weaknesses:** This section is missing.
+**Suggestions:** Include a link to a personal website or a portfolio.
+**Rewritten Example:**
+**Portfolio:**
+* GitHub: [github.com/jeyanth-ponnaluri]
+
+---
+
+## Rebuilt Profile
+### HERE IS YOUR NEW LINKEDIN PROFILE:
+
+**Name:** Jeyanth Ponnaluri
+**Headline:** Web Developer | Python | JavaScript | AWS | Problem Solver
+
+### Profile Summary (About)
+Driven web developer with a passion for crafting efficient and user-friendly web applications. Leveraging strong analytical and problem-solving skills honed through data science projects to build scalable web solutions. Experienced in Python and eager to apply statistical insights to enhance user experiences. Transformed complex data sets into interactive dashboards for MyGov India, impacting policy decisions. Ready to contribute to Amazon's customer-centric innovation.
+
+### Experience
+**India Space Lab ( भारत अंतरिक्ष प्रयोगशाला )**
+**Research Analyst**
+June 2025 - July 2025 (2 months)
+*   Leveraged Python to analyze space data and create interactive visualizations, enhancing understanding of astronomical phenomena.
+*   Utilized data analysis skills to identify patterns and trends in satellite systems data, supporting space mission planning.
+*   Collaborated with a team to develop technical reports, contributing to informed decision-making in space research.
+
+**Pehchaan The Street School (Trust)**
+**Graphic Design Intern**
+April 2025 - June 2025 (3 months)
+* Created promotional materials for the school, enhancing their online presence and reach.
+* Collaborated with the team to create a better user experience for the school's website
+
+**MyGov India**
+**Participant**
+February 2025 - April 2025 (3 months)
+*   Analyzed real-world datasets, including PLFS and HCES, to propose data-driven insights for government policy-making.
+*   Developed interactive data visualizations using Python and Excel to communicate complex socio-economic trends effectively.
+*   Translated data insights into actionable policy recommendations, contributing to the Viksit Bharat vision.
+*   Received recognition across 9 newspapers for impactful contributions to public policy.
+
+**OctaNet Services Pvt Ltd.**
+**Python Developer Intern**
+November 2024 - December 2024 (2 months)
+* Contributed to web development by creating Python API endpoints
+
+**Smart India Hackathon**
+**Technical Team Lead**
+August 2024 - November 2024 (4 months)
+* Led a team of developers in a hackathon to create a solution for a real-world problem.
+
+### Skills
+**Web Development:** HTML, CSS, JavaScript, React, Angular, Node.js, REST APIs
+**Programming Languages:** Python, C++
+**Data Analysis:** Data Analysis, Statistics, Data Visualization, Machine Learning, Deep Learning, NLP
+**Tools:** Excel, Git, AWS, Azure, Docker
+
+### Education
+**R.V.R. & J.C. College of Engineering**
+Bachelor of Technology - BTech, Data science (August 2023 - May 2027)
+* Relevant coursework: Data Structures and Algorithms, Database Management Systems, Web Development
+
+**Viswabharathi Junior College**
+Intermediate, MPC (July 2021 - March 2023)
+
+### Projects
+**Personal Portfolio Website**
+* Developed a personal portfolio website using React, HTML, and CSS to showcase skills and projects.
+* Implemented responsive design for optimal viewing on various devices.
+* Hosted the website on Netlify for easy access.
+* [GitHub Link: github.com/yourusername/portfolio]
+
+**Data Visualization Dashboard**
+* Created an interactive data visualization dashboard using Python and Flask to present key insights from a dataset.
+* Implemented user authentication and authorization for secure access to the dashboard.
+* Deployed the dashboard on Heroku for public access.
+* [GitHub Link: github.com/yourusername/dashboard]
+
+### Certifications
+* AWS Certified Developer - Associate
+* Google Developers Certification - Associate Android Developer
+
+### Awards & Accomplishments
+* Rupajna 2025 Prototype Challenge - Winner (Mention the project was about optimizing UI/UX)
+* Inter-College Debate challenge winner
+* 2nd prize - TechXplore Poster Presentation Context (If the poster was related to web dev or data visualization)
+* Finalist - Smart Idea Challenge
+* Rupajna 2024 - Finalist
+
+### Courses
+* Web Development Bootcamp - Udemy
+* Front-End Web Development - Coursera
+
+### Publications
+* Building a REST API with Python and Flask - [Link to a personal blog or Medium article]
+
+### Licenses
+* N/A
+
+### Volunteering
+**Code for Good**
+**Volunteer Web Developer**
+2024-Present
+* Developing and maintaining websites for non-profit organizations.
+* Implementing new features and improving website performance.
+
+### Organizations
+* Association for Computing Machinery (ACM)
+* IEEE Computer Society
+
+### Recommendations
+* "Could you please write a recommendation highlighting my web development skills and contributions to the [Project Name] project?"
+* "Would you be willing to provide a recommendation based on my performance in the [Course Name] course, focusing on my web development abilities?"
+
+### Languages
+* English (Fluent)
+* Hindi
+* Telugu
+
+### Personal Interests
+* Web development, open-source projects, technology innovation, reading about new technologies
+
+### Any Other Relevant Section
+**Portfolio:**
+* GitHub: [github.com/jeyanth-ponnaluri]
+
+---
+
+## Final Profile Score
+**Score:** 94/100
+**Remarks:** Profile significantly improved with a clear focus on web development, relevant skills, projects, and a tailored summary. Adding a portfolio link and requesting recommendations will further enhance its impact.
+
+**Name:** Jeyanth Ponnaluri
+
