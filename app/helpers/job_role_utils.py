@@ -1,15 +1,16 @@
-from .genai_utils import call_gemini_with_retries
 from .company_prompts import get_company_prompt
-from .role_prompts import get_role_prompt
+from .genai_utils import call_gemini_with_retries
 from .logging_utils import get_logger, log_analysis_details, safe_log_text
+from .role_prompts import get_role_prompt
 
 logger = get_logger(__name__)
+
 
 def analyze_job_role(profile_text, job_role, company_name=None, extra_sections=None):
     """
     Analyzes the profile specifically against a target Job Role and optional Company.
     """
-    
+
     extra_block = (
         f"\n--- BEGIN USER-PASTED EXTRA SECTIONS ---\n"
         f"{extra_sections if extra_sections is not None else ''}\n"
@@ -21,9 +22,7 @@ def analyze_job_role(profile_text, job_role, company_name=None, extra_sections=N
         f"--- END PDF EXTRACTED PROFILE ---"
     )
 
-    # Fetch specific prompts
     role_prompt_content = get_role_prompt(job_role)
-    
     company_prompt_content = ""
     if company_name:
         company_prompt_content = get_company_prompt(company_name)
@@ -201,30 +200,29 @@ You must strictly follow the output format and structural requirements.
 
 ---
 
-### FINAL AI CHECKLIST (Internal Only – Don't Output)
+### FINAL AI CHECKLIST (Internal Only â€“ Don't Output)
 - [ ] All 17 sections present
 - [ ] Markdown format strict
 - [ ] No company name-dropping
 </output_format>
 """
-    
+
     response = call_gemini_with_retries(prompt)
 
-    # Log the analysis details
     log_data = {
-        'type': 'job_role_analysis',
-        'inputs': {
-            'profile_text': profile_text,
-            'job_role': job_role,
-            'company_name': company_name,
-            'extra_sections': extra_sections
+        "type": "job_role_analysis",
+        "inputs": {
+            "profile_text": profile_text,
+            "job_role": job_role,
+            "company_name": company_name,
+            "extra_sections": extra_sections,
         },
-        'prompts': {
-            'role_prompt': role_prompt_content,
-            'company_prompt': company_prompt_content
+        "prompts": {
+            "role_prompt": role_prompt_content,
+            "company_prompt": company_prompt_content,
         },
-        'final_prompt': prompt,
-        'output': response
+        "final_prompt": prompt,
+        "output": response,
     }
     log_analysis_details(log_data)
 

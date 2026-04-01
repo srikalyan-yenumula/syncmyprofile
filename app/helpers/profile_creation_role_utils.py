@@ -1,34 +1,32 @@
-from .genai_utils import call_gemini_with_retries
 from .company_prompts import get_company_prompt
-from .role_prompts import get_role_prompt
+from .genai_utils import call_gemini_with_retries
 from .logging_utils import get_logger, log_analysis_details, safe_log_text
+from .role_prompts import get_role_prompt
 
 logger = get_logger(__name__)
+
 
 def create_linkedin_profile(user_data):
     """
     Generates a LinkedIn profile based on structured user input.
     user_data is a dictionary containing fields like name, education, skills, etc.
     """
-    
-    job_role = user_data.get('job_role', 'General Professional')
-    company_name = user_data.get('company_name', '')
-    
-    # Construct a text representation of the user's input
+
+    job_role = user_data.get("job_role", "General Professional")
+    company_name = user_data.get("company_name", "")
+
     profile_input_block = "--- BEGIN USER INPUT DATA ---\n"
     for key, value in user_data.items():
-        if key not in ['job_role', 'company_name']:
+        if key not in ["job_role", "company_name"]:
             profile_input_block += f"**{key.replace('_', ' ').title()}:**\n{value}\n\n"
     profile_input_block += "--- END USER INPUT DATA ---"
 
-    # Fetch specific prompts
     role_prompt_content = get_role_prompt(job_role)
     logger.info(
         "Role prompt preview for profile creation=%s",
         safe_log_text(role_prompt_content, max_length=160),
     )
-    
-    company_prompt_content = ""
+
     if company_name:
         company_prompt_content = get_company_prompt(company_name)
         logger.info(
@@ -194,25 +192,24 @@ You must strictly follow the output format and structural requirements.
 
 ---
 
-### FINAL AI CHECKLIST (Internal Only – Don't Output)
+### FINAL AI CHECKLIST (Internal Only â€“ Don't Output)
 - [ ] All 17 sections present
 - [ ] Markdown format strict
 - [ ] No company name-dropping
 </output_format>
 """
-    
+
     response = call_gemini_with_retries(prompt)
 
-    # Log the analysis details
     log_data = {
-        'type': 'profile_creation',
-        'inputs': user_data,
-        'prompts': {
-            'role_prompt': role_prompt_content,
-            'company_prompt': company_prompt_content
+        "type": "profile_creation",
+        "inputs": user_data,
+        "prompts": {
+            "role_prompt": role_prompt_content,
+            "company_prompt": company_prompt_content,
         },
-        'final_prompt': prompt,
-        'output': response
+        "final_prompt": prompt,
+        "output": response,
     }
     log_analysis_details(log_data)
 

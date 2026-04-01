@@ -1,11 +1,13 @@
-from .genai_utils import call_gemini_with_retries
-from .company_prompts import get_company_prompt
-from .role_prompts import get_role_prompt
-from .logging_utils import get_logger, log_analysis_details, safe_log_text
 import json
 import re
 
+from .company_prompts import get_company_prompt
+from .genai_utils import call_gemini_with_retries
+from .logging_utils import get_logger, log_analysis_details, safe_log_text
+from .role_prompts import get_role_prompt
+
 logger = get_logger(__name__)
+
 
 def extract_role_and_company(job_desc):
     """
@@ -15,7 +17,7 @@ def extract_role_and_company(job_desc):
     prompt = f"""
     Extract the 'Job Role' and 'Company Name' from the following Job Description.
     If not explicitly mentioned, infer the most likely role and use "General" for company.
-    
+
     Job Description:
     {job_desc[:2000]}  # Truncate to avoid excessive token usage for extraction
 
@@ -27,7 +29,6 @@ def extract_role_and_company(job_desc):
     """
     try:
         response = call_gemini_with_retries(prompt)
-        # Clean response to ensure it's valid JSON
         response = re.sub(r"```json|```", "", response).strip()
         data = json.loads(response)
         return data.get("role", "Unknown Role"), data.get("company", "General")
@@ -35,12 +36,12 @@ def extract_role_and_company(job_desc):
         logger.warning("Error extracting role/company from JD: %s", safe_log_text(e))
         return "Unknown Role", "General"
 
+
 def analyze_job_description(profile_text, job_desc, extra_sections=None):
     """
     Analyzes the profile specifically against a provided Job Description.
     """
-    
-    # 1. Extract Role and Company from JD
+
     extracted_role, extracted_company = extract_role_and_company(job_desc)
     logger.info(
         "Extracted from JD role=%s company=%s",
@@ -48,7 +49,6 @@ def analyze_job_description(profile_text, job_desc, extra_sections=None):
         safe_log_text(extracted_company),
     )
 
-    # 2. Fetch specific prompts
     role_prompt_content = get_role_prompt(extracted_role)
     company_prompt_content = get_company_prompt(extracted_company)
 
@@ -176,7 +176,7 @@ You must strictly follow the output format and structural requirements.
 ## Rebuilt Profile
 ### HERE IS YOUR NEW LINKEDIN PROFILE:
 
-**Name:** [Extracted Name]
+**Name:** {extracted_role if extracted_role else "[Extracted from JD]"}
 **Headline:** [Optimized Headline]
 
 ### Profile Summary (About)
@@ -236,31 +236,30 @@ You must strictly follow the output format and structural requirements.
 
 ---
 
-### FINAL AI CHECKLIST (Internal Only – Don't Output)
+### FINAL AI CHECKLIST (Internal Only â€“ Don't Output)
 - [ ] All 17 sections present
 - [ ] Markdown format strict
 - [ ] No company name-dropping
 </output_format>
 """
-    
+
     response = call_gemini_with_retries(prompt)
 
-    # Log the analysis details
     log_data = {
-        'type': 'job_description_analysis',
-        'inputs': {
-            'profile_text': profile_text,
-            'job_desc': job_desc,
-            'extra_sections': extra_sections,
-            'extracted_role': extracted_role,
-            'extracted_company': extracted_company
+        "type": "job_description_analysis",
+        "inputs": {
+            "profile_text": profile_text,
+            "job_desc": job_desc,
+            "extra_sections": extra_sections,
+            "extracted_role": extracted_role,
+            "extracted_company": extracted_company,
         },
-        'prompts': {
-            'role_prompt': role_prompt_content,
-            'company_prompt': company_prompt_content
+        "prompts": {
+            "role_prompt": role_prompt_content,
+            "company_prompt": company_prompt_content,
         },
-        'final_prompt': prompt,
-        'output': response
+        "final_prompt": prompt,
+        "output": response,
     }
     log_analysis_details(log_data)
 

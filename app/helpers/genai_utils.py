@@ -7,7 +7,6 @@ import requests
 
 from .logging_utils import get_logger, safe_log_text
 
-# Shared constants
 REQUIRED_SECTIONS = [
     "Profile Summary (About)",
     "Headline",
@@ -51,7 +50,9 @@ def call_gemini_with_retries(prompt):
         logger.warning(
             "GEMINI_API_KEY is not set; Gemini requests will fail until configured."
         )
-        return "Error: Gemini API key not set. Set GEMINI_API_KEY in your environment or .env file."
+        return (
+            "Error: Gemini API key not set. Set GEMINI_API_KEY in your environment or .env file."
+        )
 
     def send_request(prompt_text, max_api_retries=4):
         payload = {"contents": [{"parts": [{"text": prompt_text}]}]}

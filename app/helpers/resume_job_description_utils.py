@@ -6,7 +6,6 @@ import json
 import re
 
 logger = get_logger(__name__)
-
 def extract_role_and_company(job_desc):
     """
     Extracts the Job Role and Company Name from the Job Description text.

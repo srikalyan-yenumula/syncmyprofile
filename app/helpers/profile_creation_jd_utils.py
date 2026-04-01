@@ -1,11 +1,13 @@
 import json
 import re
-from .genai_utils import call_gemini_with_retries
+
 from .company_prompts import get_company_prompt
-from .role_prompts import get_role_prompt
+from .genai_utils import call_gemini_with_retries
 from .logging_utils import get_logger, log_analysis_details, safe_log_text
+from .role_prompts import get_role_prompt
 
 logger = get_logger(__name__)
+
 
 def extract_role_company_from_jd(jd_text):
     """
@@ -14,40 +16,36 @@ def extract_role_company_from_jd(jd_text):
     """
     extraction_prompt = f"""
     Analyze the following Job Description and extract the 'Job Role' (Title) and 'Company Name'.
-    
+
     Job Description:
     {jd_text[:2000]}  # Truncate to avoid huge context if JD is very long
-    
+
     Return ONLY a JSON object with keys 'role' and 'company'.
     Example: {{"role": "Software Engineer", "company": "Google"}}
     If not found, return empty strings.
     """
-    
+
     try:
         response = call_gemini_with_retries(extraction_prompt)
-        # Clean up code blocks if present
-        response = re.sub(r'```json', '', response)
-        response = re.sub(r'```', '', response).strip()
+        response = re.sub(r"```json", "", response)
+        response = re.sub(r"```", "", response).strip()
         data = json.loads(response)
-        return data.get('role', ''), data.get('company', '')
+        return data.get("role", ""), data.get("company", "")
     except Exception as e:
         logger.warning("Error extracting role/company from JD: %s", safe_log_text(e))
-        return '', ''
+        return "", ""
+
 
 def create_linkedin_profile_from_jd(user_data, jd_text):
     """
     Generates a LinkedIn profile based on structured user input and a Job Description.
-    user_data is a dictionary containing fields like name, education, skills, etc.
-    jd_text is the raw text of the target Job Description.
     """
-    
-    # 1. Extract Role and Company from JD
+
     logger.info("Extracting role and company from JD")
     extracted_role, extracted_company = extract_role_company_from_jd(jd_text)
     logger.info("Extracted role=%s", safe_log_text(extracted_role))
     logger.info("Extracted company=%s", safe_log_text(extracted_company))
 
-    # 2. Fetch specific prompts using extracted data
     role_prompt_content = ""
     if extracted_role:
         role_prompt_content = get_role_prompt(extracted_role)
@@ -55,7 +53,7 @@ def create_linkedin_profile_from_jd(user_data, jd_text):
             "Role prompt preview for JD profile creation=%s",
             safe_log_text(role_prompt_content, max_length=160),
         )
-    
+
     company_prompt_content = ""
     if extracted_company:
         company_prompt_content = get_company_prompt(extracted_company)
@@ -64,10 +62,9 @@ def create_linkedin_profile_from_jd(user_data, jd_text):
             safe_log_text(company_prompt_content, max_length=160),
         )
 
-    # Construct a text representation of the user's input
     profile_input_block = "--- BEGIN USER INPUT DATA ---\n"
     for key, value in user_data.items():
-        if key not in ['job_role', 'company_name']:
+        if key not in ["job_role", "company_name"]:
             profile_input_block += f"**{key.replace('_', ' ').title()}:**\n{value}\n\n"
     profile_input_block += "--- END USER INPUT DATA ---"
 
@@ -82,12 +79,12 @@ You must strictly follow the output format and structural requirements.
     <target_job_description>
     {jd_text}
     </target_job_description>
-    
+
     <extracted_info>
     Target Role: {extracted_role}
     Target Company: {extracted_company}
     </extracted_info>
-    
+
     <supplementary_guidelines>
     {role_prompt_content if role_prompt_content else "No specific role guidelines provided."}
     {company_prompt_content if company_prompt_content else "No specific company guidelines provided."}
@@ -233,26 +230,25 @@ You must strictly follow the output format and structural requirements.
 
 ---
 
-### FINAL AI CHECKLIST (Internal Only – Don't Output)
+### FINAL AI CHECKLIST (Internal Only â€“ Don't Output)
 - [ ] All 17 sections present
 - [ ] Markdown format strict
 - [ ] No company name-dropping
 </output_format>
 """
-    
+
     response = call_gemini_with_retries(prompt)
 
-    # Log the analysis details
     log_data = {
-        'type': 'profile_creation_jd',
-        'inputs': user_data,
-        'jd_length': len(jd_text),
-        'prompts': {
-            'role_prompt': role_prompt_content,
-            'company_prompt': company_prompt_content
+        "type": "profile_creation_jd",
+        "inputs": user_data,
+        "jd_length": len(jd_text),
+        "prompts": {
+            "role_prompt": role_prompt_content,
+            "company_prompt": company_prompt_content,
         },
-        'final_prompt': prompt,
-        'output': response
+        "final_prompt": prompt,
+        "output": response,
     }
     log_analysis_details(log_data)
 
